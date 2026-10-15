@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160" width="480" height="160">
+  <rect width="480" height="160" rx="16" fill="#ffffff"/>
+  <path d="M80 130 C30 96 24 66 34 50 C46 30 72 32 80 52 C88 32 114 30 126 50 C136 66 130 96 80 130 Z" fill="#c8323c"/>
+  <path d="M50 104 Q80 88 110 104 Q96 118 80 128 Q64 118 50 104 Z" fill="#3f9b5a"/>
+  <text x="152" y="76" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-style="italic" font-weight="700" fill="#7a1d24">Greenside Hearts</text>
+  <text x="154" y="110" font-family="Helvetica, Arial, sans-serif" font-size="19" letter-spacing="5" fill="#3f9b5a">FOUNDATION</text>
+</svg>

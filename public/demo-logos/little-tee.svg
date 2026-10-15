@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160" width="480" height="160">
+  <rect width="480" height="160" rx="16" fill="#ffffff"/>
+  <rect x="24" y="24" width="112" height="112" rx="28" fill="#1f5fae"/>
+  <circle cx="80" cy="58" r="17" fill="#ffffff"/>
+  <circle cx="74" cy="53" r="2.2" fill="#c9d8ee"/><circle cx="84" cy="55" r="2.2" fill="#c9d8ee"/><circle cx="78" cy="63" r="2.2" fill="#c9d8ee"/>
+  <path d="M60 78 H100 L86 88 V118 Q80 124 74 118 V88 Z" fill="#ffd34d"/>
+  <text x="156" y="72" font-family="Helvetica, Arial, sans-serif" font-size="42" font-weight="800" fill="#1f5fae">Little Tee</text>
+  <text x="158" y="108" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="2" fill="#5b6f8c">Children's Charity</text>
+</svg>

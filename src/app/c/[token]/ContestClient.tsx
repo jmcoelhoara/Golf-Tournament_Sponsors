@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { ERROR_MESSAGES, formatValue, type Unit } from "@/lib/format";
+import { logoUrl } from "@/lib/logo";
 
 type Leader = {
   name: string | null;
@@ -29,9 +30,12 @@ type Contest = {
   requires_approval: boolean;
   accepting_entries: boolean;
   event: { name: string; course_name: string | null; event_date: string | null };
-  sponsor: { name: string; logo_path: string | null; website_url: string | null } | null;
+  sponsor: SponsorInfo | null;
+  event_sponsors?: SponsorInfo[];
   leader: Leader;
 };
+
+type SponsorInfo = { name: string; logo_path: string | null; website_url: string | null };
 
 type Unavailable = { available: false; reason: string; event_name?: string };
 
@@ -248,9 +252,8 @@ export default function ContestClient({ token }: { token: string }) {
   }
 
   const c = contest;
-  const logoUrl = c.sponsor?.logo_path
-    ? supabase.storage.from("sponsor-logos").getPublicUrl(c.sponsor.logo_path).data.publicUrl
-    : null;
+  const sponsorLogo = logoUrl(c.sponsor?.logo_path);
+  const strip = c.event_sponsors ?? [];
   const isClaim = c.scoring_mode === "latest_claim";
 
   return (
@@ -263,12 +266,15 @@ export default function ContestClient({ token }: { token: string }) {
       <section className="card contest-card">
         {c.sponsor && (
           <div className="sponsor">
-            {logoUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={logoUrl} alt={c.sponsor.name} className="sponsor-logo" />
-            ) : null}
             <div className="small muted">Sponsored by</div>
-            <div className="sponsor-name">{c.sponsor.name}</div>
+            {sponsorLogo ? (
+              <SponsorLink sponsor={c.sponsor}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={sponsorLogo} alt={c.sponsor.name} className="sponsor-logo" />
+              </SponsorLink>
+            ) : (
+              <div className="sponsor-name">{c.sponsor.name}</div>
+            )}
           </div>
         )}
         <h1>{c.name}</h1>
@@ -386,7 +392,37 @@ export default function ContestClient({ token }: { token: string }) {
           )}
         </section>
       )}
+
+      {strip.length > 0 && (
+        <section className="sponsor-strip" aria-label="Event sponsors">
+          <div className="eyebrow">Thank you to our sponsors</div>
+          <div className="strip-grid">
+            {strip.map((sp, i) => {
+              const src = logoUrl(sp.logo_path);
+              return (
+                <SponsorLink key={`${sp.name}-${i}`} sponsor={sp} className="strip-item">
+                  {src
+                    // eslint-disable-next-line @next/next/no-img-element
+                    ? <img src={src} alt={sp.name} loading="lazy" />
+                    : <span>{sp.name}</span>}
+                </SponsorLink>
+              );
+            })}
+          </div>
+        </section>
+      )}
     </Shell>
+  );
+}
+
+function SponsorLink({ sponsor, className, children }: {
+  sponsor: SponsorInfo; className?: string; children: React.ReactNode;
+}) {
+  if (!sponsor.website_url) return <div className={className}>{children}</div>;
+  return (
+    <a href={sponsor.website_url} target="_blank" rel="noopener noreferrer" className={className}>
+      {children}
+    </a>
   );
 }
 

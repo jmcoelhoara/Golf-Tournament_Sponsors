@@ -1,7 +1,6 @@
 import { PGlite } from '@electric-sql/pglite';
 import fs from 'node:fs';
 
-const MIG = new URL('../migrations/20261014000000_initial_schema.sql', import.meta.url);
 const SEED = new URL('../seed.sql', import.meta.url);
 const db = new PGlite();
 
@@ -23,8 +22,11 @@ await db.exec(`
   alter default privileges in schema public grant all on tables to anon, authenticated;
 `);
 
-await db.exec(fs.readFileSync(MIG, 'utf8'));
-await db.exec(fs.readFileSync(new URL('../migrations/20261015000000_foreign_key_indexes.sql', import.meta.url), 'utf8'));
+// Apply every migration in order
+const MIG_DIR = new URL('../migrations/', import.meta.url);
+for (const f of fs.readdirSync(MIG_DIR).filter((f) => f.endsWith('.sql')).sort()) {
+  await db.exec(fs.readFileSync(new URL(f, MIG_DIR), 'utf8'));
+}
 await db.exec(fs.readFileSync(SEED, 'utf8'));
 console.log('migration + seed applied');
 
@@ -146,6 +148,22 @@ check('org B owner cannot void org A entry', r.error === 'not_allowed', r);
 check('org A owner sees 144 golfers', (await user(U.ownerA, 'select count(*)::int n from public.golfers')).rows[0].n === 144);
 check('platform admin sees all orgs', (await user(U.admin, 'select count(*)::int n from public.organizations')).rows[0].n === 2);
 check('owner cannot create organizations', await fails(() => user(U.ownerA, `insert into public.organizations (name) values ('x')`)));
+
+console.log('\nEvent sponsor strip');
+const EV = '00000000-0000-0000-0000-0000000000e1';
+await user(U.ownerA, `insert into public.event_sponsors (event_id, sponsor_id, sort_order) values
+  ('${EV}','00000000-0000-0000-0000-0000000000b3',2),('${EV}','00000000-0000-0000-0000-0000000000b1',1)`);
+const strip = (await anon(`select public.get_contest_public('dev-women-long-drive') r`)).rows[0].r.event_sponsors;
+check('strip returned in sort order', strip.length === 2 && strip[0].name === 'ABC Construction' && strip[1].name === 'Pacific Insurance', strip);
+check('staff cannot change the strip', await fails(() => user(U.staffA,
+  `insert into public.event_sponsors (event_id, sponsor_id) values ('${EV}','00000000-0000-0000-0000-0000000000b2')`)));
+check('anon cannot read event_sponsors table', await fails(() => anon('select * from public.event_sponsors')));
+check('org B owner cannot add to org A strip', await fails(() => user(U.ownerB,
+  `insert into public.event_sponsors (event_id, sponsor_id) values ('${EV}','00000000-0000-0000-0000-0000000000b2')`)));
+check('org B owner sees no org A strip rows', (await user(U.ownerB, 'select * from public.event_sponsors')).rows.length === 0);
+await user(U.ownerA, `delete from public.sponsors where id='00000000-0000-0000-0000-0000000000b3'`);
+const strip2 = (await anon(`select public.get_contest_public('dev-women-long-drive') r`)).rows[0].r.event_sponsors;
+check('deleting a sponsor removes it from the strip', strip2.length === 1, strip2);
 
 console.log('\nClosing');
 await db.exec(`update public.contests set status='closed' where public_token='dev-men-ctp'`);

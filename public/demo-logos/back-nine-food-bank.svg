@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160" width="480" height="160">
+  <rect width="480" height="160" rx="16" fill="#ffffff"/>
+  <circle cx="80" cy="80" r="58" fill="#e8611a"/>
+  <path d="M42 84 H118 Q114 122 80 124 Q46 122 42 84 Z" fill="#ffffff"/>
+  <path d="M64 70 Q60 56 70 46 M80 70 Q76 52 88 40 M96 70 Q92 58 102 50" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <text x="80" y="114" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="800" fill="#e8611a">9</text>
+  <text x="156" y="78" font-family="Helvetica, Arial, sans-serif" font-size="40" font-weight="800" fill="#3b2314">Back Nine</text>
+  <text x="158" y="112" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="600" letter-spacing="3" fill="#e8611a">FOOD BANK</text>
+</svg>

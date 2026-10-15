@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160" width="480" height="160">
+  <rect width="480" height="160" rx="16" fill="#ffffff"/>
+  <circle cx="80" cy="80" r="56" fill="#e7f4ea"/>
+  <path d="M34 112 Q80 86 126 112 L126 124 Q80 104 34 124 Z" fill="#2e8b4f"/>
+  <rect x="78" y="36" width="5" height="70" rx="2" fill="#17402a"/>
+  <path d="M83 38 L118 50 L83 62 Z" fill="#f2b632"/>
+  <circle cx="58" cy="102" r="6" fill="#ffffff" stroke="#17402a" stroke-width="2"/>
+  <text x="156" y="76" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="700" fill="#17402a">Fairway Futures</text>
+  <text x="158" y="110" font-family="Helvetica, Arial, sans-serif" font-size="19" letter-spacing="5" fill="#2e8b4f">KIDS FUND</text>
+</svg>
