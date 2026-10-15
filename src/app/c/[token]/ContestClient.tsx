@@ -38,7 +38,7 @@ type Unavailable = { available: false; reason: string; event_name?: string };
 type Golfer = { golfer_id: string; display_name: string; team_name: string | null; starting_hole: number | null };
 
 type Result =
-  | { kind: "ok"; status: "accepted" | "pending"; youLead: boolean }
+  | { kind: "ok"; status: "accepted" | "pending" }
   | { kind: "error"; message: string };
 
 const supabase = createClient();
@@ -206,8 +206,7 @@ export default function ContestClient({ token }: { token: string }) {
           storageSet(enteredKey(golferId), "1");
           setAlreadyEntered(true);
           if (d.leader !== undefined) setLeader(d.leader);
-          const youLead = Boolean(d.leader && me && d.leader.name === me.display_name);
-          setResult({ kind: "ok", status: d.status ?? "accepted", youLead });
+          setResult({ kind: "ok", status: d.status ?? "accepted" });
         } else {
           if (d.error === "already_submitted") {
             storageSet(enteredKey(golferId), "1");
@@ -337,7 +336,9 @@ export default function ContestClient({ token }: { token: string }) {
                 <div className="result ok">
                   {result.status === "pending"
                     ? "Entry received — a volunteer will confirm it shortly."
-                    : result.youLead ? "🏆 You're the new leader!" : "Entry recorded. Good luck!"}
+                    : leader?.name && me && leader.name === me.display_name
+                      ? "🏆 You're the leader!"
+                      : "Entry recorded. Good luck!"}
                 </div>
               ) : alreadyEntered ? (
                 <div className="result">You&apos;ve already entered this contest.</div>
