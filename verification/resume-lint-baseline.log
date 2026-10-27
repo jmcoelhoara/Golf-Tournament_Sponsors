@@ -1,0 +1,11 @@
+npm notice run golf-tournament-sponsors@0.1.0 lint
+npm notice run eslint
+
+/workspace/src/app/admin/contests/[id]/entries-view.test.tsx
+  1:8  warning  'React' is defined but never used  @typescript-eslint/no-unused-vars
+
+/workspace/src/app/admin/server-views.test.tsx
+  1:8  warning  'React' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+

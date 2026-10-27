@@ -1,0 +1,26 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [32m✓[39m src/app/admin/server-views.test.tsx [2m([22m[2m12 tests[22m[2m)[22m[32m 271[2mms[22m[39m
+ [32m✓[39m src/app/admin/navigation.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 243[2mms[22m[39m
+ [32m✓[39m src/app/c/[token]/ContestClient.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 211[2mms[22m[39m
+ [32m✓[39m src/app/admin/contests/[id]/entries-view.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 186[2mms[22m[39m
+ [32m✓[39m src/app/admin/EventEditor.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 202[2mms[22m[39m
+ [32m✓[39m src/app/admin/MediaPicker.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 182[2mms[22m[39m
+ [32m✓[39m src/app/admin/courses/CatalogEditor.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 173[2mms[22m[39m
+ [32m✓[39m src/app/admin/contests/[id]/print/PrintSheet.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 158[2mms[22m[39m
+ [32m✓[39m src/app/admin/access/AccessManager.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 193[2mms[22m[39m
+ [32m✓[39m src/app/presentation.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 186[2mms[22m[39m
+ [32m✓[39m src/lib/event-media.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m src/lib/staff.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m12 passed[39m[22m[90m (12)[39m
+[2m      Tests [22m [1m[32m54 passed[39m[22m[90m (54)[39m
+[2m   Start at [22m 02:07:35
+[2m   Duration [22m 11.32s[2m (transform 298ms, setup 989ms, import 539ms, tests 2.03s, environment 6.26s)[22m
+

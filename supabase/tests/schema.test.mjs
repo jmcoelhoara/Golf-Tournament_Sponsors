@@ -63,6 +63,9 @@ const uuid = () => crypto.randomUUID();
 const submit = async (token, golfer, value, req = uuid()) =>
   (await anon('select public.submit_contest_entry($1,$2,$3,$4) r', [token, golfer, value, req])).rows[0].r;
 
+// Deliberate access-model change: old scoring fixtures need explicit platform grants.
+await user(U.admin, `select public.set_event_staff_access('00000000-0000-0000-0000-0000000000e1',$1,true)`, [U.staffA]);
+await user(U.admin, `select public.set_event_staff_access('00000000-0000-0000-0000-0000000000e1',$1,true)`, [U.ownerA]);
 console.log('\nGolfer (anonymous) access');
 const pub = (await anon(`select public.get_contest_public('dev-men-ctp') r`)).rows[0].r;
 check('contest details visible by QR token', pub.available && pub.sponsor.name === 'West Coast Development', pub);
@@ -151,7 +154,7 @@ check('owner cannot create organizations', await fails(() => user(U.ownerA, `ins
 
 console.log('\nEvent sponsor strip');
 const EV = '00000000-0000-0000-0000-0000000000e1';
-await user(U.ownerA, `insert into public.event_sponsors (event_id, sponsor_id, sort_order) values
+await user(U.admin, `insert into public.event_sponsors (event_id, sponsor_id, sort_order) values
   ('${EV}','00000000-0000-0000-0000-0000000000b3',2),('${EV}','00000000-0000-0000-0000-0000000000b1',1)`);
 const strip = (await anon(`select public.get_contest_public('dev-women-long-drive') r`)).rows[0].r.event_sponsors;
 check('strip returned in sort order', strip.length === 2 && strip[0].name === 'ABC Construction' && strip[1].name === 'Pacific Insurance', strip);
@@ -161,9 +164,9 @@ check('anon cannot read event_sponsors table', await fails(() => anon('select * 
 check('org B owner cannot add to org A strip', await fails(() => user(U.ownerB,
   `insert into public.event_sponsors (event_id, sponsor_id) values ('${EV}','00000000-0000-0000-0000-0000000000b2')`)));
 check('org B owner sees no org A strip rows', (await user(U.ownerB, 'select * from public.event_sponsors')).rows.length === 0);
-await user(U.ownerA, `delete from public.sponsors where id='00000000-0000-0000-0000-0000000000b3'`);
+check('owner cannot hard-delete historical sponsor', await fails(() => user(U.ownerA, `delete from public.sponsors where id='00000000-0000-0000-0000-0000000000b3'`)));
 const strip2 = (await anon(`select public.get_contest_public('dev-women-long-drive') r`)).rows[0].r.event_sponsors;
-check('deleting a sponsor removes it from the strip', strip2.length === 1, strip2);
+check('legacy strip retained after denied sponsor deletion', strip2.length === 2, strip2);
 
 console.log('\nClosing');
 await db.exec(`update public.contests set status='closed' where public_token='dev-men-ctp'`);
@@ -174,4 +177,9 @@ await db.exec(`update public.events set status='draft' where id='00000000-0000-0
 check('draft event hides leaderboard from public', (await anon(`select * from public.contest_leaders`)).rows.length === 0);
 
 console.log(`\n${pass} passed, ${fail} failed`);
+await db.close();
+if (!fail) {
+  await import('./upgrade.test.mjs');
+  await import('./compatibility.test.mjs');
+}
 process.exit(fail ? 1 : 0);

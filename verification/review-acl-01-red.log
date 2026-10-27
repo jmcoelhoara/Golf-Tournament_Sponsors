@@ -1,0 +1,200 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/admin/access/AccessManager.test.tsx
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/admin/access/AccessManager.test.tsx [2m([22m[2m5 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[33m 2266[2mms[22m[39m
+   [32m✓[39m lists existing staff for the selected event organization and enables access with exact RPC parameters[32m 184[2mms[22m[39m
+   [32m✓[39m revokes an active event grant with explicit false, without deleting the staff account[32m 32[2mms[22m[39m
+[31m   [31m×[31m reconciles a clean same-event row when authoritative enabled=true changes[39m[33m 1019[2mms[22m[39m
+[31m   [31m×[31m reconciles a clean same-event row when authoritative enabled=false changes[39m[33m 1018[2mms[22m[39m
+   [32m✓[39m surfaces permission account lookup errors rather than showing fabricated staff[32m 10[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/access/AccessManager.test.tsx[2m > [22mreconciles a clean same-event row when authoritative enabled=true changes
+[31m[1mAssertionError[22m: expected true to be false // Object.is equality
+
+Ignored nodes: comments, script, style
+[36m<html>[31m
+  [36m<head />[31m
+  [36m<body>[31m
+    [36m<div>[31m
+      [36m<section[31m
+        [33mclass[31m=[32m"card"[31m
+      [36m>[31m
+        [36m<label[31m
+          [33mclass[31m=[32m"stack"[31m
+        [36m>[31m
+          [0mEvent to manage[0m
+          [36m<select[31m
+            [33mclass[31m=[32m"input"[31m
+          [36m>[31m
+            [36m<option[31m
+              [33mvalue[31m=[32m""[31m
+            [36m>[31m
+              [0mSelect event[0m
+            [36m</option>[31m
+            [36m<option[31m
+              [33mvalue[31m=[32m"e1"[31m
+            [36m>[31m
+              [0mCharity Open[0m
+            [36m</option>[31m
+          [36m</select>[31m
+        [36m</label>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"small muted"[31m
+        [36m>[31m
+          [0mOnly existing organization staff accounts can be enabled. Organization ownership does not grant event access.[0m
+        [36m</p>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"access-row"[31m
+        [36m>[31m
+          [36m<p>[31m
+            [0mstaff1@test[0m
+          [36m</p>[31m
+          [36m<p[31m
+            [33mclass[31m=[32m"small muted"[31m
+          [36m>[31m
+            [0mstaff[0m
+          [36m</p>[31m
+          [36m<form>[31m
+            [36m<fieldset>[31m
+              [36m<label>[31m
+                [36m<input[31m
+                  [33mchecked[31m=[32m""[31m
+                  [33mtype[31m=[32m"checkbox"[31m
+                [36m/>[31m
+                [0mEnabled access for [0m
+                [0mstaff1@test[0m
+              [36m</label>[31m
+              [36m<button[31m
+                [33mclass[31m=[32m"btn small"[31m
+                [33mtype[31m=[32m"submit"[31m
+              [36m>[31m
+                [0mSave access[0m
+              [36m</button>[31m
+            [36m</fieldset>[31m
+          [36m</form>[31m
+        [36m</div>[31m
+      [36m</section>[31m
+    [36m</div>[31m
+  [36m</body>[31m
+[36m</html>[31m[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- false[39m
+[31m+ true[39m
+
+[36m [2m❯[22m src/app/admin/access/AccessManager.test.tsx:[2m37:69[22m[39m
+    [90m 35|[39m  [34mrerender[39m([33m<[39m[33mAccessManager[39m [33mevents[39m[33m=[39m[33m{[39m[{[33m...[39mevent}][33m}[39m[33m/[39m[33m>[39m)[33m;[39m
+    [90m 36|[39m  await waitFor(() => expect(rpc.mock.calls.filter(([name]) => name ===…
+    [90m 37|[39m  await waitFor(() => expect((checkbox as HTMLInputElement).checked).to…
+    [90m   |[39m                                                                     [31m^[39m
+    [90m 38|[39m  fireEvent[33m.[39m[34mclick[39m(screen[33m.[39m[34mgetByRole[39m([32m'button'[39m[33m,[39m {name[33m:[39m [32m'Save access'[39m}))[33m;[39m
+    [90m 39|[39m  await waitFor(() => expect(rpc).toHaveBeenCalledWith('set_event_staff…
+[90m [2m❯[22m runWithExpensiveErrorDiagnosticsDisabled node_modules/@testing-library/dom/dist/config.js:[2m47:12[22m[39m
+[90m [2m❯[22m checkCallback node_modules/@testing-library/dom/dist/wait-for.js:[2m124:77[22m[39m
+[90m [2m❯[22m Timeout.checkRealTimersCallback node_modules/@testing-library/dom/dist/wait-for.js:[2m118:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/access/AccessManager.test.tsx[2m > [22mreconciles a clean same-event row when authoritative enabled=false changes
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality
+
+Ignored nodes: comments, script, style
+[36m<html>[31m
+  [36m<head />[31m
+  [36m<body>[31m
+    [36m<div>[31m
+      [36m<section[31m
+        [33mclass[31m=[32m"card"[31m
+      [36m>[31m
+        [36m<label[31m
+          [33mclass[31m=[32m"stack"[31m
+        [36m>[31m
+          [0mEvent to manage[0m
+          [36m<select[31m
+            [33mclass[31m=[32m"input"[31m
+          [36m>[31m
+            [36m<option[31m
+              [33mvalue[31m=[32m""[31m
+            [36m>[31m
+              [0mSelect event[0m
+            [36m</option>[31m
+            [36m<option[31m
+              [33mvalue[31m=[32m"e1"[31m
+            [36m>[31m
+              [0mCharity Open[0m
+            [36m</option>[31m
+          [36m</select>[31m
+        [36m</label>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"small muted"[31m
+        [36m>[31m
+          [0mOnly existing organization staff accounts can be enabled. Organization ownership does not grant event access.[0m
+        [36m</p>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"access-row"[31m
+        [36m>[31m
+          [36m<p>[31m
+            [0mstaff1@test[0m
+          [36m</p>[31m
+          [36m<p[31m
+            [33mclass[31m=[32m"small muted"[31m
+          [36m>[31m
+            [0mstaff[0m
+          [36m</p>[31m
+          [36m<form>[31m
+            [36m<fieldset>[31m
+              [36m<label>[31m
+                [36m<input[31m
+                  [33mtype[31m=[32m"checkbox"[31m
+                [36m/>[31m
+                [0mEnabled access for [0m
+                [0mstaff1@test[0m
+              [36m</label>[31m
+              [36m<button[31m
+                [33mclass[31m=[32m"btn small"[31m
+                [33mtype[31m=[32m"submit"[31m
+              [36m>[31m
+                [0mSave access[0m
+              [36m</button>[31m
+            [36m</fieldset>[31m
+          [36m</form>[31m
+        [36m</div>[31m
+      [36m</section>[31m
+    [36m</div>[31m
+  [36m</body>[31m
+[36m</html>[31m[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m src/app/admin/access/AccessManager.test.tsx:[2m37:69[22m[39m
+    [90m 35|[39m  [34mrerender[39m([33m<[39m[33mAccessManager[39m [33mevents[39m[33m=[39m[33m{[39m[{[33m...[39mevent}][33m}[39m[33m/[39m[33m>[39m)[33m;[39m
+    [90m 36|[39m  await waitFor(() => expect(rpc.mock.calls.filter(([name]) => name ===…
+    [90m 37|[39m  await waitFor(() => expect((checkbox as HTMLInputElement).checked).to…
+    [90m   |[39m                                                                     [31m^[39m
+    [90m 38|[39m  fireEvent[33m.[39m[34mclick[39m(screen[33m.[39m[34mgetByRole[39m([32m'button'[39m[33m,[39m {name[33m:[39m [32m'Save access'[39m}))[33m;[39m
+    [90m 39|[39m  await waitFor(() => expect(rpc).toHaveBeenCalledWith('set_event_staff…
+[90m [2m❯[22m runWithExpensiveErrorDiagnosticsDisabled node_modules/@testing-library/dom/dist/config.js:[2m47:12[22m[39m
+[90m [2m❯[22m checkCallback node_modules/@testing-library/dom/dist/wait-for.js:[2m124:77[22m[39m
+[90m [2m❯[22m Timeout.checkRealTimersCallback node_modules/@testing-library/dom/dist/wait-for.js:[2m118:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m3 passed[39m[22m[90m (5)[39m
+[2m   Start at [22m 02:40:04
+[2m   Duration [22m 3.14s[2m (transform 78ms, setup 117ms, import 71ms, tests 2.27s, environment 549ms)[22m
+

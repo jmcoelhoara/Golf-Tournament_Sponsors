@@ -17,5 +17,5 @@ export default function ContestPage({ params }: { params: Promise<{ token: strin
 
 async function Contest({ params }: { params: Promise<{ token: string }> }) {
   const { token } = await params;
-  return <ContestClient token={token} />;
+  return <ContestClient key={token} token={token} />;
 }

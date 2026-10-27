@@ -1,0 +1,169 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/admin/server-views.test.tsx
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/admin/server-views.test.tsx [2m([22m[2m14 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 366[2mms[22m[39m
+   [32m✓[39m requires platform authority before reading the retired organization-wide sponsor screen[32m 4[2mms[22m[39m
+   [32m✓[39m retains legacy sponsor display without destructive organization-wide image controls[32m 128[2mms[22m[39m
+   [32m✓[39m loads granted event settings through user-scoped SELECT and keeps no-grants users logged in[32m 32[2mms[22m[39m
+[31m   [31m×[31m makes course-scoped event pages discoverable without granting catalog editing[39m[32m 25[2mms[22m[39m
+   [32m✓[39m loads an event detail only after its RLS event read and exposes fixed contest creation plus shared logo[32m 24[2mms[22m[39m
+   [32m✓[39m refuses archived event history on a direct ordinary-staff settings URL[32m 0[2mms[22m[39m
+   [32m✓[39m keeps platform operational contests separate from an explicit retained-history view[32m 49[2mms[22m[39m
+   [32m✓[39m builds leaderboard navigation from the same granted-event SELECT[32m 13[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct courses route[32m 1[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct access route[32m 1[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct history route[32m 1[2mms[22m[39m
+   [32m✓[39m renders course-specific granted events but no ordinary-staff catalog editor[32m 25[2mms[22m[39m
+   [32m✓[39m shows an authenticated event leaderboard including closed and draft contests[32m 6[2mms[22m[39m
+   [32m✓[39m prints draft contests with the parent current logo and original QR token under user RLS[32m 54[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/server-views.test.tsx[2m > [22mmakes course-scoped event pages discoverable without granting catalog editing
+[31m[1mTestingLibraryElementError[22m: Unable to find an accessible element with the role "link" and name "Events at North Course"
+
+Here are the accessible roles:
+
+  main:
+
+  Name "":
+  [36m<main[31m
+    [33mclass[31m=[32m"shell wide"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Staff navigation":
+  [36m<nav[31m
+    [33maria-label[31m=[32m"Staff navigation"[31m
+    [33mclass[31m=[32m"admin-nav"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  link:
+
+  Name "Event settings":
+  [36m<a[31m
+    [33maria-current[31m=[32m"page"[31m
+    [33mclass[31m=[32m"active"[31m
+    [33mhref[31m=[32m"/admin"[31m
+  [36m/>[31m
+
+  Name "Leaderboard":
+  [36m<a[31m
+    [33mclass[31m=[32m""[31m
+    [33mhref[31m=[32m"/admin/leaderboards"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  button:
+
+  Name "Sign out":
+  [36m<button[31m
+    [33mclass[31m=[32m"link"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  heading:
+
+  Name "Event settings":
+  [36m<h1 />[31m
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  [36m<p[31m
+    [33mclass[31m=[32m"muted"[31m
+  [36m/>[31m
+
+  Name "":
+  [36m<p[31m
+    [33mclass[31m=[32m"card muted"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<main[31m
+      [33mclass[31m=[32m"shell wide"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"topbar no-print"[31m
+      [36m>[31m
+        [36m<nav[31m
+          [33maria-label[31m=[32m"Staff navigation"[31m
+          [33mclass[31m=[32m"admin-nav"[31m
+        [36m>[31m
+          [36m<a[31m
+            [33maria-current[31m=[32m"page"[31m
+            [33mclass[31m=[32m"active"[31m
+            [33mhref[31m=[32m"/admin"[31m
+          [36m>[31m
+            [0mEvent settings[0m
+          [36m</a>[31m
+          [36m<a[31m
+            [33mclass[31m=[32m""[31m
+            [33mhref[31m=[32m"/admin/leaderboards"[31m
+          [36m>[31m
+            [0mLeaderboard[0m
+          [36m</a>[31m
+        [36m</nav>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"topbar-right"[31m
+        [36m>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"small muted"[31m
+          [36m>[31m
+            [0mstaff@test[0m
+          [36m</span>[31m
+          [36m<form[31m
+            [33maction[31m=[32m"javascript:throw new Error('A React form was unexpectedly submitted. If you called form.submit() manually, consider using form.requestSubmit() instead. If you\\'re trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().')"[31m
+          [36m>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"link"[31m
+            [36m>[31m
+              [0mSign out[0m
+            [36m</button>[31m
+          [36m</form>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+      [36m<h1>[31m
+        [0mEvent settings[0m
+      [36m</h1>[31m
+      [36m<p[31m
+        [33mclass[31m=[32m"muted"[31m
+      [36m>[31m
+        [0mOnly enabled events appear here.[0m
+      [36m</p>[31m
+      [36m<p[31m
+        [33mclass[31m=[32m"card muted"[31m
+      [36m>[31m
+        [0mNo enabled events. You are signed in; ask the platform administrator to grant event access, or create an event below if available.[0m
+      [36m</p>[31m
+    [36m</main>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2m❯[22m src/app/admin/server-views.test.tsx:[2m28:16[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m13 passed[39m[22m[90m (14)[39m
+[2m   Start at [22m 02:12:25
+[2m   Duration [22m 1.35s[2m (transform 146ms, setup 92ms, import 215ms, tests 366ms, environment 530ms)[22m
+

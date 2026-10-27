@@ -1,0 +1,128 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/admin/access/AccessManager.test.tsx
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/admin/access/AccessManager.test.tsx [2m([22m[2m16 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 1547[2mms[22m[39m
+   [32m✓[39m lists existing staff for the selected event organization and enables access with exact RPC parameters[32m 178[2mms[22m[39m
+   [32m✓[39m revokes an active event grant with explicit false, without deleting the staff account[32m 18[2mms[22m[39m
+   [32m✓[39m reconciles a clean same-event row when authoritative enabled=true changes[32m 20[2mms[22m[39m
+   [32m✓[39m reconciles a clean same-event row when authoritative enabled=false changes[32m 18[2mms[22m[39m
+   [32m✓[39m blocks an unsaved draft conflict when authoritative enabled=true changes[32m 26[2mms[22m[39m
+   [32m✓[39m blocks an unsaved draft conflict when authoritative enabled=false changes[32m 20[2mms[22m[39m
+   [32m✓[39m blocks stale saves during a refetch and after a failed read, then recovers on fresh authority[32m 29[2mms[22m[39m
+   [32m✓[39m reconciles enabled=true dirty=false after another account saves[32m 24[2mms[22m[39m
+   [32m✓[39m reconciles enabled=false dirty=false after another account saves[32m 55[2mms[22m[39m
+   [32m✓[39m reconciles enabled=true dirty=true after another account saves[32m 46[2mms[22m[39m
+   [32m✓[39m reconciles enabled=false dirty=true after another account saves[32m 33[2mms[22m[39m
+[31m   [31m×[31m reconciles a completed save against the next read even when authority equals its pre-save value[39m[33m 1018[2mms[22m[39m
+   [32m✓[39m preserves an unsaved draft when a refresh reports unchanged authority[32m 12[2mms[22m[39m
+   [32m✓[39m keeps a pending save mounted when refreshed authority changes=false[32m 20[2mms[22m[39m
+   [32m✓[39m keeps a pending save mounted when refreshed authority changes=true[32m 22[2mms[22m[39m
+   [32m✓[39m surfaces permission account lookup errors rather than showing fabricated staff[32m 5[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/access/AccessManager.test.tsx[2m > [22mreconciles a completed save against the next read even when authority equals its pre-save value
+[31m[1mAssertionError[22m: expected true to be false // Object.is equality
+
+Ignored nodes: comments, script, style
+[36m<html>[31m
+  [36m<head />[31m
+  [36m<body>[31m
+    [36m<div>[31m
+      [36m<section[31m
+        [33mclass[31m=[32m"card"[31m
+      [36m>[31m
+        [36m<label[31m
+          [33mclass[31m=[32m"stack"[31m
+        [36m>[31m
+          [0mEvent to manage[0m
+          [36m<select[31m
+            [33mclass[31m=[32m"input"[31m
+          [36m>[31m
+            [36m<option[31m
+              [33mvalue[31m=[32m""[31m
+            [36m>[31m
+              [0mSelect event[0m
+            [36m</option>[31m
+            [36m<option[31m
+              [33mvalue[31m=[32m"e1"[31m
+            [36m>[31m
+              [0mCharity Open[0m
+            [36m</option>[31m
+          [36m</select>[31m
+        [36m</label>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"small muted"[31m
+        [36m>[31m
+          [0mOnly existing organization staff accounts can be enabled. Organization ownership does not grant event access.[0m
+        [36m</p>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"access-row"[31m
+        [36m>[31m
+          [36m<p>[31m
+            [0mstaff1@test[0m
+          [36m</p>[31m
+          [36m<p[31m
+            [33mclass[31m=[32m"small muted"[31m
+          [36m>[31m
+            [0mstaff[0m
+          [36m</p>[31m
+          [36m<form>[31m
+            [36m<fieldset>[31m
+              [36m<label>[31m
+                [36m<input[31m
+                  [33mtype[31m=[32m"checkbox"[31m
+                [36m/>[31m
+                [0mEnabled access for [0m
+                [0mstaff1@test[0m
+              [36m</label>[31m
+              [36m<button[31m
+                [33mclass[31m=[32m"btn small"[31m
+                [33mtype[31m=[32m"submit"[31m
+              [36m>[31m
+                [0mSave access[0m
+              [36m</button>[31m
+            [36m</fieldset>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"small"[31m
+              [33mrole[31m=[32m"status"[31m
+            [36m>[31m
+              [0mSaved.[0m
+            [36m</p>[31m
+          [36m</form>[31m
+        [36m</div>[31m
+      [36m</section>[31m
+    [36m</div>[31m
+  [36m</body>[31m
+[36m</html>[31m[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- false[39m
+[31m+ true[39m
+
+[36m [2m❯[22m src/app/admin/access/AccessManager.test.tsx:[2m142:69[22m[39m
+    [90m140|[39m  [35mawait[39m [34mwaitFor[39m(() [33m=>[39m [34mexpect[39m(refresh)[33m.[39m[34mtoHaveBeenCalledTimes[39m([34m1[39m))[33m;[39m
+    [90m141|[39m  // The next authoritative read is revoked again (e.g. an intervening …
+    [90m142|[39m  await waitFor(() => expect((checkbox as HTMLInputElement).checked).to…
+    [90m   |[39m                                                                     [31m^[39m
+    [90m143|[39m  fireEvent[33m.[39m[34mclick[39m(screen[33m.[39m[34mgetByRole[39m([32m'button'[39m[33m,[39m {name[33m:[39m [32m'Save access'[39m}))[33m;[39m
+    [90m144|[39m  await waitFor(() => expect(rpc).toHaveBeenCalledWith('set_event_staff…
+[90m [2m❯[22m runWithExpensiveErrorDiagnosticsDisabled node_modules/@testing-library/dom/dist/config.js:[2m47:12[22m[39m
+[90m [2m❯[22m checkCallback node_modules/@testing-library/dom/dist/wait-for.js:[2m124:77[22m[39m
+[90m [2m❯[22m Timeout.checkRealTimersCallback node_modules/@testing-library/dom/dist/wait-for.js:[2m118:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m15 passed[39m[22m[90m (16)[39m
+[2m   Start at [22m 02:44:51
+[2m   Duration [22m 2.42s[2m (transform 112ms, setup 95ms, import 110ms, tests 1.55s, environment 531ms)[22m
+

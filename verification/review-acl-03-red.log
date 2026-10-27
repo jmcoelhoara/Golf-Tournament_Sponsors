@@ -1,0 +1,49 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/admin/access/AccessManager.test.tsx
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/admin/access/AccessManager.test.tsx [2m([22m[2m12 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 465[2mms[22m[39m
+   [32m✓[39m lists existing staff for the selected event organization and enables access with exact RPC parameters[32m 175[2mms[22m[39m
+   [32m✓[39m revokes an active event grant with explicit false, without deleting the staff account[32m 32[2mms[22m[39m
+   [32m✓[39m reconciles a clean same-event row when authoritative enabled=true changes[32m 43[2mms[22m[39m
+   [32m✓[39m reconciles a clean same-event row when authoritative enabled=false changes[32m 24[2mms[22m[39m
+   [32m✓[39m blocks an unsaved draft conflict when authoritative enabled=true changes[32m 31[2mms[22m[39m
+   [32m✓[39m blocks an unsaved draft conflict when authoritative enabled=false changes[32m 23[2mms[22m[39m
+[31m   [31m×[31m blocks stale saves during a refetch and after a failed read, then recovers on fresh authority[39m[32m 18[2mms[22m[39m
+   [32m✓[39m reconciles enabled=true dirty=false after another account saves[32m 26[2mms[22m[39m
+   [32m✓[39m reconciles enabled=false dirty=false after another account saves[32m 25[2mms[22m[39m
+   [32m✓[39m reconciles enabled=true dirty=true after another account saves[32m 30[2mms[22m[39m
+   [32m✓[39m reconciles enabled=false dirty=true after another account saves[32m 29[2mms[22m[39m
+   [32m✓[39m surfaces permission account lookup errors rather than showing fabricated staff[32m 5[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/access/AccessManager.test.tsx[2m > [22mblocks stale saves during a refetch and after a failed read, then recovers on fresh authority
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m src/app/admin/access/AccessManager.test.tsx:[2m79:69[22m[39m
+    [90m 77|[39m  [34mrerender[39m([33m<[39m[33mAccessManager[39m [33mevents[39m[33m=[39m[33m{[39m[{[33m...[39mevent}][33m}[39m[33m/[39m[33m>[39m)[33m;[39m
+    [90m 78|[39m  [35mconst[39m save [33m=[39m screen[33m.[39m[34mgetByRole[39m([32m'button'[39m[33m,[39m {name[33m:[39m [32m'Save access'[39m})[33m;[39m
+    [90m 79|[39m  expect((save.closest('fieldset') as HTMLFieldSetElement).disabled).to…
+    [90m   |[39m                                                                     [31m^[39m
+    [90m 80|[39m  fireEvent[33m.[39m[34mclick[39m(save)[33m;[39m
+    [90m 81|[39m  expect(rpc.mock.calls.filter(([name]) => name === 'set_event_staff_ac…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m11 passed[39m[22m[90m (12)[39m
+[2m   Start at [22m 02:43:16
+[2m   Duration [22m 1.33s[2m (transform 93ms, setup 88ms, import 89ms, tests 465ms, environment 534ms)[22m
+

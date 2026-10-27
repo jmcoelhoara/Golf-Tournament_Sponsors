@@ -1,0 +1,37 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/admin/MediaPicker.test.tsx
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/admin/MediaPicker.test.tsx [2m([22m[2m3 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 220[2mms[22m[39m
+   [32m✓[39m requires archive confirmation and surfaces a returned mutation failure[32m 182[2mms[22m[39m
+[31m   [31m×[31m reflects the current shared event logo after a server refresh[39m[32m 16[2mms[22m[39m
+   [32m✓[39m selects exactly one existing event banner and retains the reusable library[32m 19[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/MediaPicker.test.tsx[2m > [22mreflects the current shared event logo after a server refresh
+[31m[1mAssertionError[22m: expected 'old' to be 'new' // Object.is equality[39m
+
+Expected: [32m"new"[39m
+Received: [31m"old"[39m
+
+[36m [2m❯[22m src/app/admin/MediaPicker.test.tsx:[2m22:84[22m[39m
+    [90m 20|[39m  [35mconst[39m {rerender}[33m=[39m[34mrender[39m([33m<[39m[33mMediaPicker[39m [33m{[39m[33m...[39mprops[33m}[39m [33mselectedId[39m[33m=[39m[32m"old"[39m[33m/[39m[33m>[39m)[33m;[39m
+    [90m 21|[39m  [34mrerender[39m([33m<[39m[33mMediaPicker[39m [33m{[39m[33m...[39mprops[33m}[39m [33mselectedId[39m[33m=[39m[32m"new"[39m[33m/[39m[33m>[39m)[33m;[39m
+    [90m 22|[39m  expect((screen.getByLabelText('Selected event logo') as HTMLSelectEle…
+    [90m   |[39m                                                                                    [31m^[39m
+    [90m 23|[39m  [34mexpect[39m(screen[33m.[39m[34mqueryByAltText[39m([32m'Old crest'[39m))[33m.[39m[34mtoBeNull[39m()[33m;[39m
+    [90m 24|[39m  [34mexpect[39m(screen[33m.[39m[34mgetByAltText[39m([32m'New crest'[39m))[33m.[39m[34mtoBeTruthy[39m()[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m2 passed[39m[22m[90m (3)[39m
+[2m   Start at [22m 02:04:49
+[2m   Duration [22m 1.02s[2m (transform 60ms, setup 102ms, import 55ms, tests 220ms, environment 519ms)[22m
+

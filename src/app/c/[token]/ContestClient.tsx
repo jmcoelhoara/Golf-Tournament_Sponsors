@@ -4,6 +4,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { ERROR_MESSAGES, formatValue, type Unit } from "@/lib/format";
 import { logoUrl } from "@/lib/logo";
+import { eventImageUrl, type PublicImage } from "@/lib/event-media";
+import SponsorBanner from "./SponsorBanner";
 
 type Leader = {
   name: string | null;
@@ -29,7 +31,8 @@ type Contest = {
   max_value: number | null;
   requires_approval: boolean;
   accepting_entries: boolean;
-  event: { name: string; course_name: string | null; event_date: string | null };
+  event: { name: string; course_name: string | null; event_date: string | null; logo?: PublicImage | null };
+  sponsor_banner?: (PublicImage & {id: string}) | null;
   sponsor: SponsorInfo | null;
   event_sponsors?: SponsorInfo[];
   leader: Leader;
@@ -60,6 +63,8 @@ function storageSet(key: string, value: string | null) {
 export default function ContestClient({ token }: { token: string }) {
   const [contest, setContest] = useState<Contest | Unavailable | null>(null);
   const [loadError, setLoadError] = useState(false);
+  // Capture only the first available response; polling must never restart an ad.
+  const [visitBanner, setVisitBanner] = useState<PublicImage | null | undefined>(undefined);
   const [leader, setLeader] = useState<Leader>(null);
   const [roster, setRoster] = useState<Golfer[] | null>(null);
   const [golferId, setGolferId] = useState<string | null>(null);
@@ -79,7 +84,10 @@ export default function ContestClient({ token }: { token: string }) {
     if (error) { setLoadError(true); return; }
     setLoadError(false);
     setContest(data as Contest | Unavailable);
-    if ((data as Contest).available) setLeader((data as Contest).leader ?? null);
+    if ((data as Contest).available) {
+      setLeader((data as Contest).leader ?? null);
+      setVisitBanner(current => current === undefined ? (data as Contest).sponsor_banner ?? null : current);
+    }
   }, [token]);
 
   // Initial load + remembered golfer
@@ -258,13 +266,16 @@ export default function ContestClient({ token }: { token: string }) {
 
   return (
     <Shell>
+      {visitBanner && <SponsorBanner image={visitBanner} onDismiss={()=>setVisitBanner(null)} />}
       <header className="event-head">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {c.event.logo && <img className="event-logo" src={eventImageUrl(c.event.logo) ?? undefined} alt={c.event.logo.alt_text} />}
         <div className="eyebrow">{c.event.name}</div>
         {c.event.course_name && <div className="muted small">{c.event.course_name}</div>}
       </header>
 
       <section className="card contest-card">
-        {c.sponsor && (
+        {!c.sponsor_banner && c.sponsor && (
           <div className="sponsor">
             <div className="small muted">Sponsored by</div>
             {sponsorLogo ? (
@@ -393,7 +404,7 @@ export default function ContestClient({ token }: { token: string }) {
         </section>
       )}
 
-      {strip.length > 0 && (
+      {!c.sponsor_banner && strip.length > 0 && (
         <section className="sponsor-strip" aria-label="Event sponsors">
           <div className="eyebrow">Thank you to our sponsors</div>
           <div className="strip-grid">

@@ -1,0 +1,108 @@
+ok 1 legacy same-org ungranted owner sees no events
+ok 2 no inferred legacy grants
+ok 3 platform sees legacy event
+ok 4 context lists creation organization without revealing events
+ok 5 nonplatform staff account enumeration denied
+ok 6 platform staff list contains existing members
+ok 7 raw legacy event update denied
+ok 8 raw event deletion denied even platform
+ok 9 staff cannot maintain course catalog
+ok 10 exactly four initial presets
+ok 11 staff cannot inject preset
+ok 12 cannot create other org event
+ok 13 cross-org course rejected
+ok 14 member creates event
+ok 15 creator gets initial grant
+ok 16 new event starts draft
+ok 17 same-org owner still cannot see created event
+ok 18 creator cannot grant access
+ok 19 raw ACL writes denied
+ok 20 platform cannot grant to nonmember
+ok 21 platform revokes creator
+ok 22 revoked creator has no persistent bypass
+ok 23 creator cannot self-regrant
+ok 24 platform regrants creator
+ok 25 free-form preset key rejected
+ok 26 cross-course tee rejected
+ok 27 missing tee hole rejected
+ok 28 staff adds preset contest
+ok 29 second contest added
+ok 30 DB derives exact scoring and placement snapshot
+ok 31 cannot directly overwrite scoring snapshot
+ok 32 catalog edits do not rewrite contest snapshot
+ok 33 explicit placement refreshes snapshot
+ok 34 refreshed yardage from DB
+ok 35 course org cannot move
+ok 36 tee cannot move course
+ok 37 yardage key cannot move
+ok 38 referenced yardage cannot be deleted
+ok 39 ungranted owner cannot alter placement
+Upgrade suite: 39 passed
+npm notice run golf-tournament-sponsors@0.1.0 test:db
+npm notice run node supabase/tests/schema.test.mjs
+migration + seed applied
+
+Golfer (anonymous) access
+  ok   contest details visible by QR token
+  ok   bad token reveals nothing
+  ok   roster filtered to Men division (72)
+  ok   roster has no contact details
+  ok   anon cannot read golfers table
+  ok   anon cannot read entries table
+  ok   anon cannot insert entries directly
+  ok   anon cannot call staff functions
+
+Closest to the Pin (lowest wins)
+  ok   first entry accepted
+  ok   closer shot takes lead
+  ok   worse shot does not take lead
+  ok   retry with same request id counted once
+  ok   second entry by same golfer blocked
+  ok   out-of-range value rejected
+  ok   missing value rejected
+  ok   wrong division rejected
+  ok   unknown golfer rejected
+  ok   public leaderboard row readable by anon
+
+Long Drive (latest accepted claim wins)
+  ok   newest claim leads
+
+Staff actions
+  ok   staff sees own org entries
+  ok   void leader -> next best leads
+  ok   staff cannot correct values (admins only)
+  ok   owner correction updates leader
+  ok   staff can check in golfer
+  ok   staff cannot edit golfers directly
+  ok   staff cannot add contests
+  ok   audit log records entry changes
+  ok   staff cannot read audit log
+
+Approval mode
+  ok   entry pending, no leader yet
+  ok   approval makes leader
+
+Separation between customers
+  ok   org B owner sees no org A golfers
+  ok   org B owner sees no org A entries
+  ok   org B owner cannot add golfer to org A event
+  ok   org B owner cannot void org A entry
+  ok   org A owner sees 144 golfers
+  ok   platform admin sees all orgs
+  ok   owner cannot create organizations
+
+Event sponsor strip
+  ok   strip returned in sort order
+  ok   staff cannot change the strip
+  ok   anon cannot read event_sponsors table
+  ok   org B owner cannot add to org A strip
+  ok   org B owner sees no org A strip rows
+  ok   owner cannot hard-delete historical sponsor
+  ok   legacy strip retained after denied sponsor deletion
+
+Closing
+  ok   closed contest refuses entries
+  ok   closed contest leaderboard still public
+  ok   draft event hides leaderboard from public
+
+47 passed, 0 failed

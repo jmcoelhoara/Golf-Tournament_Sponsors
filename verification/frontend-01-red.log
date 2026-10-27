@@ -1,0 +1,502 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/c/[token]/ContestClient.test.tsx [2m([22m[2m4 tests[22m[2m | [22m[31m4 failed[39m[2m)[22m[33m 301[2mms[22m[39m
+[31m   [31m×[31m shows current event logo and one banner for 5000ms after load, never again on poll[39m[32m 75[2mms[22m[39m
+[31m   [31m×[31m allows close bypass without blocking golfer selection[39m[32m 181[2mms[22m[39m
+[31m   [31m×[31m allows error bypass without blocking golfer selection[39m[32m 19[2mms[22m[39m
+[31m   [31m×[31m allows escape bypass without blocking golfer selection[39m[32m 21[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 4 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/c/[token]/ContestClient.test.tsx[2m > [22mshows current event logo and one banner for 5000ms after load, never again on poll
+[31m[1mTestingLibraryElementError[22m: Unable to find an element with the alt text: Tournament crest
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<main[31m
+      [33mclass[31m=[32m"shell"[31m
+    [36m>[31m
+      [36m<header[31m
+        [33mclass[31m=[32m"event-head"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"eyebrow"[31m
+        [36m>[31m
+          [0mCharity Open[0m
+        [36m</div>[31m
+      [36m</header>[31m
+      [36m<section[31m
+        [33mclass[31m=[32m"card contest-card"[31m
+      [36m>[31m
+        [36m<h1>[31m
+          [0mMen's Closest to the Pin[0m
+        [36m</h1>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"chips"[31m
+        [36m>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"chip"[31m
+          [36m>[31m
+            [0mHole [0m
+            [0m4[0m
+          [36m</span>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"chip"[31m
+          [36m>[31m
+            [0mBlue[0m
+            [0m tees[0m
+          [36m</span>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"chip"[31m
+          [36m>[31m
+            [0m145[0m
+            [0m yds[0m
+          [36m</span>[31m
+        [36m</div>[31m
+      [36m</section>[31m
+      [36m<section[31m
+        [33maria-live[31m=[32m"polite"[31m
+        [33mclass[31m=[32m"card leader-card"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"eyebrow"[31m
+        [36m>[31m
+          [0mCurrent leader[0m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"muted"[31m
+        [36m>[31m
+          [0mNo entries yet — be the first![0m
+        [36m</div>[31m
+      [36m</section>[31m
+      [36m<section[31m
+        [33mclass[31m=[32m"card"[31m
+      [36m>[31m
+        [36m<h2>[31m
+          [0mWho are you?[0m
+        [36m</h2>[31m
+        [36m<input[31m
+          [33mautocomplete[31m=[32m"off"[31m
+          [33mclass[31m=[32m"input"[31m
+          [33mplaceholder[31m=[32m"Type your name or team"[31m
+          [33mtype[31m=[32m"search"[31m
+          [33mvalue[31m=[32m""[31m
+        [36m/>[31m
+        [36m<ul[31m
+          [33mclass[31m=[32m"roster"[31m
+        [36m/>[31m
+      [36m</section>[31m
+    [36m</main>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2m❯[22m src/app/c/[token]/ContestClient.test.tsx:[2m12:16[22m[39m
+    [90m 10|[39m it('shows current event logo and one banner for 5000ms after load, nev…
+    [90m 11|[39m  [34mrender[39m([33m<[39m[33mContestClient[39m [33mtoken[39m[33m=[39m[32m"legacy-token"[39m[33m/[39m[33m>[39m)[33m;[39m [35mawait[39m [34mact[39m([35masync[39m()[33m=>[39m{})[33m;[39m
+    [90m 12|[39m  [34mexpect[39m(screen[33m.[39m[34mgetByAltText[39m([32m'Tournament crest'[39m))[33m.[39m[34mtoBeTruthy[39m()[33m;[39m
+    [90m   |[39m                [31m^[39m
+    [90m 13|[39m  [35mconst[39m dialog [33m=[39m screen[33m.[39m[34mgetByRole[39m([32m'dialog'[39m[33m,[39m{name[33m:[39m[32m'Event sponsors'[39m})[33m;[39m
+    [90m 14|[39m  await act(async()=>{vi.advanceTimersByTime(10000)}); expect(screen.ge…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/c/[token]/ContestClient.test.tsx[2m > [22mallows close bypass without blocking golfer selection
+[31m[1mTestingLibraryElementError[22m: Unable to find an accessible element with the role "button" and name "Close sponsor banner"
+
+Here are the accessible roles:
+
+  main:
+
+  Name "":
+  [36m<main[31m
+    [33mclass[31m=[32m"shell"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  [36m<header[31m
+    [33mclass[31m=[32m"event-head"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  heading:
+
+  Name "Men's Closest to the Pin":
+  [36m<h1 />[31m
+
+  Name "Who are you?":
+  [36m<h2 />[31m
+
+  --------------------------------------------------
+  searchbox:
+
+  Name "":
+  [36m<input[31m
+    [33mautocomplete[31m=[32m"off"[31m
+    [33mclass[31m=[32m"input"[31m
+    [33mplaceholder[31m=[32m"Type your name or team"[31m
+    [33mtype[31m=[32m"search"[31m
+    [33mvalue[31m=[32m""[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  [36m<ul[31m
+    [33mclass[31m=[32m"roster"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<main[31m
+      [33mclass[31m=[32m"shell"[31m
+    [36m>[31m
+      [36m<header[31m
+        [33mclass[31m=[32m"event-head"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"eyebrow"[31m
+        [36m>[31m
+          [0mCharity Open[0m
+        [36m</div>[31m
+      [36m</header>[31m
+      [36m<section[31m
+        [33mclass[31m=[32m"card contest-card"[31m
+      [36m>[31m
+        [36m<h1>[31m
+          [0mMen's Closest to the Pin[0m
+        [36m</h1>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"chips"[31m
+        [36m>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"chip"[31m
+          [36m>[31m
+            [0mHole [0m
+            [0m4[0m
+          [36m</span>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"chip"[31m
+          [36m>[31m
+            [0mBlue[0m
+            [0m tees[0m
+          [36m</span>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"chip"[31m
+          [36m>[31m
+            [0m145[0m
+            [0m yds[0m
+          [36m</span>[31m
+        [36m</div>[31m
+      [36m</section>[31m
+      [36m<section[31m
+        [33maria-live[31m=[32m"polite"[31m
+        [33mclass[31m=[32m"card leader-card"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"eyebrow"[31m
+        [36m>[31m
+          [0mCurrent leader[0m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"muted"[31m
+        [36m>[31m
+          [0mNo entries yet — be the first![0m
+        [36m</div>[31m
+      [36m</section>[31m
+      [36m<section[31m
+        [33mclass[31m=[32m"card"[31m
+      [36m>[31m
+        [36m<h2>[31m
+          [0mWho are you?[0m
+        [36m</h2>[31m
+        [36m<input[31m
+          [33mautocomplete[31m=[32m"off"[31m
+          [33mclass[31m=[32m"input"[31m
+          [33mplaceholder[31m=[32m"Type your name or team"[31m
+          [33mtype[31m=[32m"search"[31m
+          [33mvalue[31m=[32m""[31m
+        [36m/>[31m
+        [36m<ul[31m
+          [33mclass[31m=[32m"roster"[31m
+        [36m/>[31m
+      [36m</section>[31m
+    [36m</main>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2m❯[22m src/app/c/[token]/ContestClient.test.tsx:[2m22:46[22m[39m
+    [90m 20|[39m it.each(['close','error','escape'])('allows %s bypass without blocking…
+    [90m 21|[39m  [34mrender[39m([33m<[39m[33mContestClient[39m [33mtoken[39m[33m=[39m[32m"legacy-token"[39m[33m/[39m[33m>[39m)[33m;[39m [35mawait[39m [34mact[39m([35masync[39m()[33m=>[39m{})[33m;[39m
+    [90m 22|[39m  if(method==='close') fireEvent.click(screen.getByRole('button',{name:…
+    [90m   |[39m                                              [31m^[39m
+    [90m 23|[39m  if(method==='error') fireEvent.error(screen.getByAltText('Our sponsor…
+    [90m 24|[39m  if(method==='escape') fireEvent.keyDown(screen.getByRole('dialog'),{k…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/c/[token]/ContestClient.test.tsx[2m > [22mallows error bypass without blocking golfer selection
+[31m[1mTestingLibraryElementError[22m: Unable to find an element with the alt text: Our sponsors
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<main[31m
+      [33mclass[31m=[32m"shell"[31m
+    [36m>[31m
+      [36m<header[31m
+        [33mclass[31m=[32m"event-head"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"eyebrow"[31m
+        [36m>[31m
+          [0mCharity Open[0m
+        [36m</div>[31m
+      [36m</header>[31m
+      [36m<section[31m
+        [33mclass[31m=[32m"card contest-card"[31m
+      [36m>[31m
+        [36m<h1>[31m
+          [0mMen's Closest to the Pin[0m
+        [36m</h1>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"chips"[31m
+        [36m>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"chip"[31m
+          [36m>[31m
+            [0mHole [0m
+            [0m4[0m
+          [36m</span>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"chip"[31m
+          [36m>[31m
+            [0mBlue[0m
+            [0m tees[0m
+          [36m</span>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"chip"[31m
+          [36m>[31m
+            [0m145[0m
+            [0m yds[0m
+          [36m</span>[31m
+        [36m</div>[31m
+      [36m</section>[31m
+      [36m<section[31m
+        [33maria-live[31m=[32m"polite"[31m
+        [33mclass[31m=[32m"card leader-card"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"eyebrow"[31m
+        [36m>[31m
+          [0mCurrent leader[0m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"muted"[31m
+        [36m>[31m
+          [0mNo entries yet — be the first![0m
+        [36m</div>[31m
+      [36m</section>[31m
+      [36m<section[31m
+        [33mclass[31m=[32m"card"[31m
+      [36m>[31m
+        [36m<h2>[31m
+          [0mWho are you?[0m
+        [36m</h2>[31m
+        [36m<input[31m
+          [33mautocomplete[31m=[32m"off"[31m
+          [33mclass[31m=[32m"input"[31m
+          [33mplaceholder[31m=[32m"Type your name or team"[31m
+          [33mtype[31m=[32m"search"[31m
+          [33mvalue[31m=[32m""[31m
+        [36m/>[31m
+        [36m<ul[31m
+          [33mclass[31m=[32m"roster"[31m
+        [36m/>[31m
+      [36m</section>[31m
+    [36m</main>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2m❯[22m src/app/c/[token]/ContestClient.test.tsx:[2m23:46[22m[39m
+    [90m 21|[39m  [34mrender[39m([33m<[39m[33mContestClient[39m [33mtoken[39m[33m=[39m[32m"legacy-token"[39m[33m/[39m[33m>[39m)[33m;[39m [35mawait[39m [34mact[39m([35masync[39m()[33m=>[39m{})[33m;[39m
+    [90m 22|[39m  if(method==='close') fireEvent.click(screen.getByRole('button',{name:…
+    [90m 23|[39m  if(method==='error') fireEvent.error(screen.getByAltText('Our sponsor…
+    [90m   |[39m                                              [31m^[39m
+    [90m 24|[39m  if(method==='escape') fireEvent.keyDown(screen.getByRole('dialog'),{k…
+    [90m 25|[39m  [34mexpect[39m(screen[33m.[39m[34mqueryByRole[39m([32m'dialog'[39m))[33m.[39m[34mtoBeNull[39m()[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/c/[token]/ContestClient.test.tsx[2m > [22mallows escape bypass without blocking golfer selection
+[31m[1mTestingLibraryElementError[22m: Unable to find an accessible element with the role "dialog"
+
+Here are the accessible roles:
+
+  main:
+
+  Name "":
+  [36m<main[31m
+    [33mclass[31m=[32m"shell"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  [36m<header[31m
+    [33mclass[31m=[32m"event-head"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  heading:
+
+  Name "Men's Closest to the Pin":
+  [36m<h1 />[31m
+
+  Name "Who are you?":
+  [36m<h2 />[31m
+
+  --------------------------------------------------
+  searchbox:
+
+  Name "":
+  [36m<input[31m
+    [33mautocomplete[31m=[32m"off"[31m
+    [33mclass[31m=[32m"input"[31m
+    [33mplaceholder[31m=[32m"Type your name or team"[31m
+    [33mtype[31m=[32m"search"[31m
+    [33mvalue[31m=[32m""[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  [36m<ul[31m
+    [33mclass[31m=[32m"roster"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<main[31m
+      [33mclass[31m=[32m"shell"[31m
+    [36m>[31m
+      [36m<header[31m
+        [33mclass[31m=[32m"event-head"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"eyebrow"[31m
+        [36m>[31m
+          [0mCharity Open[0m
+        [36m</div>[31m
+      [36m</header>[31m
+      [36m<section[31m
+        [33mclass[31m=[32m"card contest-card"[31m
+      [36m>[31m
+        [36m<h1>[31m
+          [0mMen's Closest to the Pin[0m
+        [36m</h1>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"chips"[31m
+        [36m>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"chip"[31m
+          [36m>[31m
+            [0mHole [0m
+            [0m4[0m
+          [36m</span>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"chip"[31m
+          [36m>[31m
+            [0mBlue[0m
+            [0m tees[0m
+          [36m</span>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"chip"[31m
+          [36m>[31m
+            [0m145[0m
+            [0m yds[0m
+          [36m</span>[31m
+        [36m</div>[31m
+      [36m</section>[31m
+      [36m<section[31m
+        [33maria-live[31m=[32m"polite"[31m
+        [33mclass[31m=[32m"card leader-card"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"eyebrow"[31m
+        [36m>[31m
+          [0mCurrent leader[0m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"muted"[31m
+        [36m>[31m
+          [0mNo entries yet — be the first![0m
+        [36m</div>[31m
+      [36m</section>[31m
+      [36m<section[31m
+        [33mclass[31m=[32m"card"[31m
+      [36m>[31m
+        [36m<h2>[31m
+          [0mWho are you?[0m
+        [36m</h2>[31m
+        [36m<input[31m
+          [33mautocomplete[31m=[32m"off"[31m
+          [33mclass[31m=[32m"input"[31m
+          [33mplaceholder[31m=[32m"Type your name or team"[31m
+          [33mtype[31m=[32m"search"[31m
+          [33mvalue[31m=[32m""[31m
+        [36m/>[31m
+        [36m<ul[31m
+          [33mclass[31m=[32m"roster"[31m
+        [36m/>[31m
+      [36m</section>[31m
+    [36m</main>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2m❯[22m src/app/c/[token]/ContestClient.test.tsx:[2m24:49[22m[39m
+    [90m 22|[39m  if(method==='close') fireEvent.click(screen.getByRole('button',{name:…
+    [90m 23|[39m  if(method==='error') fireEvent.error(screen.getByAltText('Our sponsor…
+    [90m 24|[39m  if(method==='escape') fireEvent.keyDown(screen.getByRole('dialog'),{k…
+    [90m   |[39m                                                 [31m^[39m
+    [90m 25|[39m  [34mexpect[39m(screen[33m.[39m[34mqueryByRole[39m([32m'dialog'[39m))[33m.[39m[34mtoBeNull[39m()[33m;[39m
+    [90m 26|[39m  fireEvent.change(screen.getByPlaceholderText('Type your name or team'…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m4 failed[39m[22m[90m (4)[39m
+[2m   Start at [22m 19:30:45
+[2m   Duration [22m 1.25s[2m (transform 100ms, setup 113ms, import 94ms, tests 301ms, environment 582ms)[22m
+

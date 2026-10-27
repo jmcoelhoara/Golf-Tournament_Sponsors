@@ -1,0 +1,25 @@
+ok 1 legacy same-org ungranted owner sees no events
+ok 2 no inferred legacy grants
+ok 3 platform sees legacy event
+ok 4 context lists creation organization without revealing events
+ok 5 nonplatform staff account enumeration denied
+ok 6 platform staff list contains existing members
+ok 7 raw legacy event update denied
+ok 8 raw event deletion denied even platform
+ok 9 staff cannot maintain course catalog
+ok 10 exactly four initial presets
+ok 11 staff cannot inject preset
+ok 12 cannot create other org event
+ok 13 cross-org course rejected
+ok 14 member creates event
+ok 15 creator gets initial grant
+ok 16 new event starts draft
+ok 17 same-org owner still cannot see created event
+ok 18 creator cannot grant access
+ok 19 raw ACL writes denied
+ok 20 platform cannot grant to nonmember
+ok 21 platform revokes creator
+ok 22 revoked creator has no persistent bypass
+ok 23 creator cannot self-regrant
+ok 24 platform regrants creator
+Upgrade suite: 24 passed

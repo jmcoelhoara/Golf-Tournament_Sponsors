@@ -1,0 +1,16 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:smoke
+npm notice run node --test scripts/local-smoke.mjs
+✔ public homepage renders the golfer entry guidance and staff sign-in link (462.644169ms)
+✔ staff login renders email and password fields without a hosted Auth request (26.295895ms)
+✔ unauthenticated request to /admin redirects to the local login route (6.152871ms)
+✔ unauthenticated request to /admin/access redirects to the local login route (9.6219ms)
+✔ unauthenticated request to /admin/leaderboards redirects to the local login route (5.938617ms)
+✔ unauthenticated request to /admin/contests/00000000-0000-0000-0000-0000000000c3/print redirects to the local login route (4.875891ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3628.082798

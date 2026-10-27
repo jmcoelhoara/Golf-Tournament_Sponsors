@@ -1,0 +1,186 @@
+ok 1 legacy same-org ungranted owner sees no events
+ok 2 no inferred legacy grants
+ok 3 platform sees legacy event
+ok 4 context lists creation organization without revealing events
+ok 5 nonplatform staff account enumeration denied
+ok 6 platform staff list contains existing members
+ok 7 raw legacy event update denied
+ok 8 raw event deletion denied even platform
+ok 9 staff cannot maintain course catalog
+ok 10 exactly four initial presets
+ok 11 staff cannot inject preset
+ok 12 cannot create other org event
+ok 13 cross-org course rejected
+ok 14 member creates event
+ok 15 creator gets initial grant
+ok 16 new event starts draft
+ok 17 same-org owner still cannot see created event
+ok 18 creator cannot grant access
+ok 19 raw ACL writes denied
+ok 20 platform cannot grant to nonmember
+ok 21 platform revokes creator
+ok 22 revoked creator has no persistent bypass
+ok 23 creator cannot self-regrant
+ok 24 platform regrants creator
+ok 25 free-form preset key rejected
+ok 26 cross-course tee rejected
+ok 27 missing tee hole rejected
+ok 28 staff adds preset contest
+ok 29 second contest added
+ok 30 DB derives exact scoring and placement snapshot
+ok 31 cannot directly overwrite scoring snapshot
+ok 32 catalog edits do not rewrite contest snapshot
+ok 33 explicit placement refreshes snapshot
+ok 34 refreshed yardage from DB
+ok 35 course org cannot move
+ok 36 tee cannot move course
+ok 37 yardage key cannot move
+ok 38 referenced yardage cannot be deleted
+ok 39 ungranted owner cannot alter placement
+ok 40 course change requires complete placements
+ok 41 partial placements rejected
+ok 42 invalid second placement rejects entire course update
+ok 43 failed update retains original event
+ok 44 failed update retains first contest snapshot
+ok 45 duplicate placement rejected
+ok 46 UUID aliases cannot disguise duplicate contest placements
+ok 47 aliased duplicate retains entire original course
+ok 48 malformed placement rejected safely
+ok 49 complete atomic course reassignment succeeds
+ok 50 same tee label uses new course yardage
+ok 51 course name snapshot refreshed
+ok 52 owner cannot update event
+ok 53 event archive cannot use status RPC
+ok 54 staff can make event live
+ok 55 staff can open contest
+ok 56 staff can open second contest
+ok 57 existing tokens retained after event/placement changes
+ok 58 ungranted owner cannot check in legacy golfer
+ok 59 ungranted owner cannot review legacy entry
+ok 60 ungranted owner cannot correct legacy entry
+ok 61 ungranted owner cannot rotate legacy QR
+ok 62 authenticated public leaderboard policy does not bypass grant
+ok 63 granted staff can check in
+ok 64 granted staff cannot correct
+ok 65 granted staff cannot rotate token
+ok 66 revoked staff cannot check in without logout
+ok 67 revoked staff cannot read entries
+ok 68 public event-media bucket configured
+ok 69 granted staff can upload new immutable object
+ok 70 ungranted owner upload denied
+ok 71 malformed or unauthorized path denied: bad/event/file.png
+ok 72 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a1/1bac6a2c-eaa4-42b5-8d4c-df666af83ac6/../x.png
+ok 73 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a1/1bac6a2c-eaa4-42b5-8d4c-df666af83ac6/cb359b9a-0dde-4375-8a71-d4095e908944.svg
+ok 74 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a1/1bac6a2c-eaa4-42b5-8d4c-df666af83ac6/3963b6de-c750-4ed0-b39a-a7a056ad39f4.png/more
+ok 75 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a2/1bac6a2c-eaa4-42b5-8d4c-df666af83ac6/ec44dcdf-c716-41ce-9049-99c35ba4d3c6.png
+ok 76 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a1/00000000-0000-0000-0000-0000000000e1/dbca2c04-9c10-4f7b-b350-5e093971f294.png
+ok 77 no overwrite policy for staff
+ok 78 no overwrite policy even platform
+ok 79 no client object delete
+ok 80 ordinary org manager legacy upload denied
+ok 81 platform legacy immutable upload allowed
+ok 82 legacy delete also denied platform
+ok 83 missing object registration rejected
+ok 84 wrong kind rejected
+ok 85 register actual uploaded logo
+ok 86 register actual uploaded banner
+ok 87 register replacement logo
+ok 88 metadata is server derived
+ok 89 client cannot rewrite media metadata
+ok 90 client cannot delete image metadata
+ok 91 logo selection succeeds
+ok 92 banner kind cannot be logo
+ok 93 logo kind cannot be banner
+ok 94 one banner can serve contest A
+ok 95 one banner can serve contest B
+ok 96 public payload adds shared logo
+ok 97 public payload adds exactly one selected banner
+ok 98 yardage and score units stay distinct
+ok 99 second contest shares logo
+ok 100 logo change updates both public contests
+ok 101 print SQL reads same current event logo for both contests
+ok 102 clearing A banner succeeds
+ok 103 clearing A does not change B
+ok 104 clearing selection preserves all library images
+ok 105 cross-event logo rejected even with both grants
+ok 106 cross-event banner rejected even with both grants
+ok 107 invalid object metadata image/svg+xml/10 rejected
+ok 108 invalid object metadata image/png/10485761 rejected
+ok 109 invalid object metadata image/png/0 rejected
+ok 110 invalid object metadata image/jpeg/10 rejected
+ok 111 revocation hides image library
+ok 112 revocation hides storage listing
+ok 113 revoked upload denied
+ok 114 revoked logo mutation denied
+ok 115 public marketing image metadata stays public by token
+ok 116 new CTP retains inches and numeric rounding
+ok 117 new longest drive remains marker claim
+ok 118 ungranted same-org owner cannot archive contest
+ok 119 archive contest succeeds
+ok 120 archive contest retry succeeds
+ok 121 archive timestamp stable
+ok 122 archived contest hidden publicly
+ok 123 archived roster empty
+ok 124 archived public leader hidden
+ok 125 archived contest retry returns same receipt without leader
+ok 126 archived contest blocks new submission
+ok 127 archived contest blocks placement edits
+ok 128 archived contest blocks review
+ok 129 archived contest blocks correction
+ok 130 archived contest blocks QR rotation
+ok 131 course reassignment excludes archived contests
+ok 132 archived placement snapshot retained
+ok 133 event archival succeeds
+ok 134 event archive is idempotent
+ok 135 event archive preserves child status history
+ok 136 archived event blocks ordinary edit
+ok 137 archived event blocks new submission
+ok 138 archived event retry preserves receipt but hides leader
+ok 139 archived event public data hidden
+ok 140 archived event leaders not public
+ok 141 archival retains both entries
+ok 142 archival retains leader rows for staff history
+ok 143 archival retains library
+ok 144 archival retains current logo
+ok 145 archival retains original tokens
+ok 146 archive blocks object upload
+ok 147 archive blocks registration
+ok 148 platform can still manage archived ACL
+ok 149 revoked creator cannot view archive
+ok 150 platform sees archive
+ok 151 event-scoped audit includes grants,images,placement and archives
+ok 152 entry, leader and audit cannot be truncated
+ok 153 no PUBLIC executable private helpers
+ok 154 anon can execute only golfer public APIs
+ok 155 M1 ordinary staff creates event before catalog archive
+ok 156 M1 creator has active explicit grant
+ok 157 M1 fixture has long-drive placement
+ok 158 M1 fixture has CTP placement
+ok 159 M1 only course archived; tee remains active
+node:internal/modules/run_main:111
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: M1 granted creator edits title/date retaining archived course
++ actual - expected
+
+  {
++   error: 'invalid_course',
++   ok: false
+-   event_id: 'd3601ee5-bbef-4ebc-a657-654257098cdc',
+-   ok: true
+  }
+
+    at check (file:///workspace/supabase/tests/upgrade.test.mjs:6:56)
+    at file:///workspace/supabase/tests/upgrade.test.mjs:253:1 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: { ok: false, error: 'invalid_course' },
+  expected: { ok: true, event_id: 'd3601ee5-bbef-4ebc-a657-654257098cdc' },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v26.12.1
+
+command_exit=1

@@ -1,0 +1,122 @@
+ok 1 legacy same-org ungranted owner sees no events
+ok 2 no inferred legacy grants
+ok 3 platform sees legacy event
+ok 4 context lists creation organization without revealing events
+ok 5 nonplatform staff account enumeration denied
+ok 6 platform staff list contains existing members
+ok 7 raw legacy event update denied
+ok 8 raw event deletion denied even platform
+ok 9 staff cannot maintain course catalog
+ok 10 exactly four initial presets
+ok 11 staff cannot inject preset
+ok 12 cannot create other org event
+ok 13 cross-org course rejected
+ok 14 member creates event
+ok 15 creator gets initial grant
+ok 16 new event starts draft
+ok 17 same-org owner still cannot see created event
+ok 18 creator cannot grant access
+ok 19 raw ACL writes denied
+ok 20 platform cannot grant to nonmember
+ok 21 platform revokes creator
+ok 22 revoked creator has no persistent bypass
+ok 23 creator cannot self-regrant
+ok 24 platform regrants creator
+ok 25 free-form preset key rejected
+ok 26 cross-course tee rejected
+ok 27 missing tee hole rejected
+ok 28 staff adds preset contest
+ok 29 second contest added
+ok 30 DB derives exact scoring and placement snapshot
+ok 31 cannot directly overwrite scoring snapshot
+ok 32 catalog edits do not rewrite contest snapshot
+ok 33 explicit placement refreshes snapshot
+ok 34 refreshed yardage from DB
+ok 35 course org cannot move
+ok 36 tee cannot move course
+ok 37 yardage key cannot move
+ok 38 referenced yardage cannot be deleted
+ok 39 ungranted owner cannot alter placement
+ok 40 course change requires complete placements
+ok 41 partial placements rejected
+ok 42 invalid second placement rejects entire course update
+ok 43 failed update retains original event
+ok 44 failed update retains first contest snapshot
+ok 45 duplicate placement rejected
+ok 46 malformed placement rejected safely
+ok 47 complete atomic course reassignment succeeds
+ok 48 same tee label uses new course yardage
+ok 49 course name snapshot refreshed
+ok 50 owner cannot update event
+ok 51 event archive cannot use status RPC
+ok 52 staff can make event live
+ok 53 staff can open contest
+ok 54 staff can open second contest
+ok 55 existing tokens retained after event/placement changes
+ok 56 ungranted owner cannot check in legacy golfer
+ok 57 ungranted owner cannot review legacy entry
+ok 58 ungranted owner cannot correct legacy entry
+ok 59 ungranted owner cannot rotate legacy QR
+ok 60 authenticated public leaderboard policy does not bypass grant
+ok 61 granted staff can check in
+ok 62 granted staff cannot correct
+ok 63 granted staff cannot rotate token
+ok 64 revoked staff cannot check in without logout
+ok 65 revoked staff cannot read entries
+ok 66 public event-media bucket configured
+ok 67 granted staff can upload new immutable object
+ok 68 ungranted owner upload denied
+ok 69 malformed or unauthorized path denied: bad/event/file.png
+ok 70 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a1/91967047-a541-4165-bcee-8ac5ca508fb1/../x.png
+ok 71 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a1/91967047-a541-4165-bcee-8ac5ca508fb1/c08176b0-529b-42e8-b3ef-a2dc2b6b26c8.svg
+ok 72 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a1/91967047-a541-4165-bcee-8ac5ca508fb1/27869400-2bd8-4a82-b8a4-2a448d970fb8.png/more
+ok 73 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a2/91967047-a541-4165-bcee-8ac5ca508fb1/8edc6418-0434-416d-ac1e-b5ff12ded57a.png
+ok 74 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a1/00000000-0000-0000-0000-0000000000e1/d1284f61-c16e-455a-bdb0-f23577a96ff5.png
+ok 75 no overwrite policy for staff
+ok 76 no overwrite policy even platform
+ok 77 no client object delete
+ok 78 ordinary org manager legacy upload denied
+ok 79 platform legacy immutable upload allowed
+ok 80 legacy delete also denied platform
+ok 81 missing object registration rejected
+ok 82 wrong kind rejected
+ok 83 register actual uploaded logo
+ok 84 register actual uploaded banner
+ok 85 register replacement logo
+ok 86 metadata is server derived
+ok 87 client cannot rewrite media metadata
+ok 88 client cannot delete image metadata
+ok 89 logo selection succeeds
+ok 90 banner kind cannot be logo
+ok 91 logo kind cannot be banner
+ok 92 one banner can serve contest A
+ok 93 one banner can serve contest B
+node:internal/modules/run_main:111
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: public payload adds shared logo
++ actual - expected
+
++ undefined
+- {
+-   alt_text: 'Tournament',
+-   bucket: 'event-media',
+-   path: '00000000-0000-0000-0000-0000000000a1/91967047-a541-4165-bcee-8ac5ca508fb1/96e6848d-0bfd-49ca-9df5-cadd93ccb80c.png'
+- }
+
+    at check (file:///workspace/supabase/tests/upgrade.test.mjs:6:56)
+    at file:///workspace/supabase/tests/upgrade.test.mjs:152:1 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: undefined,
+  expected: {
+    bucket: 'event-media',
+    path: '00000000-0000-0000-0000-0000000000a1/91967047-a541-4165-bcee-8ac5ca508fb1/96e6848d-0bfd-49ca-9df5-cadd93ccb80c.png',
+    alt_text: 'Tournament'
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v26.12.1

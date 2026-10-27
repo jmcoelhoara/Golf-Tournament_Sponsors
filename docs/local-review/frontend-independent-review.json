@@ -1,0 +1,69 @@
+{
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "id": "FE-ACL-REFRESH-01",
+      "severity": "P2",
+      "title": "A refreshed access grant does not update the permission checkbox and can be unintentionally reversed",
+      "source": "work-frontend/src/app/admin/access/AccessManager.tsx:6,9,11-13",
+      "related_source": "work-frontend/src/app/admin/MutationForm.tsx:7",
+      "finding": "AccessManager refetches account/grant rows when refreshed event props arrive, but AccessRow is keyed only by event ID and account ID. Its enabled state is initialized once with useState(initialEnabled), so a newly fetched initialEnabled value is ignored. The displayed checkbox and the next set_event_staff_access payload can disagree with the grant data just fetched from the server.",
+      "reproduction": [
+        "Render the actual AccessManager component with event e1 and a fetched active grant for staff1; select e1 and observe the checked checkbox.",
+        "Supply a revoked grant on the next account/grant read and rerender with a fresh object for the same event, matching the event-prop replacement produced by an RSC refresh. The effect runs and the grants are fetched again.",
+        "The existing AccessRow remains mounted because its key is still e1:staff1; the checkbox remains checked despite the newly fetched revoked_at value.",
+        "Click Save access without toggling the stale checkbox. The component submits set_event_staff_access with p_event_id=e1, p_user_id=staff1 and p_enabled=true, reversing the fetched revocation. The inverse case can revoke a newly granted user. A refresh following another account's save can expose the same problem."
+      ],
+      "execution_evidence": "Independently reproduced with the repository's actual TSX transpiled in memory, React, JSDOM and Testing Library inside the required offline sandbox. Initial active-grant checkbox=true; after a same-event prop refresh with the revoked-grant fixture checkbox=true; clicking Save emitted {name:set_event_staff_access,args:{p_event_id:e1,p_user_id:staff1,p_enabled:true}}. This was a component-state reproduction using a mocked Supabase transport, not an authenticated HTTP/DB integration test. No product or test file was created or edited.",
+      "impact": "Troy can be shown a permission state inconsistent with a completed refetch and can accidentally re-enable access revoked in another tab/session, or disable newly enabled access. This is a correctness defect in permission management, not a demonstrated RPC/RLS authorization bypass.",
+      "required_fix": "Reconcile AccessRow draft state with changes to the fetched grant state, or remount the row when the fetched enabled/revoked state changes. Account for pending/unsaved edits explicitly rather than silently retaining stale values. Add regression tests for both enabled-to-revoked and revoked-to-enabled refetches, including a refresh caused by saving another account.",
+      "acceptance": "After fetching a changed grant for the same event/account, the row reflects that authoritative state or presents an explicit edit conflict; a subsequent save cannot silently submit the old state. Existing grant/revoke tests must remain green."
+    }
+  ],
+  "suggestions": [
+    {
+      "id": "FE-COURSE-UX",
+      "source": "work-frontend/src/app/admin/EventEditor.tsx:10,14-15,20-21",
+      "suggestion": "The current course-change editor deliberately refuses changes while any nonarchived contest exists and always sends p_contest_placements:null. This is the contract's safe-refusal option, not a partial-remap/data-corruption bug. It is nevertheless a limitation of the original course-edit request: the offered workaround archives existing contests and recreates playable contests rather than remapping the existing ones. Consider a complete placement-remap UI using the backend's atomic placements array, preserving contest IDs, tokens and entries. Keep this limitation explicit rather than describing unrestricted event course editing."
+    },
+    {
+      "id": "FE-TEST-SEAMS",
+      "source": "work-frontend/src/app/admin/access/AccessManager.test.tsx:5-23; work-frontend/src/app/admin/server-views.test.tsx:23-68; work-frontend/src/lib/event-media.test.ts:5-17",
+      "suggestion": "The passing tests correctly exercise useful component and error-handling seams, but most fluent query mocks return the same fixtures regardless of actual filters and none proves PostgREST relationship discovery, RLS, Auth or Storage. Add same-account refresh/conflict coverage for the blocking finding; strengthen query-shape assertions and cross-event/kind library fixtures where practical. Keep actual-service acceptance distinct from these mocks."
+    },
+    {
+      "id": "FE-LEGACY-DEAD-INTERFACES",
+      "source": "work-frontend/src/app/admin/actions.ts:13-87; backend commit 9800799dde5ebfc64da9bd3cf89239664c0d1b63, supabase/migrations/20261025000000_event_catalog_access_media.sql:56-77,344-357,413-431",
+      "suggestion": "Remove or explicitly retire unused legacy mutation actions/components in a follow-up. They still ignore returned errors and some request direct event/contest mutations, but they are not an authorization bypass under the reviewed backend contract: direct client event/contest DML is revoked, review uses the fresh-ACL RPC, legacy sponsor-strip writes are platform/nonarchive restricted, and legacy Storage update/delete policies are removed. The new rendered workflows use checkedMutation. Do not revive these old paths without adapting them to the new contract."
+    },
+    {
+      "id": "FE-READABILITY",
+      "source": "work-frontend/src/app/admin/server-views.tsx; work-frontend/src/app/admin/access/AccessManager.tsx; work-frontend/src/app/admin/courses/CatalogEditor.tsx",
+      "suggestion": "Expand the densely compressed JSX and mutation handlers into normally formatted source. This is an auditability/maintenance judgment, not a documented-standard violation or an additional release blocker."
+    }
+  ],
+  "release_gates": [
+    {
+      "id": "RG-MERGED-LOCAL-STACK",
+      "gate": "Combine the frontend with the final reviewed backend migration and any parent-accepted backend fixes, then verify against an authorized real local Supabase Auth/PostgREST/Storage stack. The frontend checkout alone does not contain the new migration. Confirm real named RPC dispatch, JSON error results, nested SELECT shapes, persisted mutations and readbacks. The concurrent metadata-only edit/archived-course fix is not adjudicated here; its final revision needs parent verification."
+    },
+    {
+      "id": "RG-AUTHENTICATED-BOUNDARIES",
+      "gate": "Exercise granted staff, same-organization ungranted owner/admin, revoked creator, no-grant login and platform identities through authenticated requests. Check direct event/settings/entries/print/leaderboard/history/access/catalog URLs and mutation endpoints, including revocation without logout. Signed-out redirects and a public shell are not authenticated integration evidence."
+    },
+    {
+      "id": "RG-STORAGE",
+      "gate": "Verify actual local Storage upload and metadata registration, wrong-event/wrong-kind selections, revoked and malformed-path uploads, denied overwrite/update/delete and retained objects after registration/selection failure. Verify public delivery separately. Public event-media URLs remain downloadable by URL holders after revoke/archive; the implementation must not promise revocable image delivery."
+    },
+    {
+      "id": "RG-BROWSER-PRINT-PLAYER",
+      "gate": "Use a real browser for mobile layout, popup loading/error/keyboard/focus behavior, five seconds after image load and once per visit across polling/token navigation, current logo on multiple contest pages, draft print readiness and print pagination. Decode/scan the generated QR against the unchanged legacy-compatible /c/<token> route and exercise remembered golfer, retry UUID, closest-to-pin inches and unmeasured drive claims with a real local backend. JSDOM assertions do not prove browser layout, image timing, pagination or QR scannability."
+    },
+    {
+      "id": "RG-RELEASE-AUTHORITY",
+      "gate": "Before any separately authorized publication, verify the deployed policy/privilege inventory and the trusted Troy/platform-admin identity inventory, approve migration/application ordering and obtain publication approval. No hosted access, real credentials, pushes, deployments, account changes or task completion were performed for this review."
+    }
+  ],
+  "summary": "FAIL: one independently reproduced frontend logic defect; no substantiated authorization bypass or exposed secret found. Reviewed frontend HEAD ddb038faf16c15f4be6e881796ccaac5d4d709fe and its implementation diff from 1be624d3f515ada41ab86d4e570bee81301a26a9, the requested planning/requirements/contract/result documents as context rather than proof, all changed production source and component tests, route wrappers, public-player compatibility paths, user-scoped clients and legacy actions. Compared every new rendered RPC name/parameter set and checkedMutation result expectation to the actual backend migration at immutable commit 9800799dde5ebfc64da9bd3cf89239664c0d1b63; no mismatch found. Source review found server platform guards beyond hidden menus, fresh RLS event reads without service-role fallback, operational/archive separation, event-filtered and kind-filtered media selection, immutable upload/register/select sequencing without destructive orphan cleanup, snapshot-based placement, current parent-event logo and authenticated draft print, and the 5000ms post-load captured-per-visit banner with dismissal/error and token reset handling. Independently reran the existing UI suite in the required sandbox: 65 tests passed in 12 files (exit 0), with the existing nonblocking Vite config-loader warning. A separate in-memory component reproduction exposed the stale permission-row defect that those tests miss. Scoped git diff --check passed and frontend git status was clean after inspection/execution. An initial sandbox python3 probe failed because python3 is not an executable inside that sandbox; the successful read-only scan and reproduction used node instead, without tooling changes. No service responses or integration evidence were fabricated. Product files remain untouched; only this review JSON was written. Release-only service/browser/deployment gates are listed separately and are not counted as code defects."
+}

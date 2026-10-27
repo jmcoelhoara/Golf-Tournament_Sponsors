@@ -1,0 +1,66 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [32m✓[39m src/app/admin/navigation.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 241[2mms[22m[39m
+ [32m✓[39m src/app/admin/EventEditor.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 246[2mms[22m[39m
+ [32m✓[39m src/app/c/[token]/ContestClient.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 232[2mms[22m[39m
+ [32m✓[39m src/app/admin/access/AccessManager.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 194[2mms[22m[39m
+ [32m✓[39m src/app/admin/MediaPicker.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 211[2mms[22m[39m
+ [32m✓[39m src/app/admin/courses/CatalogEditor.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 211[2mms[22m[39m
+ [31m❯[39m src/app/admin/server-views.test.tsx [2m([22m[2m9 tests[22m[2m | [22m[31m6 failed[39m[2m)[22m[32m 196[2mms[22m[39m
+   [32m✓[39m loads granted event settings through user-scoped SELECT and keeps no-grants users logged in[32m 132[2mms[22m[39m
+   [32m✓[39m loads an event detail only after its RLS event read and exposes fixed contest creation plus shared logo[32m 50[2mms[22m[39m
+   [32m✓[39m builds leaderboard navigation from the same granted-event SELECT[32m 9[2mms[22m[39m
+[31m   [31m×[31m requires server platform context for direct courses route[39m[32m 2[2mms[22m[39m
+[31m   [31m×[31m requires server platform context for direct access route[39m[32m 0[2mms[22m[39m
+[31m   [31m×[31m requires server platform context for direct history route[39m[32m 0[2mms[22m[39m
+[31m   [31m×[31m renders course-specific granted events but no ordinary-staff catalog editor[39m[32m 0[2mms[22m[39m
+[31m   [31m×[31m shows an authenticated event leaderboard including closed and draft contests[39m[32m 0[2mms[22m[39m
+[31m   [31m×[31m prints draft contests with the parent current logo and original QR token under user RLS[39m[32m 0[2mms[22m[39m
+ [32m✓[39m src/app/admin/contests/[id]/print/PrintSheet.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 170[2mms[22m[39m
+ [32m✓[39m src/lib/event-media.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/lib/staff.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 6 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/server-views.test.tsx[2m > [22mrequires server platform context for direct courses route
+[41m[1m FAIL [22m[49m src/app/admin/server-views.test.tsx[2m > [22mrequires server platform context for direct access route
+[41m[1m FAIL [22m[49m src/app/admin/server-views.test.tsx[2m > [22mrequires server platform context for direct history route
+[31m[1mTypeError[22m: view is not a function[39m
+[36m [2m❯[22m src/app/admin/server-views.test.tsx:[2m10:247[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/server-views.test.tsx[2m > [22mrenders course-specific granted events but no ordinary-staff catalog editor
+[31m[1mTypeError[22m: CourseContent is not a function[39m
+[36m [2m❯[22m src/app/admin/server-views.test.tsx:[2m11:411[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/server-views.test.tsx[2m > [22mshows an authenticated event leaderboard including closed and draft contests
+[31m[1mTypeError[22m: EventLeaderboardContent is not a function[39m
+[36m [2m❯[22m src/app/admin/server-views.test.tsx:[2m12:106[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/server-views.test.tsx[2m > [22mprints draft contests with the parent current logo and original QR token under user RLS
+[31m[1mTypeError[22m: PrintContent is not a function[39m
+[36m [2m❯[22m src/app/admin/server-views.test.tsx:[2m13:604[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m9 passed[39m[22m[90m (10)[39m
+[2m      Tests [22m [1m[31m6 failed[39m[22m[2m | [22m[1m[32m39 passed[39m[22m[90m (45)[39m
+[2m   Start at [22m 19:44:09
+[2m   Duration [22m 9.86s[2m (transform 262ms, setup 807ms, import 427ms, tests 1.72s, environment 5.49s)[22m
+

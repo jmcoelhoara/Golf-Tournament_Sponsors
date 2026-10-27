@@ -1,0 +1,38 @@
+ok 1 legacy payload key kind retained
+ok 2 legacy payload key name retained
+ok 3 legacy payload key tees retained
+ok 4 legacy payload key unit retained
+ok 5 legacy event object unchanged
+ok 6 legacy logo not invented
+ok 7 legacy payload key leader retained
+ok 8 legacy payload key sponsor retained
+ok 9 legacy payload key division retained
+ok 10 legacy payload key available retained
+ok 11 legacy payload key max_value retained
+ok 12 legacy payload key min_value retained
+ok 13 legacy payload key contest_id retained
+ok 14 legacy payload key hole_number retained
+ok 15 legacy payload key hole_yardage retained
+ok 16 legacy payload key scoring_mode retained
+ok 17 legacy payload key event_sponsors retained
+ok 18 legacy payload key accepting_entries retained
+ok 19 legacy payload key requires_approval retained
+ok 20 all legacy IDs,tokens,scoring and display snapshots unchanged
+ok 21 conflicting yardage observations remain unmapped
+ok 22 unambiguous placement imported
+ok 23 only observed nonconflicting yardages imported
+ok 24 custom scoring not forced to preset
+ok 25 exact four legacy definitions attached
+ok 26 legacy creators not invented
+ok 27 no blanket old-member grants
+ok 28 legacy archive time inferred from old update time
+ok 29 unknown archive actor left null
+ok 30 custom legacy roster remains division permissive
+ok 31 custom legacy approval preserved
+ok 32 legacy highest-value result preserved
+ok 33 repeated approval transition rejected
+ok 34 null review status rejected
+ok 35 platform correction preserved
+ok 36 platform can inspect org-null audit history
+ok 37 equal results prefer earlier submission
+Compatibility suite: 37 passed

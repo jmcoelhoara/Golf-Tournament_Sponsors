@@ -1,0 +1,25 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [32m✓[39m src/app/c/[token]/ContestClient.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 212[2mms[22m[39m
+ [32m✓[39m src/app/admin/navigation.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 211[2mms[22m[39m
+ [32m✓[39m src/app/admin/EventEditor.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 200[2mms[22m[39m
+ [32m✓[39m src/app/admin/server-views.test.tsx [2m([22m[2m9 tests[22m[2m)[22m[33m 379[2mms[22m[39m
+ [32m✓[39m src/app/admin/contests/[id]/entries-view.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 210[2mms[22m[39m
+ [32m✓[39m src/app/admin/courses/CatalogEditor.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 195[2mms[22m[39m
+ [32m✓[39m src/app/admin/MediaPicker.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 214[2mms[22m[39m
+ [32m✓[39m src/app/admin/access/AccessManager.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 177[2mms[22m[39m
+ [32m✓[39m src/app/admin/contests/[id]/print/PrintSheet.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 155[2mms[22m[39m
+ [32m✓[39m src/lib/event-media.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/lib/staff.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m11 passed[39m[22m[90m (11)[39m
+[2m      Tests [22m [1m[32m47 passed[39m[22m[90m (47)[39m
+[2m   Start at [22m 01:56:20
+[2m   Duration [22m 10.59s[2m (transform 293ms, setup 895ms, import 510ms, tests 1.97s, environment 5.79s)[22m
+

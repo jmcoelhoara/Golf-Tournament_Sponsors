@@ -1,0 +1,48 @@
+{
+  "started_at": "2026-10-26T02:23:19.711Z",
+  "network": "offline sandbox",
+  "backend": "none; fake loopback configuration only",
+  "checks": [
+    {
+      "name": "ui",
+      "command": "npm run test:ui -- --maxWorkers=1",
+      "exit_code": 0,
+      "seconds": 12.099,
+      "log": "verification/frontend-final-ui.log",
+      "files_passed": 12,
+      "tests_passed": 65
+    },
+    {
+      "name": "lint",
+      "command": "npm run lint",
+      "exit_code": 0,
+      "seconds": 4.175,
+      "log": "verification/frontend-final-lint.log"
+    },
+    {
+      "name": "typecheck",
+      "command": "npm run typecheck",
+      "exit_code": 0,
+      "seconds": 1.701,
+      "log": "verification/frontend-final-typecheck.log"
+    },
+    {
+      "name": "build",
+      "command": "npm run build",
+      "exit_code": 0,
+      "seconds": 3.492,
+      "log": "verification/frontend-final-build.log"
+    },
+    {
+      "name": "http",
+      "command": "node --test verification/frontend-http-smoke.mjs",
+      "exit_code": 0,
+      "seconds": 3.811,
+      "log": "verification/frontend-final-http.log",
+      "tests_passed": 16
+    }
+  ],
+  "baseline_ui_tests": 47,
+  "added_ui_tests": 18,
+  "finished_at": "2026-10-26T02:23:44.993Z"
+}

@@ -1,0 +1,307 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/admin/access/AccessManager.test.tsx
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/admin/access/AccessManager.test.tsx [2m([22m[2m7 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[33m 2301[2mms[22m[39m
+   [32m✓[39m lists existing staff for the selected event organization and enables access with exact RPC parameters[32m 173[2mms[22m[39m
+   [32m✓[39m revokes an active event grant with explicit false, without deleting the staff account[32m 22[2mms[22m[39m
+   [32m✓[39m reconciles a clean same-event row when authoritative enabled=true changes[32m 21[2mms[22m[39m
+   [32m✓[39m reconciles a clean same-event row when authoritative enabled=false changes[32m 17[2mms[22m[39m
+[31m   [31m×[31m blocks an unsaved draft conflict when authoritative enabled=true changes[39m[33m 1022[2mms[22m[39m
+[31m   [31m×[31m blocks an unsaved draft conflict when authoritative enabled=false changes[39m[33m 1034[2mms[22m[39m
+   [32m✓[39m surfaces permission account lookup errors rather than showing fabricated staff[32m 9[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/access/AccessManager.test.tsx[2m > [22mblocks an unsaved draft conflict when authoritative enabled=true changes
+[31m[1mTestingLibraryElementError[22m: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<section[31m
+      [33mclass[31m=[32m"card"[31m
+    [36m>[31m
+      [36m<label[31m
+        [33mclass[31m=[32m"stack"[31m
+      [36m>[31m
+        [0mEvent to manage[0m
+        [36m<select[31m
+          [33mclass[31m=[32m"input"[31m
+        [36m>[31m
+          [36m<option[31m
+            [33mvalue[31m=[32m""[31m
+          [36m>[31m
+            [0mSelect event[0m
+          [36m</option>[31m
+          [36m<option[31m
+            [33mvalue[31m=[32m"e1"[31m
+          [36m>[31m
+            [0mCharity Open[0m
+          [36m</option>[31m
+        [36m</select>[31m
+      [36m</label>[31m
+      [36m<p[31m
+        [33mclass[31m=[32m"small muted"[31m
+      [36m>[31m
+        [0mOnly existing organization staff accounts can be enabled. Organization ownership does not grant event access.[0m
+      [36m</p>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"access-row"[31m
+      [36m>[31m
+        [36m<p>[31m
+          [0mstaff1@test[0m
+        [36m</p>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"small muted"[31m
+        [36m>[31m
+          [0mstaff[0m
+        [36m</p>[31m
+        [36m<form>[31m
+          [36m<fieldset>[31m
+            [36m<label>[31m
+              [36m<input[31m
+                [33mchecked[31m=[32m""[31m
+                [33mtype[31m=[32m"checkbox"[31m
+              [36m/>[31m
+              [0mEnabled access for [0m
+              [0mstaff1@test[0m
+            [36m</label>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"btn small"[31m
+              [33mtype[31m=[32m"submit"[31m
+            [36m>[31m
+              [0mSave access[0m
+            [36m</button>[31m
+          [36m</fieldset>[31m
+        [36m</form>[31m
+      [36m</div>[31m
+    [36m</section>[31m
+  [36m</div>[31m
+[36m</body>[31m
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<section[31m
+      [33mclass[31m=[32m"card"[31m
+    [36m>[31m
+      [36m<label[31m
+        [33mclass[31m=[32m"stack"[31m
+      [36m>[31m
+        [0mEvent to manage[0m
+        [36m<select[31m
+          [33mclass[31m=[32m"input"[31m
+        [36m>[31m
+          [36m<option[31m
+            [33mvalue[31m=[32m""[31m
+          [36m>[31m
+            [0mSelect event[0m
+          [36m</option>[31m
+          [36m<option[31m
+            [33mvalue[31m=[32m"e1"[31m
+          [36m>[31m
+            [0mCharity Open[0m
+          [36m</option>[31m
+        [36m</select>[31m
+      [36m</label>[31m
+      [36m<p[31m
+        [33mclass[31m=[32m"small muted"[31m
+      [36m>[31m
+        [0mOnly existing organization staff accounts can be enabled. Organization ownership does not grant event access.[0m
+      [36m</p>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"access-row"[31m
+      [36m>[31m
+        [36m<p>[31m
+          [0mstaff1@test[0m
+        [36m</p>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"small muted"[31m
+        [36m>[31m
+          [0mstaff[0m
+        [36m</p>[31m
+        [36m<form>[31m
+          [36m<fieldset>[31m
+            [36m<label>[31m
+              [36m<input[31m
+                [33mchecked[31m=[32m""[31m
+                [33mtype[31m=[32m"checkbox"[31m
+              [36m/>[31m
+              [0mEnabled access for [0m
+              [0mstaff1@test[0m
+            [36m</label>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"btn small"[31m
+              [33mtype[31m=[32m"submit"[31m
+            [36m>[31m
+              [0mSave access[0m
+            [36m</button>[31m
+          [36m</fieldset>[31m
+        [36m</form>[31m
+      [36m</div>[31m
+    [36m</section>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[90m [2m❯[22m waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m86:33[22m[39m
+[36m [2m❯[22m src/app/admin/access/AccessManager.test.tsx:[2m55:29[22m[39m
+    [90m 53|[39m  enabled [33m=[39m [33m![39minitialEnabled[33m;[39m
+    [90m 54|[39m  [34mrerender[39m([33m<[39m[33mAccessManager[39m [33mevents[39m[33m=[39m[33m{[39m[{[33m...[39mevent}][33m}[39m[33m/[39m[33m>[39m)[33m;[39m
+    [90m 55|[39m  [35mconst[39m alert [33m=[39m [35mawait[39m screen[33m.[39m[34mfindByRole[39m([32m'alert'[39m)[33m;[39m
+    [90m   |[39m                             [31m^[39m
+    [90m 56|[39m  [34mexpect[39m(alert[33m.[39mtextContent)[33m.[39m[34mtoContain[39m([32m'Access changed on the server'[39m)[33m;[39m
+    [90m 57|[39m  [34mexpect[39m(alert[33m.[39mtextContent)[33m.[39m[34mtoContain[39m(enabled [33m?[39m [32m'enabled'[39m [33m:[39m [32m'revoked'[39m)[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/access/AccessManager.test.tsx[2m > [22mblocks an unsaved draft conflict when authoritative enabled=false changes
+[31m[1mTestingLibraryElementError[22m: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<section[31m
+      [33mclass[31m=[32m"card"[31m
+    [36m>[31m
+      [36m<label[31m
+        [33mclass[31m=[32m"stack"[31m
+      [36m>[31m
+        [0mEvent to manage[0m
+        [36m<select[31m
+          [33mclass[31m=[32m"input"[31m
+        [36m>[31m
+          [36m<option[31m
+            [33mvalue[31m=[32m""[31m
+          [36m>[31m
+            [0mSelect event[0m
+          [36m</option>[31m
+          [36m<option[31m
+            [33mvalue[31m=[32m"e1"[31m
+          [36m>[31m
+            [0mCharity Open[0m
+          [36m</option>[31m
+        [36m</select>[31m
+      [36m</label>[31m
+      [36m<p[31m
+        [33mclass[31m=[32m"small muted"[31m
+      [36m>[31m
+        [0mOnly existing organization staff accounts can be enabled. Organization ownership does not grant event access.[0m
+      [36m</p>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"access-row"[31m
+      [36m>[31m
+        [36m<p>[31m
+          [0mstaff1@test[0m
+        [36m</p>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"small muted"[31m
+        [36m>[31m
+          [0mstaff[0m
+        [36m</p>[31m
+        [36m<form>[31m
+          [36m<fieldset>[31m
+            [36m<label>[31m
+              [36m<input[31m
+                [33mtype[31m=[32m"checkbox"[31m
+              [36m/>[31m
+              [0mEnabled access for [0m
+              [0mstaff1@test[0m
+            [36m</label>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"btn small"[31m
+              [33mtype[31m=[32m"submit"[31m
+            [36m>[31m
+              [0mSave access[0m
+            [36m</button>[31m
+          [36m</fieldset>[31m
+        [36m</form>[31m
+      [36m</div>[31m
+    [36m</section>[31m
+  [36m</div>[31m
+[36m</body>[31m
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<section[31m
+      [33mclass[31m=[32m"card"[31m
+    [36m>[31m
+      [36m<label[31m
+        [33mclass[31m=[32m"stack"[31m
+      [36m>[31m
+        [0mEvent to manage[0m
+        [36m<select[31m
+          [33mclass[31m=[32m"input"[31m
+        [36m>[31m
+          [36m<option[31m
+            [33mvalue[31m=[32m""[31m
+          [36m>[31m
+            [0mSelect event[0m
+          [36m</option>[31m
+          [36m<option[31m
+            [33mvalue[31m=[32m"e1"[31m
+          [36m>[31m
+            [0mCharity Open[0m
+          [36m</option>[31m
+        [36m</select>[31m
+      [36m</label>[31m
+      [36m<p[31m
+        [33mclass[31m=[32m"small muted"[31m
+      [36m>[31m
+        [0mOnly existing organization staff accounts can be enabled. Organization ownership does not grant event access.[0m
+      [36m</p>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"access-row"[31m
+      [36m>[31m
+        [36m<p>[31m
+          [0mstaff1@test[0m
+        [36m</p>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"small muted"[31m
+        [36m>[31m
+          [0mstaff[0m
+        [36m</p>[31m
+        [36m<form>[31m
+          [36m<fieldset>[31m
+            [36m<label>[31m
+              [36m<input[31m
+                [33mtype[31m=[32m"checkbox"[31m
+              [36m/>[31m
+              [0mEnabled access for [0m
+              [0mstaff1@test[0m
+            [36m</label>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"btn small"[31m
+              [33mtype[31m=[32m"submit"[31m
+            [36m>[31m
+              [0mSave access[0m
+            [36m</button>[31m
+          [36m</fieldset>[31m
+        [36m</form>[31m
+      [36m</div>[31m
+    [36m</section>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[90m [2m❯[22m waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m86:33[22m[39m
+[36m [2m❯[22m src/app/admin/access/AccessManager.test.tsx:[2m55:29[22m[39m
+    [90m 53|[39m  enabled [33m=[39m [33m![39minitialEnabled[33m;[39m
+    [90m 54|[39m  [34mrerender[39m([33m<[39m[33mAccessManager[39m [33mevents[39m[33m=[39m[33m{[39m[{[33m...[39mevent}][33m}[39m[33m/[39m[33m>[39m)[33m;[39m
+    [90m 55|[39m  [35mconst[39m alert [33m=[39m [35mawait[39m screen[33m.[39m[34mfindByRole[39m([32m'alert'[39m)[33m;[39m
+    [90m   |[39m                             [31m^[39m
+    [90m 56|[39m  [34mexpect[39m(alert[33m.[39mtextContent)[33m.[39m[34mtoContain[39m([32m'Access changed on the server'[39m)[33m;[39m
+    [90m 57|[39m  [34mexpect[39m(alert[33m.[39mtextContent)[33m.[39m[34mtoContain[39m(enabled [33m?[39m [32m'enabled'[39m [33m:[39m [32m'revoked'[39m)[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m5 passed[39m[22m[90m (7)[39m
+[2m   Start at [22m 02:41:12
+[2m   Duration [22m 3.13s[2m (transform 66ms, setup 106ms, import 61ms, tests 2.30s, environment 528ms)[22m
+

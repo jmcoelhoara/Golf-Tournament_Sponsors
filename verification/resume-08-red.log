@@ -1,0 +1,101 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/admin/server-views.test.tsx
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/admin/server-views.test.tsx [2m([22m[2m13 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 318[2mms[22m[39m
+   [32m✓[39m requires platform authority before reading the retired organization-wide sponsor screen[32m 4[2mms[22m[39m
+   [32m✓[39m retains legacy sponsor display without destructive organization-wide image controls[32m 129[2mms[22m[39m
+   [32m✓[39m loads granted event settings through user-scoped SELECT and keeps no-grants users logged in[32m 23[2mms[22m[39m
+   [32m✓[39m loads an event detail only after its RLS event read and exposes fixed contest creation plus shared logo[32m 38[2mms[22m[39m
+   [32m✓[39m refuses archived event history on a direct ordinary-staff settings URL[32m 1[2mms[22m[39m
+[31m   [31m×[31m keeps platform operational contests separate from an explicit retained-history view[39m[32m 26[2mms[22m[39m
+   [32m✓[39m builds leaderboard navigation from the same granted-event SELECT[32m 8[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct courses route[32m 1[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct access route[32m 0[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct history route[32m 0[2mms[22m[39m
+   [32m✓[39m renders course-specific granted events but no ordinary-staff catalog editor[32m 10[2mms[22m[39m
+   [32m✓[39m shows an authenticated event leaderboard including closed and draft contests[32m 5[2mms[22m[39m
+   [32m✓[39m prints draft contests with the parent current logo and original QR token under user RLS[32m 70[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/server-views.test.tsx[2m > [22mkeeps platform operational contests separate from an explicit retained-history view
+[31m[1mAssertionError[22m: expected <section …(2)>…(4)</section> to be null[39m
+
+[32m- Expected:[39m
+null
+
+[31m+ Received:[39m
+<section
+  aria-label="Archived drive"
+  class="contest-tile"
+>
+  <div
+    class="tile-head"
+  >
+    <h3>
+      Archived drive
+    </h3>
+    <span
+      class="badge"
+    >
+      archived
+    </span>
+  </div>
+  <p>
+    Hole 7 · Blue tees · 420 yards
+  </p>
+  <p
+    class="small"
+  >
+    Leader: 
+    —
+     · 
+    0
+     entries
+  </p>
+  <div
+    class="tile-actions wrap"
+  >
+    <a
+      class="btn small secondary"
+      href="/admin/contests/c2"
+    >
+      Entries
+    </a>
+    <a
+      class="btn small secondary"
+      href="/admin/contests/c2/print"
+    >
+      Print
+    </a>
+    <a
+      class="btn small secondary"
+      href="/c/legacy"
+      target="_blank"
+    >
+      Player page
+    </a>
+  </div>
+</section>
+
+[36m [2m❯[22m src/app/admin/server-views.test.tsx:[2m38:63[22m[39m
+    [90m 36|[39m  const {unmount}=render(await EventDetailContent({params:Promise.resol…
+    [90m 37|[39m  [34mexpect[39m(screen[33m.[39m[34mgetByRole[39m([32m'region'[39m[33m,[39m{name[33m:[39m[32m'Active drive'[39m}))[33m.[39m[34mtoBeTruthy[39m()[33m;[39m
+    [90m 38|[39m  expect(screen.queryByRole('region',{name:'Archived drive'})).toBeNull…
+    [90m   |[39m                                                               [31m^[39m
+    [90m 39|[39m  expect(screen.getByRole('link',{name:'View retained contest history'}…
+    [90m 40|[39m  [34munmount[39m()[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m12 passed[39m[22m[90m (13)[39m
+[2m   Start at [22m 02:11:04
+[2m   Duration [22m 1.33s[2m (transform 187ms, setup 87ms, import 261ms, tests 318ms, environment 541ms)[22m
+

@@ -1,0 +1,45 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/admin/server-views.test.tsx
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/admin/server-views.test.tsx [2m([22m[2m11 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 280[2mms[22m[39m
+[31m   [31m×[31m requires platform authority before reading the retired organization-wide sponsor screen[39m[32m 12[2mms[22m[39m
+   [32m✓[39m loads granted event settings through user-scoped SELECT and keeps no-grants users logged in[32m 124[2mms[22m[39m
+   [32m✓[39m loads an event detail only after its RLS event read and exposes fixed contest creation plus shared logo[32m 53[2mms[22m[39m
+   [32m✓[39m refuses archived event history on a direct ordinary-staff settings URL[32m 1[2mms[22m[39m
+   [32m✓[39m builds leaderboard navigation from the same granted-event SELECT[32m 12[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct courses route[32m 1[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct access route[32m 0[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct history route[32m 0[2mms[22m[39m
+   [32m✓[39m renders course-specific granted events but no ordinary-staff catalog editor[32m 13[2mms[22m[39m
+   [32m✓[39m shows an authenticated event leaderboard including closed and draft contests[32m 6[2mms[22m[39m
+   [32m✓[39m prints draft contests with the parent current logo and original QR token under user RLS[32m 55[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/server-views.test.tsx[2m > [22mrequires platform authority before reading the retired organization-wide sponsor screen
+[31m[1mAssertionError[22m: expected [Function] to throw error including 'platform_denied' but got 'legacy_read_before_platform_guard'[39m
+
+Expected: [32m"platform_[7mdenie[27md"[39m
+Received: [31m"[7mlegacy_read_before_[27mplatform_[7mguar[27md"[39m
+
+[36m [2m❯[22m src/app/admin/server-views.test.tsx:[2m10:30[22m[39m
+    [90m  8|[39m  requireStaff[33m.[39m[34mmockRejectedValueOnce[39m([35mnew[39m [33mError[39m([32m'platform_denied'[39m))[33m;[39m
+    [90m  9|[39m  [35mconst[39m content[33m=[39m[33mLegacySponsorsPage[39m()[33m.[39mprops[33m.[39mchildren[33m;[39m
+    [90m 10|[39m  [35mawait[39m [34mexpect[39m(content[33m.[39m[34mtype[39m())[33m.[39mrejects[33m.[39m[34mtoThrow[39m([32m'platform_denied'[39m)[33m;[39m
+    [90m   |[39m                              [31m^[39m
+    [90m 11|[39m  [34mexpect[39m(requireStaff)[33m.[39m[34mtoHaveBeenCalledWith[39m([35mtrue[39m)[33m;[39m
+    [90m 12|[39m })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m10 passed[39m[22m[90m (11)[39m
+[2m   Start at [22m 02:06:09
+[2m   Duration [22m 1.32s[2m (transform 177ms, setup 102ms, import 246ms, tests 280ms, environment 531ms)[22m
+

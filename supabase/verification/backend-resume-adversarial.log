@@ -1,0 +1,390 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:db
+npm notice run node supabase/tests/schema.test.mjs
+migration + seed applied
+
+Golfer (anonymous) access
+  ok   contest details visible by QR token
+  ok   bad token reveals nothing
+  ok   roster filtered to Men division (72)
+  ok   roster has no contact details
+  ok   anon cannot read golfers table
+  ok   anon cannot read entries table
+  ok   anon cannot insert entries directly
+  ok   anon cannot call staff functions
+
+Closest to the Pin (lowest wins)
+  ok   first entry accepted
+  ok   closer shot takes lead
+  ok   worse shot does not take lead
+  ok   retry with same request id counted once
+  ok   second entry by same golfer blocked
+  ok   out-of-range value rejected
+  ok   missing value rejected
+  ok   wrong division rejected
+  ok   unknown golfer rejected
+  ok   public leaderboard row readable by anon
+
+Long Drive (latest accepted claim wins)
+  ok   newest claim leads
+
+Staff actions
+  ok   staff sees own org entries
+  ok   void leader -> next best leads
+  ok   staff cannot correct values (admins only)
+  ok   owner correction updates leader
+  ok   staff can check in golfer
+  ok   staff cannot edit golfers directly
+  ok   staff cannot add contests
+  ok   audit log records entry changes
+  ok   staff cannot read audit log
+
+Approval mode
+  ok   entry pending, no leader yet
+  ok   approval makes leader
+
+Separation between customers
+  ok   org B owner sees no org A golfers
+  ok   org B owner sees no org A entries
+  ok   org B owner cannot add golfer to org A event
+  ok   org B owner cannot void org A entry
+  ok   org A owner sees 144 golfers
+  ok   platform admin sees all orgs
+  ok   owner cannot create organizations
+
+Event sponsor strip
+  ok   strip returned in sort order
+  ok   staff cannot change the strip
+  ok   anon cannot read event_sponsors table
+  ok   org B owner cannot add to org A strip
+  ok   org B owner sees no org A strip rows
+  ok   owner cannot hard-delete historical sponsor
+  ok   legacy strip retained after denied sponsor deletion
+
+Closing
+  ok   closed contest refuses entries
+  ok   closed contest leaderboard still public
+  ok   draft event hides leaderboard from public
+
+47 passed, 0 failed
+ok 1 legacy same-org ungranted owner sees no events
+ok 2 no inferred legacy grants
+ok 3 platform sees legacy event
+ok 4 context lists creation organization without revealing events
+ok 5 nonplatform staff account enumeration denied
+ok 6 platform staff list contains existing members
+ok 7 raw legacy event update denied
+ok 8 raw event deletion denied even platform
+ok 9 staff cannot maintain course catalog
+ok 10 exactly four initial presets
+ok 11 staff cannot inject preset
+ok 12 cannot create other org event
+ok 13 cross-org course rejected
+ok 14 member creates event
+ok 15 creator gets initial grant
+ok 16 new event starts draft
+ok 17 same-org owner still cannot see created event
+ok 18 creator cannot grant access
+ok 19 raw ACL writes denied
+ok 20 platform cannot grant to nonmember
+ok 21 platform revokes creator
+ok 22 revoked creator has no persistent bypass
+ok 23 creator cannot self-regrant
+ok 24 platform regrants creator
+ok 25 free-form preset key rejected
+ok 26 cross-course tee rejected
+ok 27 missing tee hole rejected
+ok 28 staff adds preset contest
+ok 29 second contest added
+ok 30 DB derives exact scoring and placement snapshot
+ok 31 cannot directly overwrite scoring snapshot
+ok 32 catalog edits do not rewrite contest snapshot
+ok 33 explicit placement refreshes snapshot
+ok 34 refreshed yardage from DB
+ok 35 course org cannot move
+ok 36 tee cannot move course
+ok 37 yardage key cannot move
+ok 38 referenced yardage cannot be deleted
+ok 39 ungranted owner cannot alter placement
+ok 40 course change requires complete placements
+ok 41 partial placements rejected
+ok 42 invalid second placement rejects entire course update
+ok 43 failed update retains original event
+ok 44 failed update retains first contest snapshot
+ok 45 duplicate placement rejected
+ok 46 UUID aliases cannot disguise duplicate contest placements
+ok 47 aliased duplicate retains entire original course
+ok 48 malformed placement rejected safely
+ok 49 complete atomic course reassignment succeeds
+ok 50 same tee label uses new course yardage
+ok 51 course name snapshot refreshed
+ok 52 owner cannot update event
+ok 53 event archive cannot use status RPC
+ok 54 staff can make event live
+ok 55 staff can open contest
+ok 56 staff can open second contest
+ok 57 existing tokens retained after event/placement changes
+ok 58 ungranted owner cannot check in legacy golfer
+ok 59 ungranted owner cannot review legacy entry
+ok 60 ungranted owner cannot correct legacy entry
+ok 61 ungranted owner cannot rotate legacy QR
+ok 62 authenticated public leaderboard policy does not bypass grant
+ok 63 granted staff can check in
+ok 64 granted staff cannot correct
+ok 65 granted staff cannot rotate token
+ok 66 revoked staff cannot check in without logout
+ok 67 revoked staff cannot read entries
+ok 68 public event-media bucket configured
+ok 69 granted staff can upload new immutable object
+ok 70 ungranted owner upload denied
+ok 71 malformed or unauthorized path denied: bad/event/file.png
+ok 72 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a1/7c7d260d-0382-4de7-a53a-5bedf27e6cb6/../x.png
+ok 73 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a1/7c7d260d-0382-4de7-a53a-5bedf27e6cb6/ea56df33-f594-41b0-9fee-912626811daf.svg
+ok 74 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a1/7c7d260d-0382-4de7-a53a-5bedf27e6cb6/1f3e6afc-40a6-45e2-bf05-b458fa1c4dd7.png/more
+ok 75 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a2/7c7d260d-0382-4de7-a53a-5bedf27e6cb6/7d8ef08e-0189-482c-a3c2-8fbf7afb155c.png
+ok 76 malformed or unauthorized path denied: 00000000-0000-0000-0000-0000000000a1/00000000-0000-0000-0000-0000000000e1/906cb25a-386b-460e-9eb2-dde0b9de0b27.png
+ok 77 no overwrite policy for staff
+ok 78 no overwrite policy even platform
+ok 79 no client object delete
+ok 80 ordinary org manager legacy upload denied
+ok 81 platform legacy immutable upload allowed
+ok 82 legacy delete also denied platform
+ok 83 missing object registration rejected
+ok 84 wrong kind rejected
+ok 85 register actual uploaded logo
+ok 86 register actual uploaded banner
+ok 87 register replacement logo
+ok 88 metadata is server derived
+ok 89 client cannot rewrite media metadata
+ok 90 client cannot delete image metadata
+ok 91 logo selection succeeds
+ok 92 banner kind cannot be logo
+ok 93 logo kind cannot be banner
+ok 94 one banner can serve contest A
+ok 95 one banner can serve contest B
+ok 96 public payload adds shared logo
+ok 97 public payload adds exactly one selected banner
+ok 98 yardage and score units stay distinct
+ok 99 second contest shares logo
+ok 100 logo change updates both public contests
+ok 101 print SQL reads same current event logo for both contests
+ok 102 clearing A banner succeeds
+ok 103 clearing A does not change B
+ok 104 clearing selection preserves all library images
+ok 105 cross-event logo rejected even with both grants
+ok 106 cross-event banner rejected even with both grants
+ok 107 invalid object metadata image/svg+xml/10 rejected
+ok 108 invalid object metadata image/png/10485761 rejected
+ok 109 invalid object metadata image/png/0 rejected
+ok 110 invalid object metadata image/jpeg/10 rejected
+ok 111 revocation hides image library
+ok 112 revocation hides storage listing
+ok 113 revoked upload denied
+ok 114 revoked logo mutation denied
+ok 115 public marketing image metadata stays public by token
+ok 116 new CTP retains inches and numeric rounding
+ok 117 new longest drive remains marker claim
+ok 118 ungranted same-org owner cannot archive contest
+ok 119 archive contest succeeds
+ok 120 archive contest retry succeeds
+ok 121 archive timestamp stable
+ok 122 archived contest hidden publicly
+ok 123 archived roster empty
+ok 124 archived public leader hidden
+ok 125 archived contest retry returns same receipt without leader
+ok 126 archived contest blocks new submission
+ok 127 archived contest blocks placement edits
+ok 128 archived contest blocks review
+ok 129 archived contest blocks correction
+ok 130 archived contest blocks QR rotation
+ok 131 course reassignment excludes archived contests
+ok 132 archived placement snapshot retained
+ok 133 event archival succeeds
+ok 134 event archive is idempotent
+ok 135 event archive preserves child status history
+ok 136 archived event blocks ordinary edit
+ok 137 archived event blocks new submission
+ok 138 archived event retry preserves receipt but hides leader
+ok 139 archived event public data hidden
+ok 140 archived event leaders not public
+ok 141 archival retains both entries
+ok 142 archival retains leader rows for staff history
+ok 143 archival retains library
+ok 144 archival retains current logo
+ok 145 archival retains original tokens
+ok 146 archive blocks object upload
+ok 147 archive blocks registration
+ok 148 platform can still manage archived ACL
+ok 149 revoked creator cannot view archive
+ok 150 platform sees archive
+ok 151 event-scoped audit includes grants,images,placement and archives
+ok 152 entry, leader and audit cannot be truncated
+ok 153 no PUBLIC executable private helpers
+ok 154 anon can execute only golfer public APIs
+ok 155 unreferenced inactive presets hidden from ordinary staff
+ok 156 referenced inactive preset remains readable
+ok 157 catalog preset edit does not rewrite existing scoring snapshot
+ok 158 inactive preset cannot be added
+ok 159 archived tee cannot be newly placed
+ok 160 archived referenced catalog still readable
+ok 161 archived course unavailable for new event
+ok 162 malformed storage path parser returns null
+ok 163 anonymous cannot inspect new courses
+ok 164 anonymous cannot upload Storage objects
+ok 165 platform cannot raw-insert grant rows
+ok 166 creator identity cannot be overwritten through direct DML
+ok 167 contest identity cannot be moved through direct DML
+ok 168 owner cannot read ungranted events
+ok 169 owner cannot read ungranted contests
+ok 170 owner cannot read ungranted teams
+ok 171 owner cannot read ungranted golfers
+ok 172 owner cannot read ungranted contest_entries
+ok 173 owner cannot read ungranted contest_leaders
+ok 174 owner cannot read ungranted event_images
+ok 175 owner cannot read ungranted event_sponsors
+ok 176 owner cannot read ungranted audit_log
+ok 177 owner cannot read ungranted print join
+ok 178 owner cannot invoke update_event without grant
+ok 179 owner cannot invoke set_event_status without grant
+ok 180 owner cannot invoke archive_event without grant
+ok 181 owner cannot invoke add_event_contest without grant
+ok 182 owner cannot invoke set_contest_placement without grant
+ok 183 owner cannot invoke set_contest_status without grant
+ok 184 owner cannot invoke archive_contest without grant
+ok 185 owner cannot invoke register_event_image without grant
+ok 186 owner cannot invoke set_event_logo without grant
+ok 187 owner cannot invoke set_contest_banner without grant
+ok 188 owner cannot invoke check_in_golfer without grant
+ok 189 owner cannot invoke review_contest_entry without grant
+ok 190 owner cannot invoke correct_contest_entry without grant
+ok 191 owner cannot invoke regenerate_contest_token without grant
+ok 192 manager cannot read ungranted events
+ok 193 manager cannot read ungranted contests
+ok 194 manager cannot read ungranted teams
+ok 195 manager cannot read ungranted golfers
+ok 196 manager cannot read ungranted contest_entries
+ok 197 manager cannot read ungranted contest_leaders
+ok 198 manager cannot read ungranted event_images
+ok 199 manager cannot read ungranted event_sponsors
+ok 200 manager cannot read ungranted audit_log
+ok 201 manager cannot read ungranted print join
+ok 202 manager cannot invoke update_event without grant
+ok 203 manager cannot invoke set_event_status without grant
+ok 204 manager cannot invoke archive_event without grant
+ok 205 manager cannot invoke add_event_contest without grant
+ok 206 manager cannot invoke set_contest_placement without grant
+ok 207 manager cannot invoke set_contest_status without grant
+ok 208 manager cannot invoke archive_contest without grant
+ok 209 manager cannot invoke register_event_image without grant
+ok 210 manager cannot invoke set_event_logo without grant
+ok 211 manager cannot invoke set_contest_banner without grant
+ok 212 manager cannot invoke check_in_golfer without grant
+ok 213 manager cannot invoke review_contest_entry without grant
+ok 214 manager cannot invoke correct_contest_entry without grant
+ok 215 manager cannot invoke regenerate_contest_token without grant
+ok 216 other cannot read ungranted events
+ok 217 other cannot read ungranted contests
+ok 218 other cannot read ungranted teams
+ok 219 other cannot read ungranted golfers
+ok 220 other cannot read ungranted contest_entries
+ok 221 other cannot read ungranted contest_leaders
+ok 222 other cannot read ungranted event_images
+ok 223 other cannot read ungranted event_sponsors
+ok 224 other cannot read ungranted audit_log
+ok 225 other cannot read ungranted print join
+ok 226 other cannot invoke update_event without grant
+ok 227 other cannot invoke set_event_status without grant
+ok 228 other cannot invoke archive_event without grant
+ok 229 other cannot invoke add_event_contest without grant
+ok 230 other cannot invoke set_contest_placement without grant
+ok 231 other cannot invoke set_contest_status without grant
+ok 232 other cannot invoke archive_contest without grant
+ok 233 other cannot invoke register_event_image without grant
+ok 234 other cannot invoke set_event_logo without grant
+ok 235 other cannot invoke set_contest_banner without grant
+ok 236 other cannot invoke check_in_golfer without grant
+ok 237 other cannot invoke review_contest_entry without grant
+ok 238 other cannot invoke correct_contest_entry without grant
+ok 239 other cannot invoke regenerate_contest_token without grant
+ok 240 staff cannot read ungranted events
+ok 241 staff cannot read ungranted contests
+ok 242 staff cannot read ungranted teams
+ok 243 staff cannot read ungranted golfers
+ok 244 staff cannot read ungranted contest_entries
+ok 245 staff cannot read ungranted contest_leaders
+ok 246 staff cannot read ungranted event_images
+ok 247 staff cannot read ungranted event_sponsors
+ok 248 staff cannot read ungranted audit_log
+ok 249 staff cannot read ungranted print join
+ok 250 staff cannot invoke update_event without grant
+ok 251 staff cannot invoke set_event_status without grant
+ok 252 staff cannot invoke archive_event without grant
+ok 253 staff cannot invoke add_event_contest without grant
+ok 254 staff cannot invoke set_contest_placement without grant
+ok 255 staff cannot invoke set_contest_status without grant
+ok 256 staff cannot invoke archive_contest without grant
+ok 257 staff cannot invoke register_event_image without grant
+ok 258 staff cannot invoke set_event_logo without grant
+ok 259 staff cannot invoke set_contest_banner without grant
+ok 260 staff cannot invoke check_in_golfer without grant
+ok 261 staff cannot invoke review_contest_entry without grant
+ok 262 staff cannot invoke correct_contest_entry without grant
+ok 263 staff cannot invoke regenerate_contest_token without grant
+ok 264 owner cannot promote own membership
+ok 265 owner cannot add organization members
+ok 266 ordinary member sees only own membership
+ok 267 granted manager retains roster insert
+ok 268 granted manager retains roster update
+ok 269 granted manager can read event audit
+ok 270 granted manager cannot read event-null audit
+ok 271 granted manager cannot change ACL
+ok 272 revoked manager roster write affects zero rows
+ok 273 revoked manager audit access gone
+ok 274 active creator ACL alone does not replace current membership
+ok 275 former member cannot edit via stale active ACL
+ok 276 restored membership and existing grant restore access
+ok 277 logo selection before deleting every contest
+ok 278 archive the last operational contest
+ok 279 no active contests remain
+ok 280 deleting every contest keeps tournament logo
+ok 281 deleting every contest keeps event image library
+ok 282 deleting every contest keeps uploaded object
+ok 283 submission SQL locks event before contest
+Upgrade suite: 283 passed
+ok 1 legacy payload key kind retained
+ok 2 legacy payload key name retained
+ok 3 legacy payload key tees retained
+ok 4 legacy payload key unit retained
+ok 5 legacy event object unchanged
+ok 6 legacy logo not invented
+ok 7 legacy payload key leader retained
+ok 8 legacy payload key sponsor retained
+ok 9 legacy payload key division retained
+ok 10 legacy payload key available retained
+ok 11 legacy payload key max_value retained
+ok 12 legacy payload key min_value retained
+ok 13 legacy payload key contest_id retained
+ok 14 legacy payload key hole_number retained
+ok 15 legacy payload key hole_yardage retained
+ok 16 legacy payload key scoring_mode retained
+ok 17 legacy payload key event_sponsors retained
+ok 18 legacy payload key accepting_entries retained
+ok 19 legacy payload key requires_approval retained
+ok 20 all legacy IDs,tokens,scoring and display snapshots unchanged
+ok 21 conflicting yardage observations remain unmapped
+ok 22 unambiguous placement imported
+ok 23 only observed nonconflicting yardages imported
+ok 24 custom scoring not forced to preset
+ok 25 exact four legacy definitions attached
+ok 26 legacy creators not invented
+ok 27 no blanket old-member grants
+ok 28 legacy archive time inferred from old update time
+ok 29 unknown archive actor left null
+ok 30 custom legacy roster remains division permissive
+ok 31 custom legacy approval preserved
+ok 32 legacy highest-value result preserved
+ok 33 repeated approval transition rejected
+ok 34 null review status rejected
+ok 35 platform correction preserved
+ok 36 platform can inspect org-null audit history
+ok 37 equal results prefer earlier submission
+Compatibility suite: 37 passed
