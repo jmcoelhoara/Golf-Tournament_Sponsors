@@ -181,5 +181,6 @@ await db.close();
 if (!fail) {
   await import('./upgrade.test.mjs');
   await import('./compatibility.test.mjs');
+  await import('./courses.test.mjs');
 }
 process.exit(fail ? 1 : 0);
