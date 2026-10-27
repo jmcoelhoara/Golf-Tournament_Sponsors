@@ -26,6 +26,15 @@ npm run dev
 Import this repo in Vercel and add the two environment variables from `.env.example`
 (Supabase → Project Settings → API). Every push to `main` deploys automatically.
 
+## Upgrade review and Supabase rollout
+
+The golf admin upgrade is a review candidate, not an approved production release.
+Start with [SUPABASE-UPDATE-GUIDE.md](SUPABASE-UPDATE-GUIDE.md) for GitHub publication,
+target inventory, migration sequencing, permissions, media and coordinated rollout.
+[LOCAL-REVIEW.md](LOCAL-REVIEW.md) records the implementation checks and open gates.
+Read-only target checks are under `supabase/checks/`; runbook SQL can be exercised
+offline with `node scripts/verify-rollout-sql.mjs` in the approved test sandbox.
+
 ## Database
 See [`supabase/README.md`](supabase/README.md). Migrations live in `supabase/migrations/`,
 tests in `supabase/tests/` (`npm i @electric-sql/pglite && node supabase/tests/schema.test.mjs`).

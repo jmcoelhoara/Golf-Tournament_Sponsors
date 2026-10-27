@@ -1,0 +1,12 @@
+✔ login control persists replacement cookies for an expired session (597.389403ms)
+✔ invite GET, HEAD and prefetch stay inert even with an expired session cookie (146.708945ms)
+✔ expired password session persists cookies and reuses them on password POST (214.468792ms)
+✔ nearly expired password session persists cookies and reuses them on password POST (92.419074ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1619.226835

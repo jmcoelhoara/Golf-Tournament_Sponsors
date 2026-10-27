@@ -1,0 +1,184 @@
+{
+  "status": "implemented",
+  "branch": "murilo/staff-invitations",
+  "source_commit": "f2285455d09cb65836334a919f17b90e4ec580a8",
+  "source_commit_note": "Actual tested L1 correction commit, including witnessed RED/GREEN and full offline evidence; this result and handoff are updated in a subsequent documentation-only commit.",
+  "base_commit": "e139a5b851e3006fcc188117b9aabd3cf2b7e1c1",
+  "summary": "Local staff-invitation implementation with review-round-1 blocking finding L1 corrected: /auth/set-password now receives writable proxy refresh before rendering. Witnessed real-Next HTTP RED-to-GREEN proves replacement cookies and later password-action reuse against an explicitly fake Auth transport, while invitation GET/HEAD/prefetch remain inert. S1/S2 suggestions were not changed. Independent re-review and all real-service/browser/concurrency/configuration/publication release gates remain open; no hosted operation or real invitation was performed.",
+  "blockers": [],
+  "sandbox_command_prefix": "/usr/bin/python3 -I /root/.hermes/projects/golf-tournament-sponsors/tooling/sandbox.py --workspace /root/.hermes/projects/golf-tournament-sponsors/work-staff-invitations --timeout 600 --",
+  "verification_runner": "node verification/verify-staff-invitations.mjs",
+  "verification_run": {
+    "started_at": "2026-10-27T05:16:43.936Z",
+    "finished_at": "2026-10-27T05:17:40.235Z",
+    "exit_code": 0,
+    "report": "verification/staff-final-results.json",
+    "environment": "Required offline sandbox; explicit fake loopback Supabase configuration and synthetic build-key canary. Session HTTP regression uses a deliberately fake Auth listener; no real Supabase Auth/SMTP/Storage service or browser.",
+    "execution": "Synchronous, sequential heavy checks, one UI worker. Local HTTP servers terminate before return."
+  },
+  "tests": [
+    {
+      "name": "existing-database-regression",
+      "command": "npm run test:db",
+      "exit_code": 0,
+      "tests_passed": 418,
+      "suite_counts": [47, 316, 55],
+      "log": "verification/staff-final-database.log",
+      "evidence_type": "Real PGlite SQL/RLS with fake identities and simplified Storage metadata fixture"
+    },
+    {
+      "name": "staff-invitation-database",
+      "command": "node supabase/tests/staff-invitations.test.mjs",
+      "exit_code": 0,
+      "tests_passed": 56,
+      "log": "verification/staff-final-staff-database.log",
+      "evidence_type": "Real PGlite authorization/atomicity/readback; includes failure after first selected grant, rollback and retry"
+    },
+    {
+      "name": "ui-and-actions",
+      "command": "npm run test:ui -- --maxWorkers=1",
+      "exit_code": 0,
+      "tests_passed": 154,
+      "files_passed": 17,
+      "existing_baseline_tests_retained": 78,
+      "log": "verification/staff-final-ui.log",
+      "evidence_type": "Real components and server actions with explicitly mocked Supabase transport; NOT Auth HTTP/SMTP proof"
+    },
+    {
+      "name": "lint",
+      "command": "npm run lint",
+      "exit_code": 0,
+      "log": "verification/staff-final-lint.log"
+    },
+    {
+      "name": "typecheck",
+      "command": "npm run typecheck",
+      "exit_code": 0,
+      "log": "verification/staff-final-typecheck.log"
+    },
+    {
+      "name": "optimized-production-build",
+      "command": "npm run build",
+      "exit_code": 0,
+      "log": "verification/staff-final-build.log"
+    },
+    {
+      "name": "existing-production-http",
+      "command": "node --test .sandbox/staff-verification/legacy-http.mjs",
+      "exit_code": 0,
+      "tests_passed": 16,
+      "tests_failed": 0,
+      "tests_skipped": 0,
+      "log": "verification/staff-final-legacy-http.log",
+      "evidence_type": "Real offline production Next HTTP; runner materializes original smoke module with only log destination changed"
+    },
+    {
+      "name": "invitation-production-http",
+      "command": "node --test verification/staff-http-smoke.mjs",
+      "exit_code": 0,
+      "tests_passed": 9,
+      "tests_failed": 0,
+      "tests_skipped": 0,
+      "log": "verification/staff-final-staff-http.log",
+      "evidence_type": "Real offline production Next HTTP; GET/HEAD/manual-confirm landing, rejected params, no-store/no-referrer and signed-out protection; no Auth backend"
+    },
+    {
+      "name": "password-session-production-http",
+      "command": "node --test verification/staff-session-refresh.test.mjs",
+      "exit_code": 0,
+      "tests_passed": 4,
+      "tests_failed": 0,
+      "tests_skipped": 0,
+      "log": "verification/staff-final-session-http.log",
+      "evidence_type": "Real optimized Next HTTP and installed SDK with explicitly fake Auth transport; expired/nearly expired refresh cookies, later rendered password-form POST using replacement token without re-refresh, login control and inert invitation GET/HEAD/prefetch. NOT real Auth or browser acceptance."
+    },
+    {
+      "name": "original-http-baseline",
+      "command": "npm run test:smoke",
+      "exit_code": 0,
+      "tests_passed": 6,
+      "tests_failed": 0,
+      "tests_skipped": 0,
+      "log": "verification/staff-final-baseline-http.log",
+      "evidence_type": "Real production HTTP; route coverage overlaps the other HTTP suites"
+    },
+    {
+      "name": "browser-secret-leak-scan",
+      "command": "Verification runner scans every .next/static file for synthetic build-secret canary, private variable name and privileged factory name",
+      "exit_code": 0,
+      "files_scanned": 19,
+      "findings": [],
+      "log": "verification/staff-final-results.json",
+      "evidence_type": "Bounded actual build-output scan, not exhaustive secret audit"
+    },
+    {
+      "name": "source-whitespace-check",
+      "command": "git diff e139a5b851e3006fcc188117b9aabd3cf2b7e1c1 HEAD --check -- src supabase/migrations supabase/tests next.config.ts vitest.config.ts verification/*.mjs",
+      "exit_code": 0,
+      "log": "Source-only check witnessed in terminal; raw log/cache whitespace intentionally preserved"
+    }
+  ],
+  "red_green_evidence": [
+    {"slice": "database-preflight", "command": "node supabase/tests/staff-invitations.test.mjs", "red_exit_code": 1, "green_exit_code": 0, "red_log": "verification/staff-db-preflight-red.log", "green_log": "verification/staff-db-preflight-green.log"},
+    {"slice": "atomic-database-completion", "command": "node supabase/tests/staff-invitations.test.mjs", "red_exit_code": 1, "green_exit_code": 0, "red_log": "verification/staff-db-complete-red.log", "green_log": "verification/staff-db-complete-green.log"},
+    {"slice": "invitation-action", "command": "npm run test:ui -- --maxWorkers=1 src/app/admin/invitation-actions.test.ts", "red_exit_code": 1, "green_exit_code": 0, "red_log": "verification/staff-action-behavior-red.log", "green_log": "verification/staff-action-green.log"},
+    {"slice": "course-dashboard", "command": "npm run test:ui -- --maxWorkers=1 src/app/admin/server-views.test.tsx", "red_exit_code": 1, "green_exit_code": 0, "red_log": "verification/staff-course-red.log", "green_log": "verification/staff-course-green.log"},
+    {"slice": "confirmation-password-actions", "command": "npm run test:ui -- --maxWorkers=1 src/app/auth/actions.test.ts", "red_exit_code": 1, "green_exit_code": 0, "red_log": "verification/staff-auth-red.log", "green_log": "verification/staff-auth-green.log"},
+    {"slice": "auth-forms", "command": "npm run test:ui -- --maxWorkers=1 src/app/auth/forms.test.tsx", "red_exit_code": 1, "green_exit_code": 0, "red_log": "verification/staff-auth-forms-red.log", "green_log": "verification/staff-auth-forms-green.log"},
+    {"slice": "auth-pages", "command": "npm run test:ui -- --maxWorkers=1 src/app/auth/views.test.tsx", "red_exit_code": 1, "green_exit_code": 0, "red_log": "verification/staff-auth-views-red.log", "green_log": "verification/staff-auth-views-green.log"},
+    {"slice": "sanitized-email-errors", "command": "npm run test:ui -- --maxWorkers=1 src/app/admin/invitation-actions.test.ts", "red_exit_code": 1, "green_exit_code": 0, "red_log": "verification/staff-email-errors-red.log", "green_log": "verification/staff-email-errors-green.log"},
+    {"slice": "precise-partial-progress", "command": "npm run test:ui -- --maxWorkers=1 src/app/admin/invitation-actions.test.ts", "red_exit_code": 1, "green_exit_code": 0, "red_log": "verification/staff-partial-progress-red.log", "green_log": "verification/staff-partial-progress-green.log"},
+    {"slice": "review-round-1-L1-refresh-cookie-persistence", "command": "node --test verification/staff-session-refresh.test.mjs", "red_exit_code": 1, "red_tests_passed": 2, "red_tests_failed": 2, "green_exit_code": 0, "green_tests_passed": 4, "green_tests_failed": 0, "red_log": "verification/staff-review-l1-red.log", "green_log": "verification/staff-review-l1-green.log", "red_build_log": "verification/staff-review-l1-red-build.log", "green_build_log": "verification/staff-review-l1-green-build.log", "report": "verification/staff-review-l1-results.json"}
+  ],
+  "review_round_1": {
+    "input": "/root/.hermes/projects/golf-tournament-sponsors/staff-invitations/review-round-1.json",
+    "reviewed_commit": "dab811b354870d7c8d7653c2dd91e0ff7d2de456",
+    "substantiated_blocking_findings_fixed_locally": ["L1"],
+    "nonblocking_suggestions_not_changed": ["S1", "S2"],
+    "production_scope": "One matcher entry in src/proxy.ts; no /auth wildcard or invitation landing refresh",
+    "independent_re_review": "Pending, not claimed; no background children or independent reviewer launched",
+    "release_gate_disposition": "RG1 local code/regression portion corrected; independent re-review remains open. RG2-RG6 and earlier release-only gates remain unproved."
+  },
+  "configuration_required": [
+    "SUPABASE_SERVICE_ROLE_KEY: server-only project Auth administration key; never NEXT_PUBLIC, never in chat/source/browser/logs. Not retrieved or configured.",
+    "STAFF_INVITE_SITE_URL: trusted canonical HTTPS app origin, no credentials/path/query/fragment; exact localhost HTTP allowed for approved disposable local testing.",
+    "Existing NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY for the intended environment.",
+    "Apply new forward 20261027000000_staff_invitations.sql after existing 20261025000000 upgrade and verify real function privileges before exposing the new UI.",
+    "Supabase Site URL must match the canonical app origin; allowlist exact /auth/invite URL, not arbitrary production wildcards.",
+    "Custom Invite user template: {{ .RedirectTo }}?token_hash={{ .TokenHash }}&amp;type=invite. RedirectTo already includes /auth/invite. Full template and official-source justification are in the handoff.",
+    "Approved SMTP sender/recipient/rate/expiry/password-policy setup; disable auth email link tracking. No real email setup or sending performed.",
+    "Redact token-bearing auth query strings in hosting/proxy/analytics logs and keep invitation sending paused until route/template/backend configuration matches."
+  ],
+  "release_gates": [
+    "Independent re-review of the L1 correction and separate supervisor verification remain required. Original review failed L1; passing implementer regressions do not substitute for independent approval. No Kanban done transition was made.",
+    "Separately approved disposable local Supabase Auth/PostgREST/Storage/mailbox acceptance, real named RPC wire calls, invitation/resend/existing-account behavior and exact membership/grant readbacks.",
+    "Real Auth/SMTP error, rate and delivery/capture tests. Transport doubles are not evidence of sent or delivered email.",
+    "Real browser cross-device invitation confirmation, persisted cookies/password setup/login, expired/used/scanner/redirect handling and mobile/keyboard/pending/retry behavior.",
+    "Real independent-session revoke/archive/course-move/duplicate-invitation races; sequential PGlite is not concurrent scheduling proof or distributed atomicity.",
+    "All prior LOCAL-REVIEW.md authenticated workflow, Storage, QR/media/scoring/browser/concurrency gates remain open.",
+    "Verify actual platform ADM and deployed policy/function inventory, backups/restore, migration/application ordering and secret/template/SMTP configuration before any approved rollout.",
+    "Explicit publication/deployment/real-invite approval and verified GitHub authentication/preview-backend isolation; no remote branch, PR, push, merge or deployment claimed."
+  ],
+  "limitations": [
+    "Existing nonblocking Vite future native-config-loader warning remains in UI output; lint/typecheck/build passed.",
+    "Browser startup actually failed because Chromium lacked libnspr4.so; no package/system change or fabricated browser evidence.",
+    "docker, podman, psql, supabase, chromium and chromium-browser not found on PATH at final read-only check. No local service stack was provisioned.",
+    "Generic web extraction failed with the configured search-only backend; public official curl retrieval and offline HTML extraction succeeded.",
+    "Raw RED/GREEN/build/research logs preserve original whitespace, so unrestricted git diff --check flags evidence formatting only; source-only whitespace check passed.",
+    "The first action import-resolution failure is preserved separately and is not counted as witnessed behavior RED.",
+    "Actual provider-side cookie, password, invitation and existing-account semantics still require approved real local service acceptance. The L1 HTTP fixture is explicitly synthetic and does not establish real refresh-token rotation/reuse behavior."
+  ],
+  "delivery_paths": {
+    "handoff": "STAFF-INVITATIONS-HANDOFF.md",
+    "verification_report": "verification/staff-final-results.json",
+    "source_archive": ".sandbox/staff-delivery/staff-invitations-source.tar.gz",
+    "incremental_bundle": ".sandbox/staff-delivery/staff-invitations-feature.bundle",
+    "generated_package_manifest": ".sandbox/staff-delivery/delivery.json",
+    "package_status": "Pre-correction ignored archive/bundle were not refreshed in this narrow review fix; they do not contain L1 correction. Current corrected delivery is the local committed branch plus this handoff/result and tracked evidence."
+  },
+  "no_hosted_operations": true,
+  "no_real_invites": true,
+  "no_system_changes": true,
+  "original_checkout_preserved": true,
+  "kanban_marked_done": false
+}

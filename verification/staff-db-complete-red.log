@@ -1,0 +1,35 @@
+ok 1 course invitation preflight RPC installed
+ok 2 platform validates exact course and selected events
+ok 3 server resolves organization
+ok 4 new email is not an existing account
+ok 5 existing lookup is exact and case insensitive
+ok 6 ordinary staff cannot preflight
+ok 7 same-org owner cannot preflight
+ok 8 anonymous has no execute
+ok 9 wrong course events rejected
+ok 10 archived events rejected
+ok 11 null events rejected
+ok 12 null array elements rejected
+ok 13 unknown course rejected
+ok 14 invalid email rejected
+ok 15 zero events valid
+ok 16 duplicate selection valid
+node:internal/modules/run_main:111
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: atomic completion RPC installed
+
+false !== true
+
+    at check (file:///workspace/supabase/tests/staff-invitations.test.mjs:6:49)
+    at file:///workspace/supabase/tests/staff-invitations.test.mjs:38:1 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v26.12.1

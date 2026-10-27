@@ -1,0 +1,41 @@
+email-templates TokenHash ons have been enabled at a project-level.
+Terminology#
+The templating system provides the following variables for use:
+NameDescription{{ .ConfirmationURL }}Contains the confirmation URL. For example, a signup confirmation URL would look like: https://project-ref.supabase.co/auth/v1/verify?token={{ .TokenHash }}&type=email&redirect_to=https://example.com/path.{{ .Token }}Contains a 6-digit One-Time-Password (OTP) that can be used instead of the {{. ConfirmationURL }}.{{ .TokenHash }}Contains a hashed version of the {{ .Token }}. This is useful for constructing your own email link in the email template.{{ .SiteURL }}Contains your application's Site URL. This can be configured in your project's authentication settings.{{ .RedirectTo }}Contains the redirect URL passed when signUp, signInWithOtp, signInWithOAuth, resetPasswordForEmail or inviteUserByEmail is called. The redirect URL allow list can be configured in your project's authentication settings.{{ .Data }}Contains metadata from auth.users.user_metadata. Use this to personalize the email message.{{ .Email }}Contains the original email address of the user. Empty when trying to link an email address to an anonymous user.{{ .NewEmail }}Contains the new email address of the user. This variable is only supported in the "Change email address" template.{{ .OldEmail }}Contains the old email address of the user. This variable is only supported in the "Email address changed notification" template.{{ .Phone }}Contains the new phone number of the user. This variable is only supported in the "Phone number changed notification" template.{{ .OldPhone }}Contains the old phone address of the user. This variable is only supported in the "Phone number changed notification" template.{{ .Provider }}Contains the provider of the linked or removed sign-in method. This variable is only supported in the "Sign-in method linked" and "Sign-in method removed" notification templates.{{ .FactorType }}Contains the type of verification method that was added or removed. This variable is only supported in the "Verification method added" and "Verif
+email-templates prefetch n-in method for {{ .Email }}.</p>\n<p>If you didn't make this change, contact support immediately.</p>"48  }'    
+Mobile deep linking#
+For mobile applications, you might need to link or redirect to a specific page within your app. See the Mobile Deep Linking guide to set this up.
+Limitations#
+Email prefetching#
+Certain email providers may have spam detection or other security features that prefetch URL links from incoming emails (e.g. Safe Links in Microsoft Defender for Office 365).
+In this scenario, the {{ .ConfirmationURL }} sent will be consumed instantly which leads to a "Token has expired or is invalid" error.
+To guard against this there are the options below:
+Option 1
+
+Use an email OTP instead by including {{ .Token }} in the email template
+Create your own custom email link to redirect the user to a page where they can enter their email and token to sign in
+
+1<a href="{{ .SiteURL }}/confirm-signup">Confirm email address</a>    
+
+Log them in by verifying the OTP token value with their email e.g. with supabase.auth.verifyOtp show below
+
+1const { data, error } = await supabase.auth.verifyOtp({ email, token, type: 'email' })    
+Option 2
+
+Create your own custom email link to redirect the user to a page where they can click on a button to confirm the action
+
+1<a href="{{ .SiteURL }}/confirm-signup?confirmation_url={{ .ConfirmationURL }}">2  Confirm email address3</a>    
+
+The button should contain the actual confirmation link which can be obtained from parsing the confirmation_url={{ .ConfirmationURL }} query parameter in the URL.
+
+Email tracking#
+If you are using an external email provider that enables "email tracking", the links inside the Supabase email templates will be overwritten and won't perform as expected. We recommend disabling email tracking to ensure email links are not overwritten.
+Redirecting the user to a server-side endpoint#
+If you intend to use Server-side rendering, you might want the email link to redirect the user to a server-side endpoint to check if they are authenticated before returning the page. However, the default email link will red
+email-templates RedirectTo sed instead of the {{. ConfirmationURL }}.{{ .TokenHash }}Contains a hashed version of the {{ .Token }}. This is useful for constructing your own email link in the email template.{{ .SiteURL }}Contains your application's Site URL. This can be configured in your project's authentication settings.{{ .RedirectTo }}Contains the redirect URL passed when signUp, signInWithOtp, signInWithOAuth, resetPasswordForEmail or inviteUserByEmail is called. The redirect URL allow list can be configured in your project's authentication settings.{{ .Data }}Contains metadata from auth.users.user_metadata. Use this to personalize the email message.{{ .Email }}Contains the original email address of the user. Empty when trying to link an email address to an anonymous user.{{ .NewEmail }}Contains the new email address of the user. This variable is only supported in the "Change email address" template.{{ .OldEmail }}Contains the old email address of the user. This variable is only supported in the "Email address changed notification" template.{{ .Phone }}Contains the new phone number of the user. This variable is only supported in the "Phone number changed notification" template.{{ .OldPhone }}Contains the old phone address of the user. This variable is only supported in the "Phone number changed notification" template.{{ .Provider }}Contains the provider of the linked or removed sign-in method. This variable is only supported in the "Sign-in method linked" and "Sign-in method removed" notification templates.{{ .FactorType }}Contains the type of verification method that was added or removed. This variable is only supported in the "Verification method added" and "Verification method removed" notification templates.
+Editing email templates#
+Where you edit templates depends on how you run Supabase.
+Hosted projects#
+Edit templates on the Email Templates page in the dashboard. The template builder uses the same terminology and variables documented on this page.
+Local development and self-hosted#
+The dashboard template builder does not apply when running local development with CLI or self-hoste

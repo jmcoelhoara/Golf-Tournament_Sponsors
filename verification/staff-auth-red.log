@@ -1,0 +1,95 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/auth/actions.test.ts
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/auth/actions.test.ts [2m([22m[2m26 tests[22m[2m | [22m[31m3 failed[39m[2m)[22m[32m 21[2mms[22m[39m
+[31m   [31m×[31m explicit confirmation verifies only invite and redirects to fixed same-app password page[39m[32m 8[2mms[22m[39m
+   [32m✓[39m rejects token type recovery before Auth[32m 1[2mms[22m[39m
+   [32m✓[39m rejects token type signup before Auth[32m 0[2mms[22m[39m
+   [32m✓[39m rejects token type magiclink before Auth[32m 0[2mms[22m[39m
+   [32m✓[39m rejects token type email before Auth[32m 0[2mms[22m[39m
+   [32m✓[39m rejects token type email_change before Auth[32m 0[2mms[22m[39m
+   [32m✓[39m rejects token type https://evil.test before Auth[32m 0[2mms[22m[39m
+   [32m✓[39m rejects token type  before Auth[32m 0[2mms[22m[39m
+   [32m✓[39m rejects submitted redirect https://evil.test[32m 0[2mms[22m[39m
+   [32m✓[39m rejects submitted redirect //evil.test[32m 0[2mms[22m[39m
+   [32m✓[39m rejects submitted redirect /admin[32m 0[2mms[22m[39m
+   [32m✓[39m rejects submitted redirect /auth/set-password[32m 0[2mms[22m[39m
+   [32m✓[39m rejects submitted redirect /\evil.test[32m 0[2mms[22m[39m
+   [32m✓[39m rejects malformed hash [32m 0[2mms[22m[39m
+   [32m✓[39m rejects malformed hash short[32m 0[2mms[22m[39m
+   [32m✓[39m rejects malformed hash a
+b[32m 0[2mms[22m[39m
+   [32m✓[39m rejects malformed hash <script>alert(1)</script>[32m 0[2mms[22m[39m
+[31m   [31m×[31m sanitizes expired/used invite without returning token/session[39m[32m 1[2mms[22m[39m
+   [32m✓[39m sanitizes thrown confirmation error[32m 0[2mms[22m[39m
+[31m   [31m×[31m sets password only for a freshly verified session and redirects to dashboard[39m[32m 1[2mms[22m[39m
+   [32m✓[39m refuses signed-out password mutation[32m 0[2mms[22m[39m
+   [32m✓[39m rejects invalid password without Auth update[32m 0[2mms[22m[39m
+   [32m✓[39m rejects invalid password without Auth update[32m 0[2mms[22m[39m
+   [32m✓[39m rejects invalid password without Auth update[32m 1[2mms[22m[39m
+   [32m✓[39m rejects invalid password without Auth update[32m 0[2mms[22m[39m
+   [32m✓[39m does not echo a password from errors[32m 0[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 3 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/auth/actions.test.ts[2m > [22mexplicit confirmation verifies only invite and redirects to fixed same-app password page
+[31m[1mAssertionError[22m: promise resolved "{ ok: false, …(1) }" instead of rejecting[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- Error {[39m
+[32m-   "message": "rejected promise",[39m
+[31m+ {[39m
+[31m+   "message": "Confirmation not implemented.",[39m
+[31m+   "ok": false,[39m
+[2m  }[22m
+
+[36m [2m❯[22m src/app/auth/actions.test.ts:[2m9:184[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/auth/actions.test.ts[2m > [22msanitizes expired/used invite without returning token/session
+[31m[1mAssertionError[22m: expected 'Confirmation not implemented.' to match /expired|used/i[39m
+
+[32m- Expected:[39m
+/expired|used/i
+
+[31m+ Received:[39m
+"Confirmation not implemented."
+
+[36m [2m❯[22m src/app/auth/actions.test.ts:[2m13:271[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/auth/actions.test.ts[2m > [22msets password only for a freshly verified session and redirects to dashboard
+[31m[1mAssertionError[22m: promise resolved "{ ok: false, …(1) }" instead of rejecting[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- Error {[39m
+[32m-   "message": "rejected promise",[39m
+[31m+ {[39m
+[31m+   "message": "Password setup not implemented.",[39m
+[31m+   "ok": false,[39m
+[2m  }[22m
+
+[36m [2m❯[22m src/app/auth/actions.test.ts:[2m15:207[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m3 failed[39m[22m[2m | [22m[1m[32m23 passed[39m[22m[90m (26)[39m
+[2m   Start at [22m 04:36:31
+[2m   Duration [22m 842ms[2m (transform 39ms, setup 105ms, import 34ms, tests 21ms, environment 531ms)[22m
+

@@ -1,0 +1,44 @@
+ok 1 course invitation preflight RPC installed
+ok 2 platform validates exact course and selected events
+ok 3 server resolves organization
+ok 4 new email is not an existing account
+ok 5 existing lookup is exact and case insensitive
+ok 6 ordinary staff cannot preflight
+ok 7 same-org owner cannot preflight
+ok 8 anonymous has no execute
+ok 9 wrong course events rejected
+ok 10 archived events rejected
+ok 11 null events rejected
+ok 12 null array elements rejected
+ok 13 unknown course rejected
+ok 14 invalid email rejected
+ok 15 zero events valid
+ok 16 duplicate selection valid
+ok 17 atomic completion RPC installed
+ok 18 missing Auth account does not create membership
+ok 19 ordinary staff completion denied
+ok 20 owner completion denied
+ok 21 tampered event completion denied
+ok 22 tampered event created no membership
+ok 23 existing account joins course organization
+ok 24 new membership always staff
+ok 25 selected event visible
+ok 26 grant actor is authenticated ADM
+ok 27 retry duplicate selections succeeds
+ok 28 retry leaves grants and original attribution untouched
+ok 29 owner reuse succeeds
+ok 30 owner not demoted
+ok 31 zero selections never grant events
+ok 32 zero selection retry preserves prior grants
+ok 33 prior grant retained
+ok 34 revocation effective
+ok 35 explicit selected retry re-enables revoked event
+ok 36 membership audit actor
+ok 37 forced SQL failure witnessed
+ok 38 transaction rolls back new membership
+ok 39 transaction rolls back membership audit
+ok 40 Auth account never deleted on DB failure
+ok 41 safe retry succeeds
+ok 42 revoked ADM completion denied without logout
+ok 43 revoked ADM preflight denied
+43 staff invitation checks passed

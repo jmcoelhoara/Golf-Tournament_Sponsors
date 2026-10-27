@@ -1,0 +1,46 @@
+✔ login control persists replacement cookies for an expired session (627.929588ms)
+✔ invite GET, HEAD and prefetch stay inert even with an expired session cookie (153.425143ms)
+✖ expired password session persists cookies and reuses them on password POST (50.774638ms)
+✖ nearly expired password session persists cookies and reuses them on password POST (28.756608ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 2
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1452.081563
+
+✖ failing tests:
+
+test at verification/staff-session-refresh.test.mjs:99:72
+✖ expired password session persists cookies and reuses them on password POST (50.774638ms)
+  AssertionError [ERR_ASSERTION]: Replacement session cookie must reach the HTTP client
+      at persistedCookie (file:///workspace/verification/staff-session-refresh.test.mjs:26:9)
+      at TestContext.<anonymous> (file:///workspace/verification/staff-session-refresh.test.mjs:106:15)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at verification/staff-session-refresh.test.mjs:99:72
+✖ nearly expired password session persists cookies and reuses them on password POST (28.756608ms)
+  AssertionError [ERR_ASSERTION]: Replacement session cookie must reach the HTTP client
+      at persistedCookie (file:///workspace/verification/staff-session-refresh.test.mjs:26:9)
+      at TestContext.<anonymous> (file:///workspace/verification/staff-session-refresh.test.mjs:106:15)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

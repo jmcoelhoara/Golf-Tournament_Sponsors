@@ -1,0 +1,50 @@
+▲ Next.js 16.4.1 (Turbopack)
+✓ Running next.config.ts took 33ms
+- Cache Components enabled
+- Partial Prefetching enabled
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 227ms
+  Running TypeScript ...
+  Finished TypeScript in 2.6s ...
+  Collecting page data using 1 worker ...
+  Generating static pages using 1 worker (0/19) ...
+  Generating static pages using 1 worker (4/19) 
+  Generating static pages using 1 worker (9/19) 
+  Generating static pages using 1 worker (14/19) 
+✓ Generating static pages using 1 worker (19/19) in 483ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ◐ /admin
+├ ◐ /admin/access
+├   /admin/contests/[id]
+│ └ ◐ /admin/contests/[id]
+├   /admin/contests/[id]/print
+│ └ ◐ /admin/contests/[id]/print
+├ ◐ /admin/courses
+├   /admin/courses/[id]
+│ └ ◐ /admin/courses/[id]
+├   /admin/events/[id]
+│ └ ◐ /admin/events/[id]
+├   /admin/events/[id]/leaderboard
+│ └ ◐ /admin/events/[id]/leaderboard
+├ ◐ /admin/history
+├ ◐ /admin/leaderboards
+├ ◐ /admin/sponsors
+├ ◐ /auth/invite
+├ ◐ /auth/set-password
+├   /c/[token]
+│ └ ◐ /c/[token]
+└ ○ /login
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)             prerendered as static content
+◐  (Partial Prerender)  prerendered as static HTML with dynamic server-streamed content
+
+npm notice run golf-tournament-sponsors@0.1.0 build
+npm notice run next build

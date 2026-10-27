@@ -1,0 +1,366 @@
+{
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "suggestions": [
+    {
+      "id": "S1",
+      "severity": "low",
+      "source_references": [
+        "src/app/admin/invitation-actions.ts:14-24",
+        "src/app/admin/invitation-actions.test.ts:16,27"
+      ],
+      "suggestion": "Validate resend as an optional singleton with the exact supported value. Unlike course_id and email, duplicate or unsupported resend values are currently accepted and interpreted using only form.get. This remains input-contract hardening, not a demonstrated authorization bypass: fresh platform-admin authority is still required before any privileged use."
+    },
+    {
+      "id": "S2",
+      "severity": "low",
+      "source_references": [
+        "src/app/admin/server-views.tsx:14-16",
+        "src/app/admin/server-views.test.tsx:52-63",
+        "src/app/admin/courses/AddStaff.tsx:13-22",
+        "src/app/admin/courses/AddStaff.test.tsx:8-10"
+      ],
+      "suggestion": "Add explicit negative assertions that ordinary-staff and archived-course views contain no Add staff form, and a deferred-action test asserting the form stays disabled while pending. The production guards and disabled fieldset are present. The positive ADM test and immediate resolved-action tests do not independently exercise these negative/pending cases."
+    }
+  ],
+  "release_gates": [
+    {
+      "id": "RG1",
+      "gate": "This artifact completes the independent source re-review of L1; it does not claim completion of the separately assigned supervisor verification, release approval or any task-board transition. Obtain that separate verification before handoff is treated as release-ready.",
+      "references": [
+        "STAFF-INVITATIONS-HANDOFF.md:132-139",
+        "STAFF-INVITATIONS-RESULT.json:152-160"
+      ]
+    },
+    {
+      "id": "RG2",
+      "gate": "Separately approve a disposable LOCAL Supabase Auth/PostgREST/Storage/mailbox stack. Apply the forward migration against real schemas/roles and verify the named RPC wire calls, exact target Auth identity, pending/confirmed/existing-account reuse, duplicate invitation/resend behavior, memberships, selected and retained grants, atomic failure readbacks, SMTP capture, sender/configuration failures and rate limits. PGlite uses synthetic Auth rows and component tests replace transport; neither proves real Auth/SMTP/HTTP integration, sending or delivery.",
+      "references": [
+        "supabase/tests/staff-invitations.test.mjs:1,7-13,39-78",
+        "src/app/admin/invitation-actions.test.ts:1-10,18-22,25-27",
+        "STAFF-INVITATIONS-HANDOFF.md:135"
+      ]
+    },
+    {
+      "id": "RG3",
+      "gate": "Before approved rollout, provision the server-only administration key and canonical STAFF_INVITE_SITE_URL through the approved deployment secret mechanism. Verify the intended project, exact Site URL and /auth/invite redirect allowlist, custom Invite user template, SMTP sender/recipient restrictions, expiry and password policy together. The documented link must use RedirectTo plus token_hash and type=invite, not the default provider verification/implicit-fragment link. No actual key, deployed setting or email template was inspected or changed by this reviewer.",
+      "references": [
+        "src/lib/supabase/invitation-admin.ts:14-28",
+        "STAFF-INVITATIONS-HANDOFF.md:36-55,143-151",
+        "verification/staff-official-email-templates.txt:24,64-71",
+        "../staff-invitations/research/redirects.txt:17-43,96-99"
+      ]
+    },
+    {
+      "id": "RG4",
+      "gate": "Exercise a real browser against real local Auth: cross-device invitation, GET/HEAD/prefetch scanners, deliberate confirmation POST and session replacement, browser-persisted cookies, expired/nearly expired refresh, password setup, used/expired/malformed links, existing password login, no-grant behavior and partial-progress retry. Include keyboard/mobile/pending/error states. The independently passing Next/SDK HTTP refresh regression uses a deliberately fake Auth listener and an HTTP cookie jar, not a real browser, real provider rotation/reuse or email acceptance.",
+      "references": [
+        "src/app/auth/actions.ts:5-28",
+        "src/app/auth/forms.tsx:5-24",
+        "verification/staff-session-refresh.test.mjs:1,12-33,44-59,99-130",
+        "STAFF-INVITATIONS-HANDOFF.md:130,136"
+      ]
+    },
+    {
+      "id": "RG5",
+      "gate": "Test independent-session revocation/archive/course-move/duplicate-invitation races against real local services. Ordered event locks and sequential preflight-to-completion revalidation are useful evidence, not concurrent scheduling proof or cross-service atomicity. Do not claim already-running Auth requests can be cancelled by subsequent revocation.",
+      "references": [
+        "supabase/migrations/20261027000000_staff_invitations.sql:7-15,38-49",
+        "supabase/tests/staff-invitations.test.mjs:79-95",
+        "STAFF-INVITATIONS-HANDOFF.md:76-82,137"
+      ]
+    },
+    {
+      "id": "RG6",
+      "gate": "Verify actual platform ADM identity, deployed policy/function inventory, backups/restore and migration/application order before any approved rollout. Verify redaction of token-bearing authentication query strings in hosting/proxy/analytics/error logs; application no-referrer/no-store headers do not configure those external logs. Preserve all earlier authenticated event/roster/print/leaderboard, Storage, QR/media/scoring/browser/concurrency gates. Publication, deployment and real invitations still require separate explicit approval. The older archive/bundle is documented as stale and must not be mistaken for corrected source.",
+      "references": [
+        "STAFF-INVITATIONS-HANDOFF.md:55,138-160",
+        "LOCAL-REVIEW.md:61-70",
+        "next.config.ts:7-13"
+      ]
+    }
+  ],
+  "summary": "PASS for the reviewed local source: no substantiated blocking security or correctness defect was found after independent inspection of the complete changed production code and tests relative to the requested base. The prior L1 omission is corrected by the exact /auth/set-password proxy matcher entry. A fresh optimized build and independent execution of all four real-Next/fake-Auth HTTP regressions confirmed replacement access/refresh cookies, their reuse by the actual rendered password-action POST, and inert invitation GET/HEAD/prefetch. Independently rerun existing DB, feature DB, UI, lint, typecheck and production HTTP checks passed. Two low-priority suggestions remain. This is not deployment approval or proof of real Auth/SMTP/browser integration; the explicit release gates remain open. No product source, dependency/tooling/system/gateway/profile configuration or Git state was changed.",
+  "reviewed_commit": "d0450c813776bdee945f0e70dfea166c6d56c6de",
+  "reviewed_source_commit": "f2285455d09cb65836334a919f17b90e4ec580a8",
+  "base_commit": "e139a5b851e3006fcc188117b9aabd3cf2b7e1c1",
+  "scope": {
+    "role": "Fresh independent security and correctness reviewer, not the implementer",
+    "skill_loaded": "code-review (mattpocock/code-review); standards and specification axes applied directly, without child agents",
+    "inputs": [
+      "../staff-invitations/MISSION.md",
+      "STAFF-INVITATIONS-HANDOFF.md",
+      "STAFF-INVITATIONS-RESULT.json",
+      "AGENTS.md",
+      "../WORKPLAN.md",
+      "../contract-review.md",
+      "LOCAL-REVIEW.md"
+    ],
+    "input_resolution": "Literal worktree RESULT.json does not exist. Reviewed STAFF-INVITATIONS-RESULT.json, the result filename required by MISSION.md:40 and named in the handoff. WORKPLAN.md and contract-review.md were located and read in the project parent. No changed production-code or test scope was unreadable. The earlier review artifact was read for finding disposition, not treated as proof of current behavior.",
+    "comparison": "Host read-only git diff e139a5b851e3006fcc188117b9aabd3cf2b7e1c1 HEAD, changed-file inventory and commit history. Only 20261027000000_staff_invitations.sql is added under migrations. Prior migrations, package.json, package-lock.json, the existing login page and the shared SSR adapter are unchanged. The difference from f2285455d09cb65836334a919f17b90e4ec580a8 to reviewed HEAD is handoff/result documentation only.",
+    "complete_changed_production_files_read": [
+      "next.config.ts",
+      "src/app/admin/courses/AddStaff.tsx",
+      "src/app/admin/invitation-actions.ts",
+      "src/app/admin/server-views.tsx",
+      "src/app/auth/actions.ts",
+      "src/app/auth/forms.tsx",
+      "src/app/auth/invite/page.tsx",
+      "src/app/auth/layout.tsx",
+      "src/app/auth/set-password/page.tsx",
+      "src/app/auth/views.tsx",
+      "src/lib/supabase/invitation-admin.ts",
+      "src/proxy.ts",
+      "supabase/migrations/20261027000000_staff_invitations.sql"
+    ],
+    "complete_changed_test_and_verification_source_read": [
+      "src/app/admin/courses/AddStaff.test.tsx",
+      "src/app/admin/invitation-actions.test.ts",
+      "src/app/admin/server-views.test.tsx",
+      "src/app/auth/actions.test.ts",
+      "src/app/auth/forms.test.tsx",
+      "src/app/auth/views.test.tsx",
+      "supabase/tests/staff-invitations.test.mjs",
+      "verification/staff-http-smoke.mjs",
+      "verification/staff-session-refresh.test.mjs",
+      "verification/verify-staff-invitations.mjs",
+      "verification/read-staff-research.mjs",
+      "vitest.config.ts"
+    ],
+    "dependent_paths_traced": [
+      "src/lib/staff.ts:6-18",
+      "src/lib/staff-data.ts:3-10",
+      "src/lib/supabase/server.ts:4-25",
+      "src/app/admin/courses/[id]/page.tsx:1-3",
+      "src/app/login/page.tsx:14-26",
+      "supabase/migrations/20261014000000_initial_schema.sql:44-74,213-239",
+      "supabase/migrations/20261025000000_event_catalog_access_media.sql:12-100,150-202,258-275"
+    ],
+    "standards_assessment": "No substantiated documented-standard violation found. Installed Next documentation was read for this version's Server Actions, async request data/Suspense, cookie writes, server-only boundary and proxy matcher behavior. The dense formatting follows neighboring source conventions; no speculative style issue is elevated to a security/correctness blocker.",
+    "specification_assessment": "The scoped course invitation flow, fresh platform authority, server-only privileged Auth client, staff-only new membership, selected-event grants, role/grant preservation, deliberate invitation confirmation, fixed redirects, password setup and conservative partial-failure handling match the local implementation requirements. Real-service and deployment requirements remain explicit acceptance gates rather than being inferred from doubles."
+  },
+  "boundary_evidence": [
+    {
+      "boundary": "Platform authorization BEFORE key access and privileged client construction",
+      "source_references": [
+        "src/app/admin/invitation-actions.ts:12-27",
+        "src/lib/supabase/invitation-admin.ts:1-28",
+        "supabase/migrations/20261025000000_event_catalog_access_media.sql:86-100",
+        "supabase/migrations/20261014000000_initial_schema.sql:213-239"
+      ],
+      "test_references": [
+        "src/app/admin/invitation-actions.test.ts:12-17,28-36"
+      ],
+      "evidence": "The action freshly checks getUser and get_staff_context, then preflights. The factory repeats that fresh guard before reading SUPABASE_SERVICE_ROLE_KEY. The independently passing revocation test instruments process.env and asserts zero privileged-key reads. The factory is server-only, creates a distinct supabase-js client with persistence/auto-refresh/URL detection disabled, and forwards no caller cookies, storage or user session. Configuration errors use fixed safe strings; raw construction/provider errors are not returned. A fresh browser build scan found no private key canary, private variable name or factory name in any of 19 static files."
+    },
+    {
+      "boundary": "Course/organization/tournament binding and atomic, non-escalating data writes",
+      "source_references": [
+        "src/app/admin/invitation-actions.ts:14-22,42-49",
+        "src/app/admin/server-views.tsx:13-16",
+        "src/app/admin/courses/AddStaff.tsx:6-22",
+        "supabase/migrations/20261027000000_staff_invitations.sql:3-57"
+      ],
+      "test_references": [
+        "src/app/admin/invitation-actions.test.ts:16-17,24",
+        "src/app/admin/courses/AddStaff.test.tsx:8-10",
+        "src/app/admin/server-views.test.tsx:54-63",
+        "supabase/tests/staff-invitations.test.mjs:28-37,40-78,79-95"
+      ],
+      "evidence": "The server rejects submitted org/role/user/redirect fields and validates bounded UUID selections. SQL derives the organization from the active course, locks selected event rows in UUID order and validates exact course/org and active state again during completion. New membership uses staff; conflicts do nothing. Only explicitly selected revoked grants are re-enabled; active grants retain original attribution, existing owner/admin roles and other grants remain untouched. Ordinary, owner, anonymous and revoked callers are denied. Actual PGlite tests forced a failure after an earlier selected grant and read back rollback of membership, grants and their audit rows while retaining the Auth identity. Zero selections add no event grants. Existing catalog/event-creation membership semantics are unchanged, not misrepresented as a new all-event grant."
+    },
+    {
+      "boundary": "Definer privileges, RLS, search_path and unchanged preexisting authorization",
+      "source_references": [
+        "supabase/migrations/20261027000000_staff_invitations.sql:3-57",
+        "supabase/migrations/20261025000000_event_catalog_access_media.sql:30-44,56-70,86-100,258-275"
+      ],
+      "test_references": [
+        "supabase/tests/staff-invitations.test.mjs:21,28-29,41-44,91-95"
+      ],
+      "evidence": "Both public RPCs reach the platform-guarded private scope helper, use security definer with empty search_path and qualified application objects, revoke PUBLIC/anon execution and grant only authenticated execution. The private helper is not client executable. Completion uses the caller-authenticated RPC, not service-role writes, so audit actor auth.uid() remains the real caller. An additional independent in-memory PGlite before/after catalog comparison confirmed every preexisting policy, relation ACL, function definition and function ACL unchanged. Catalog readback confirmed all three new functions are definers with search_path=\"\", no PUBLIC/anon execute, and authenticated execute only on the two public RPCs. This is real SQL/catalog evidence under synthetic Auth fixtures, not deployed-inventory proof."
+    },
+    {
+      "boundary": "Existing identity reuse, duplicates and safe partial failure/retry",
+      "source_references": [
+        "src/app/admin/invitation-actions.ts:8,23-49",
+        "supabase/migrations/20261027000000_staff_invitations.sql:25,38-50",
+        "src/app/admin/courses/AddStaff.tsx:11-12,20"
+      ],
+      "test_references": [
+        "src/app/admin/invitation-actions.test.ts:18-22,25-30",
+        "supabase/tests/staff-invitations.test.mjs:27,39-78"
+      ],
+      "evidence": "SQL resolves the existing account by case-insensitive exact email rather than accepting a user ID. Existing-account default path does not construct the privileged client or reset password/metadata; explicit resend uses only inviteUserByEmail(email,{redirectTo}). Duplicate-email error codes proceed to fresh exact-email DB completion. Errors distinguish known accepted invitation requests from uncertain Auth progress, sanitize provider messages and advise reviewed retry without deleting identities/memberships. Grants and membership are one DB transaction, not falsely described as atomic with Auth/email. Transport-double success proves application branching only; actual provider duplicate/resend behavior remains RG2."
+    },
+    {
+      "boundary": "Invitation/callback/password semantics, fixed redirects and secret non-disclosure",
+      "source_references": [
+        "src/app/auth/actions.ts:5-28",
+        "src/app/auth/views.tsx:5-14",
+        "src/app/auth/forms.tsx:5-24",
+        "src/app/auth/invite/page.tsx:1-5",
+        "src/app/auth/set-password/page.tsx:1-3",
+        "src/app/auth/layout.tsx:1-3",
+        "src/lib/supabase/invitation-admin.ts:18-28",
+        "next.config.ts:7-13",
+        "src/app/login/page.tsx:14-26"
+      ],
+      "test_references": [
+        "src/app/auth/actions.test.ts:9-18",
+        "src/app/auth/forms.test.tsx:7-10",
+        "src/app/auth/views.test.tsx:6-9",
+        "verification/staff-http-smoke.mjs:15-20"
+      ],
+      "evidence": "The landing rejects extra/repeated parameters and unintended types; GET never verifies a token. An explicit action POST validates type=invite and hash shape and calls verifyOtp, then redirects only to /auth/set-password. The password view and action freshly call getUser; the action accepts only matching 12-128 character passwords and updates only password before fixed /admin redirect. Existing password login is unchanged. The configured invitation origin rejects credentials/path/query/fragment and non-HTTPS except exact supported local development hosts. Added production code contains no password/token/invite-link/key/provider-exception logging or sensitive result-state echo. HTTP checks independently witnessed no-referrer/no-store/noindex controls on invitation responses. External access-log redaction remains RG6."
+    }
+  ],
+  "l1_disposition": {
+    "status": "resolved_in_reviewed_source",
+    "source_references": [
+      "src/proxy.ts:16-21,27-39",
+      "src/lib/supabase/server.ts:14-21",
+      "src/app/auth/views.tsx:11-14",
+      "src/app/auth/set-password/page.tsx:1-3"
+    ],
+    "regression_references": [
+      "verification/staff-session-refresh.test.mjs:23-33,80-98,99-130"
+    ],
+    "independent_evidence": "After an independent fresh production build, node --test verification/staff-session-refresh.test.mjs exited 0: all 4 tests passed, none failed/skipped. Both expired and nearly expired password-page requests refreshed exactly once, rendered with the replacement session and returned replacement access AND refresh cookies. A subsequent HTTP POST using the actual rendered React bound-action fields and those persisted cookies returned 303 to /admin; the fake Auth listener observed exactly one password update with the replacement bearer and no additional refresh. The /login persistence control passed; invitation GET/HEAD/prefetch made zero Auth calls and set no session cookies. This independently verifies the bounded lost-cookie defect is corrected; it does not prove real Auth rotation or browser acceptance."
+  },
+  "primary_source_comparison": [
+    {
+      "references": [
+        "node_modules/@supabase/auth-js/src/GoTrueAdminApi.ts:174-177,230-246",
+        "node_modules/@supabase/auth-js/src/lib/types.ts:896-912",
+        "node_modules/@supabase/auth-js/src/GoTrueClient.ts:2479-2522,3404-3470"
+      ],
+      "assessment": "Installed SDK source explicitly says admin invitations do not support PKCE; inviteUserByEmail sends the email and redirect without a verifier. Token-hash verifyOtp supports invite, persists the returned session and emits SIGNED_IN. Password update uses the current session bearer, saves the user and emits USER_UPDATED. The application uses these actual interfaces rather than an invented PKCE/fragment callback."
+    },
+    {
+      "references": [
+        "node_modules/@supabase/ssr/src/createServerClient.ts:44-86,155-210",
+        "node_modules/@supabase/ssr/src/cookies.ts:552-672",
+        "../staff-invitations/research/ssr-auth.txt:97-120,172-181,261-269,357-394",
+        "node_modules/next/dist/docs/01-app/03-api-reference/04-functions/cookies.md:6,65-91",
+        "node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/proxy.md:13-21,71-80,249-251"
+      ],
+      "assessment": "Server Component writes are prohibited; proxy must forward refreshed request and response cookies before rendering. The exact password-route matcher now supplies that path without running Auth on the invitation landing. Installed Next docs also state action POSTs use their hosting route and require independent authorization inside the action."
+    },
+    {
+      "references": [
+        "../staff-invitations/research/invite-user.txt:2-13",
+        "../staff-invitations/research/admin-create.txt:2-5",
+        "../staff-invitations/research/password-reset.txt:204-233,271-285",
+        "../staff-invitations/research/redirects.txt:17-43,96-99,267-278",
+        "verification/staff-official-email-templates.txt:24,42-71",
+        "node_modules/next/dist/docs/01-app/02-guides/forms.md:7-10,70,190-245",
+        "node_modules/next/dist/docs/01-app/02-guides/data-security.md:56-66,132,201-240"
+      ],
+      "assessment": "Cached official material supports server-only administration, exact redirect allowlists, authenticated updateUser password setup, custom TokenHash/RedirectTo invite links for SSR, and deliberate confirmation to mitigate link prefetch. The handoff template matches this architecture. Missing secrets/template/SMTP settings and real browser/provider behavior are deployment/acceptance gates, not proof supplied by mocks. No hosted documentation or service request was made during this review."
+    }
+  ],
+  "independent_verification": {
+    "sandbox_prefix": "/usr/bin/python3 -I /root/.hermes/projects/golf-tournament-sponsors/tooling/sandbox.py --workspace /root/.hermes/projects/golf-tournament-sponsors/work-staff-invitations --timeout 600 --",
+    "execution": "All executable project tests, builds and inline SQL/HTTP/build-output diagnostics ran synchronously through that exact offline sandbox prefix. Heavy checks were sequential; UI used one worker. No child agents, background task handoff, hosted network, credentials or real email were used.",
+    "results": [
+      {
+        "command": "npm run test:db",
+        "exit_code": 0,
+        "suite_counts": [47, 316, 55],
+        "tests_passed": 418,
+        "observed_stdout": ["47 passed, 0 failed", "Upgrade suite: 316 passed", "Compatibility suite: 55 passed"],
+        "evidence_type": "Actual PGlite SQL/RLS with synthetic identities and bounded Storage fixtures"
+      },
+      {
+        "command": "node supabase/tests/staff-invitations.test.mjs",
+        "exit_code": 0,
+        "tests_passed": 56,
+        "observed_stdout": "56 staff invitation checks passed",
+        "evidence_type": "Actual SQL authorization, role/grant preservation, atomic rollback and retry readbacks; no real Auth/SMTP"
+      },
+      {
+        "command": "npm run test:ui -- --maxWorkers=1",
+        "exit_code": 0,
+        "tests_passed": 154,
+        "files_passed": 17,
+        "observed_stdout": ["Test Files 17 passed (17)", "Tests 154 passed (154)"],
+        "evidence_type": "Actual components/actions with explicitly mocked Supabase transport; not Auth/SMTP/HTTP integration"
+      },
+      {"command": "npm run lint", "exit_code": 0},
+      {"command": "npm run typecheck", "exit_code": 0},
+      {
+        "command": "env NEXT_TELEMETRY_DISABLED=1 NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=offline-fake-key SUPABASE_SERVICE_ROLE_KEY=independent-review-fake-canary STAFF_INVITE_SITE_URL=http://127.0.0.1:3427 npm run build",
+        "exit_code": 0,
+        "observed_stdout": "Next.js 16.4.1 optimized production build compiled and typechecked successfully; both auth routes and Proxy were built.",
+        "evidence_type": "Fresh independent production build using exclusively fake local/public configuration and a synthetic non-secret private canary"
+      },
+      {
+        "command": "node --test verification/staff-session-refresh.test.mjs",
+        "exit_code": 0,
+        "tests_passed": 4,
+        "tests_failed": 0,
+        "tests_skipped": 0,
+        "evidence_type": "Actual Next/SDK/SSR HTTP with deliberately fake Auth listener; not real Auth/browser acceptance"
+      },
+      {
+        "command": "node --input-type=module -e <read verification/staff-http-smoke.mjs, suppress only its final log-file write in memory, import as a data module>",
+        "exit_code": 0,
+        "tests_passed": 9,
+        "tests_failed": 0,
+        "tests_skipped": 0,
+        "harness_change": "Only writeFileSync('verification/staff-http-server.log',log) was replaced by void log before execution. All requests, assertions and server cleanup were unchanged; tracked implementer evidence was not overwritten.",
+        "evidence_type": "Actual signed-out/invitation production HTTP against the fresh build, no Auth backend"
+      },
+      {
+        "command": "node --input-type=module -e <read verification/frontend-http-smoke.mjs, suppress only its final log-file write in memory, import as a data module>",
+        "exit_code": 0,
+        "tests_passed": 16,
+        "tests_failed": 0,
+        "tests_skipped": 0,
+        "harness_change": "Only writeFileSync('verification/frontend-http-server.log', serverLog) was replaced by void serverLog before execution. All requests, assertions and server cleanup were unchanged; tracked baseline evidence was not overwritten.",
+        "evidence_type": "Actual existing signed-out production HTTP against the fresh build, no Auth backend"
+      },
+      {
+        "command": "npm run test:smoke",
+        "exit_code": 0,
+        "tests_passed": 6,
+        "tests_failed": 0,
+        "tests_skipped": 0,
+        "evidence_type": "Actual original production HTTP baseline; coverage overlaps the other HTTP suites"
+      },
+      {
+        "command": "node --input-type=module -e <recursively read every .next/static file and scan for the independent synthetic private canary, SUPABASE_SERVICE_ROLE_KEY and createInvitationAdmin>",
+        "exit_code": 0,
+        "files_scanned": 19,
+        "findings": [],
+        "evidence_type": "Independent bounded scan of the fresh browser build, not an exhaustive secret audit"
+      },
+      {
+        "command": "node --input-type=module -e <apply actual baseline migrations to in-memory PGlite; snapshot pg_policies, relation ACLs and preexisting function definitions/ACLs; apply new forward migration; assert equality and inspect all new function privileges/search_path>",
+        "exit_code": 0,
+        "observed_readback": {
+          "preexisting_policies_unchanged": true,
+          "preexisting_relation_grants_unchanged": true,
+          "preexisting_functions_and_execute_grants_unchanged": true,
+          "complete_staff_invitation": {"security_definer": true, "search_path": "", "public_execute": false, "anon_execute": false, "authenticated_execute": true},
+          "preflight_staff_invitation": {"security_definer": true, "search_path": "", "public_execute": false, "anon_execute": false, "authenticated_execute": true},
+          "staff_invitation_scope": {"security_definer": true, "search_path": "", "public_execute": false, "anon_execute": false, "authenticated_execute": false}
+        },
+        "evidence_type": "Additional independent real SQL/catalog assertions with a synthetic Auth schema; no product/test file authored"
+      }
+    ],
+    "warning": "The preexisting nonblocking Vite future native-config-loader warning remained; the UI suite passed.",
+    "host_read_only_checks": [
+      "git diff --check e139a5b851e3006fcc188117b9aabd3cf2b7e1c1 HEAD -- src supabase/migrations supabase/tests next.config.ts vitest.config.ts 'verification/*.mjs' exited 0.",
+      "Git branch remained murilo/staff-invitations, HEAD remained d0450c813776bdee945f0e70dfea166c6d56c6de, and git status --porcelain=v1 was empty before and after execution. No index, branch, commit, remote or configuration write was performed."
+    ],
+    "evidence_location": "Observed command results are recorded in this review artifact and the synchronous tool transcript. The implementation verification runner was inspected but not invoked because it overwrites tracked staff-final evidence. Existing tracked implementer evidence was preserved; test/build execution regenerated only ignored runtime/cache/build output. This JSON is the only authored review deliverable.",
+    "not_claimed": [
+      "No independently recreated pre-fix RED chronology; the current L1 regression was independently rerun GREEN against a fresh build.",
+      "No real Supabase Auth/PostgREST/SMTP/Storage, browser, independent-session concurrency, sent-email or delivered-email acceptance.",
+      "No credentials, hosted-service calls, dependency installs, system/tooling/gateway/profile changes, Git writes, publication, deployment or task completion transition."
+    ]
+  }
+}

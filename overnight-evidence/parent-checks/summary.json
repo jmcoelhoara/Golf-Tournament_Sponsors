@@ -1,0 +1,21 @@
+{
+  "source_commit": "d0450c813776bdee945f0e70dfea166c6d56c6de",
+  "review_passed": true,
+  "release_approved": false,
+  "counts": {
+    "database": 418,
+    "ui": 154,
+    "lint": null,
+    "typecheck": null,
+    "build": null,
+    "baseline-http": 6,
+    "http": 16,
+    "staff-database": 56,
+    "staff-invitation-http": 9,
+    "staff-password-session-http": 4
+  },
+  "new_feature_sql_checks": 56,
+  "database_total": 474,
+  "actual_auth_smtp_service_verified": false,
+  "real_browser_verified": false
+}

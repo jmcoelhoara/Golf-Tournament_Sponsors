@@ -1,0 +1,79 @@
+[
+  {
+    "name": "staff-database",
+    "command": [
+      "/usr/bin/python3",
+      "-I",
+      "/root/.hermes/projects/golf-tournament-sponsors/tooling/sandbox.py",
+      "--workspace",
+      "/root/.hermes/projects/golf-tournament-sponsors/work-staff-invitations",
+      "--timeout",
+      "600",
+      "--",
+      "env",
+      "NEXT_TELEMETRY_DISABLED=1",
+      "NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321",
+      "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=offline-fake-key",
+      "STAFF_INVITE_SITE_URL=http://127.0.0.1:3437",
+      "node",
+      "supabase/tests/staff-invitations.test.mjs"
+    ],
+    "exit_code": 0,
+    "tests_passed": 56,
+    "log": "/root/.hermes/projects/golf-tournament-sponsors/staff-invitations/parent-checks/staff-database.log",
+    "log_sha256": "3241da5a1708f9257e3ede38fa83cb7fcd962fdd84bc134bd1f7058876fae7f7",
+    "seconds": 3.95
+  },
+  {
+    "name": "staff-invitation-http",
+    "command": [
+      "/usr/bin/python3",
+      "-I",
+      "/root/.hermes/projects/golf-tournament-sponsors/tooling/sandbox.py",
+      "--workspace",
+      "/root/.hermes/projects/golf-tournament-sponsors/work-staff-invitations",
+      "--timeout",
+      "600",
+      "--",
+      "env",
+      "NEXT_TELEMETRY_DISABLED=1",
+      "NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321",
+      "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=offline-fake-key",
+      "STAFF_INVITE_SITE_URL=http://127.0.0.1:3437",
+      "node",
+      "--test",
+      ".sandbox/parent-staff-http-smoke.mjs"
+    ],
+    "exit_code": 0,
+    "tests_passed": 9,
+    "log": "/root/.hermes/projects/golf-tournament-sponsors/staff-invitations/parent-checks/staff-invitation-http.log",
+    "log_sha256": "7e1bad2d792d94827e274e949c78d7944f0a0e2cd81440913e10760e289d605c",
+    "seconds": 5.32
+  },
+  {
+    "name": "staff-password-session-http",
+    "command": [
+      "/usr/bin/python3",
+      "-I",
+      "/root/.hermes/projects/golf-tournament-sponsors/tooling/sandbox.py",
+      "--workspace",
+      "/root/.hermes/projects/golf-tournament-sponsors/work-staff-invitations",
+      "--timeout",
+      "600",
+      "--",
+      "env",
+      "NEXT_TELEMETRY_DISABLED=1",
+      "NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321",
+      "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=offline-fake-key",
+      "STAFF_INVITE_SITE_URL=http://127.0.0.1:3437",
+      "node",
+      "--test",
+      "verification/staff-session-refresh.test.mjs"
+    ],
+    "exit_code": 0,
+    "tests_passed": 4,
+    "log": "/root/.hermes/projects/golf-tournament-sponsors/staff-invitations/parent-checks/staff-password-session-http.log",
+    "log_sha256": "108f8bac1028917a66444087df65aa275fe961cad7b926704783fcfa4ba803f4",
+    "seconds": 2.7
+  }
+]

@@ -1,0 +1,1 @@
+JavaScript: inviteUserByEmailSends an invite link to an email address.Parametersemail(Required)The email address of the user.options(Required)Additional options to be included when inviting.ExamplesInvite a userconst { data, error } = await supabase.auth.admin.inviteUserByEmail('email@example.com')

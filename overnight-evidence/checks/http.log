@@ -1,0 +1,24 @@
+✔ production home provides staff sign-in without backend access (534.989432ms)
+✔ production login contains the real email and password form (38.597004ms)
+✔ signed-out /admin redirects to login (7.290157ms)
+✔ signed-out /admin/access redirects to login (7.772954ms)
+✔ signed-out /admin/courses redirects to login (6.23848ms)
+✔ signed-out /admin/courses/course-id redirects to login (4.852042ms)
+✔ signed-out /admin/events/event-id redirects to login (4.990633ms)
+✔ signed-out /admin/events/event-id?history=1 redirects to login (5.085795ms)
+✔ signed-out /admin/events/event-id/leaderboard redirects to login (4.904162ms)
+✔ signed-out /admin/contests/contest-id redirects to login (5.104885ms)
+✔ signed-out /admin/contests/contest-id/print redirects to login (4.008249ms)
+✔ signed-out /admin/leaderboards redirects to login (3.785476ms)
+✔ signed-out /admin/history redirects to login (3.992658ms)
+✔ signed-out /admin/sponsors redirects to login (5.231347ms)
+✔ legacy QR route serves a public shell without staff login (115.887754ms)
+✔ built stylesheet ships popup containment and print rules (9.997766ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3898.99862
