@@ -1,0 +1,111 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/admin/server-views.test.tsx
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/admin/server-views.test.tsx [2m([22m[2m10 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 325[2mms[22m[39m
+   [32m✓[39m loads granted event settings through user-scoped SELECT and keeps no-grants users logged in[32m 160[2mms[22m[39m
+   [32m✓[39m loads an event detail only after its RLS event read and exposes fixed contest creation plus shared logo[32m 54[2mms[22m[39m
+[31m   [31m×[31m refuses archived event history on a direct ordinary-staff settings URL[39m[32m 13[2mms[22m[39m
+   [32m✓[39m builds leaderboard navigation from the same granted-event SELECT[32m 15[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct courses route[32m 2[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct access route[32m 0[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct history route[32m 0[2mms[22m[39m
+   [32m✓[39m renders course-specific granted events but no ordinary-staff catalog editor[32m 15[2mms[22m[39m
+   [32m✓[39m shows an authenticated event leaderboard including closed and draft contests[32m 6[2mms[22m[39m
+   [32m✓[39m prints draft contests with the parent current logo and original QR token under user RLS[32m 57[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/server-views.test.tsx[2m > [22mrefuses archived event history on a direct ordinary-staff settings URL
+[31m[1mAssertionError[22m: promise resolved "{ …(10) }" instead of rejecting[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- Error {[39m
+[32m-   "message": "rejected promise",[39m
+[32m- }[39m
+[31m+ <main[39m
+[31m+   className="shell wide"[39m
+[31m+ >[39m
+[31m+   <AdminNav[39m
+[31m+     current="events"[39m
+[31m+     email="staff@test"[39m
+[31m+     isPlatformAdmin={false}[39m
+[31m+   />[39m
+[31m+   <ForwardRef(LinkComponent)[39m
+[31m+     href="/admin"[39m
+[31m+   >[39m
+[31m+     ← Event settings[39m
+[31m+   </ForwardRef(LinkComponent)>[39m
+[31m+   <section[39m
+[31m+     className="card"[39m
+[31m+   >[39m
+[31m+     <h1>[39m
+[31m+       Granted Charity[39m
+[31m+     </h1>[39m
+[31m+     <p[39m
+[31m+       className="muted"[39m
+[31m+     >[39m
+[31m+       2026-11-05 · archived[39m
+[31m+     </p>[39m
+[31m+     <ForwardRef(LinkComponent)[39m
+[31m+       href="/admin/events/event1/leaderboard"[39m
+[31m+     >[39m
+[31m+       Open leaderboard[39m
+[31m+     </ForwardRef(LinkComponent)>[39m
+[31m+     <React.Fragment>[39m
+[31m+        · [39m
+[31m+       <ForwardRef(LinkComponent)[39m
+[31m+         href="/admin/courses/course1"[39m
+[31m+       >[39m
+[31m+         Course event view[39m
+[31m+       </ForwardRef(LinkComponent)>[39m
+[31m+     </React.Fragment>[39m
+[31m+     <p[39m
+[31m+       className="result"[39m
+[31m+     >[39m
+[31m+       Archived event history. Entries and image library retained; editing is disabled.[39m
+[31m+     </p>[39m
+[31m+   </section>[39m
+[31m+   <h2>[39m
+[31m+     Contests[39m
+[31m+   </h2>[39m
+[31m+   <p[39m
+[31m+     className="card muted"[39m
+[31m+   >[39m
+[31m+     No contests yet.[39m
+[31m+   </p>[39m
+[31m+   <div[39m
+[31m+     className="contest-grid"[39m
+[31m+   />[39m
+[31m+   <section[39m
+[31m+     className="card"[39m
+[31m+   >[39m
+[31m+     <h2>[39m
+[31m+       Retained image library[39m
+[31m+     </h2>[39m
+[31m+     <ul />[39m
+[31m+   </section>[39m
+[31m+ </main>[39m
+
+[36m [2m❯[22m src/app/admin/server-views.test.tsx:[2m11:75[22m[39m
+    [90m  9|[39m it('refuses archived event history on a direct ordinary-staff settings…
+    [90m 10|[39m  requireEvent.mockResolvedValue({...event,status:'archived',archived_a…
+    [90m 11|[39m  await expect(EventDetailContent({params:Promise.resolve({id:'event1'}…
+    [90m   |[39m                                                                           [31m^[39m
+    [90m 12|[39m  [34mexpect[39m(queries)[33m.[39mnot[33m.[39m[34mtoContain[39m([32m'event_images'[39m)[33m;[39m
+    [90m 13|[39m })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m9 passed[39m[22m[90m (10)[39m
+[2m   Start at [22m 02:04:02
+[2m   Duration [22m 1.34s[2m (transform 151ms, setup 100ms, import 214ms, tests 325ms, environment 552ms)[22m
+

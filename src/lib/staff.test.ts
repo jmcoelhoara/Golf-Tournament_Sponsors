@@ -1,0 +1,10 @@
+import { expect,it,vi,beforeEach } from 'vitest';
+const {client,redirect,notFound}=vi.hoisted(()=>({client:{auth:{getUser:vi.fn()},rpc:vi.fn(),from:vi.fn()},redirect:vi.fn((path:string)=>{throw new Error(`redirect:${path}`)}),notFound:vi.fn(()=>{throw new Error('not_found')})}));
+vi.mock('@/lib/supabase/server',()=>({createClient:()=>client}));vi.mock('next/navigation',()=>({redirect,notFound}));
+import { requireStaff, requireEvent } from './staff';
+beforeEach(()=>{vi.clearAllMocks();client.auth.getUser.mockResolvedValue({data:{user:{id:'staff',email:'staff@example.test'}},error:null});client.rpc.mockResolvedValue({data:{is_platform_admin:false,creation_organizations:[]},error:null})});
+it('allows authenticated staff with no grants to see an empty dashboard context',async()=>{expect((await requireStaff()).context).toEqual({is_platform_admin:false,creation_organizations:[]})});
+it('denies direct platform route access to ordinary staff independently of navigation',async()=>{await expect(requireStaff(true)).rejects.toThrow('not_found')});
+it('fails closed on context error instead of treating an organization owner as platform admin',async()=>{client.rpc.mockResolvedValue({data:null,error:{message:'not_allowed'}});await expect(requireStaff()).rejects.toThrow(/not_allowed/)});
+it('redirects signed-out users before querying staff context',async()=>{client.auth.getUser.mockResolvedValue({data:{user:null},error:null});await expect(requireStaff()).rejects.toThrow('redirect:/login');expect(client.rpc).not.toHaveBeenCalled()});
+it('denies event reads after grants are revoked and never retries with elevated credentials',async()=>{const query={select:vi.fn().mockReturnThis(),eq:vi.fn().mockReturnThis(),maybeSingle:vi.fn().mockResolvedValue({data:null,error:null})};client.from.mockReturnValue(query);await expect(requireEvent(client as never,'event-id')).rejects.toThrow('not_found');expect(client.from).toHaveBeenCalledWith('events')});

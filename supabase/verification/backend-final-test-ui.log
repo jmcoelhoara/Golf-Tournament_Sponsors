@@ -1,0 +1,28 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Startup Error [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯⎯[39m
+Error: Cannot find native binding. npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). Please try `npm i` again after removing both package-lock.json and node_modules directory.
+    at file:///workspace/node_modules/rolldown/dist/shared/binding-BMtuZhvP.mjs:601:34
+    at file:///workspace/node_modules/rolldown/dist/shared/binding-BMtuZhvP.mjs:9:49
+    ... 4 lines matching cause stack trace ...
+    at async CAC.run (file:///workspace/node_modules/vitest/dist/chunks/cac.DzDtg8hz.js:2318:2) {
+  cause: Error: Cannot find module '@rolldown/binding-wasm32-wasi'
+  Require stack:
+  - /workspace/node_modules/rolldown/dist/shared/binding-BMtuZhvP.mjs
+      at file:///workspace/node_modules/rolldown/dist/shared/binding-BMtuZhvP.mjs:495:18
+      ... 8 lines matching cause stack trace ...
+      at async CAC.run (file:///workspace/node_modules/vitest/dist/chunks/cac.DzDtg8hz.js:2318:2) {
+    cause: Error: Cannot find module './rolldown-binding.wasi.cjs'
+    Require stack:
+    - /workspace/node_modules/rolldown/dist/shared/binding-BMtuZhvP.mjs
+        at file:///workspace/node_modules/rolldown/dist/shared/binding-BMtuZhvP.mjs:495:18
+        ... 8 lines matching cause stack trace ...
+        at async CAC.run (file:///workspace/node_modules/vitest/dist/chunks/cac.DzDtg8hz.js:2318:2) {
+      cause: [Error]
+    }
+  }
+}
+
+
+

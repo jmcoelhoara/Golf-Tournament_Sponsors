@@ -1,0 +1,264 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/c
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/c/[token]/ContestClient.test.tsx [2m([22m[2m11 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 350[2mms[22m[39m
+   [32m✓[39m shows current event logo and one banner for 5000ms after load, never again on poll[32m 146[2mms[22m[39m
+   [32m✓[39m does not reopen a dismissed banner when polling clears then replaces its selection[32m 38[2mms[22m[39m
+   [32m✓[39m preserves remembered golfer, CTP inches, and the same request UUID on transport retry[32m 32[2mms[22m[39m
+   [32m✓[39m keeps longest-drive marker claims unmeasured[32m 10[2mms[22m[39m
+   [32m✓[39m updates shared event branding on poll without resetting the selected player[32m 19[2mms[22m[39m
+   [32m✓[39m retains legacy inline sponsors without treating a sponsor logo as event branding[32m 5[2mms[22m[39m
+   [32m✓[39m does not start a popup for a banner first selected by a later poll[32m 4[2mms[22m[39m
+[31m   [31m×[31m starts a fresh visit when navigating to another QR token without a full reload[39m[32m 51[2mms[22m[39m
+   [32m✓[39m allows close bypass without blocking golfer selection[32m 20[2mms[22m[39m
+   [32m✓[39m allows error bypass without blocking golfer selection[32m 11[2mms[22m[39m
+   [32m✓[39m allows escape bypass without blocking golfer selection[32m 12[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/c/[token]/ContestClient.test.tsx[2m > [22mstarts a fresh visit when navigating to another QR token without a full reload
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an accessible element with the role "dialog"
+
+Here are the accessible roles:
+
+  main:
+
+  Name "":
+  [36m<main[39m
+    [33mclass[39m=[32m"shell"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  [36m<header[39m
+    [33mclass[39m=[32m"event-head"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  img:
+
+  Name "Tournament crest":
+  [36m<img[39m
+    [33malt[39m=[32m"Tournament crest"[39m
+    [33mclass[39m=[32m"event-logo"[39m
+    [33msrc[39m=[32m"undefined/storage/v1/object/public/event-media/org/event/logo.png"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  heading:
+
+  Name "Men's Closest to the Pin":
+  [36m<h1 />[39m
+
+  Name "Your distance to the pin":
+  [36m<h2 />[39m
+
+  --------------------------------------------------
+  button:
+
+  Name "Not you?":
+  [36m<button[39m
+    [33mclass[39m=[32m"link"[39m
+  [36m/>[39m
+
+  Name "Submit":
+  [36m<button[39m
+    [33mclass[39m=[32m"btn"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  textbox:
+
+  Name "feet":
+  [36m<input[39m
+    [33mclass[39m=[32m"input"[39m
+    [33minputmode[39m=[32m"numeric"[39m
+    [33mplaceholder[39m=[32m"0"[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+
+  Name "inches":
+  [36m<input[39m
+    [33mclass[39m=[32m"input"[39m
+    [33minputmode[39m=[32m"decimal"[39m
+    [33mplaceholder[39m=[32m"0"[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"small muted"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"shell"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"event-head"[39m
+      [36m>[39m
+        [36m<img[39m
+          [33malt[39m=[32m"Tournament crest"[39m
+          [33mclass[39m=[32m"event-logo"[39m
+          [33msrc[39m=[32m"undefined/storage/v1/object/public/event-media/org/event/logo.png"[39m
+        [36m/>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"eyebrow"[39m
+        [36m>[39m
+          [0mCharity Open[0m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<section[39m
+        [33mclass[39m=[32m"card contest-card"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mMen's Closest to the Pin[0m
+        [36m</h1>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"chips"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"chip"[39m
+          [36m>[39m
+            [0mHole [0m
+            [0m4[0m
+          [36m</span>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"chip"[39m
+          [36m>[39m
+            [0mBlue[0m
+            [0m tees[0m
+          [36m</span>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"chip"[39m
+          [36m>[39m
+            [0m145[0m
+            [0m yds[0m
+          [36m</span>[39m
+        [36m</div>[39m
+      [36m</section>[39m
+      [36m<section[39m
+        [33maria-live[39m=[32m"polite"[39m
+        [33mclass[39m=[32m"card leader-card"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"eyebrow"[39m
+        [36m>[39m
+          [0mCurrent leader[0m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"muted"[39m
+        [36m>[39m
+          [0mNo entries yet — be the first![0m
+        [36m</div>[39m
+      [36m</section>[39m
+      [36m<section[39m
+        [33mclass[39m=[32m"card"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"me"[39m
+        [36m>[39m
+          [36m<div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"small muted"[39m
+            [36m>[39m
+              [0mPlaying as[0m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"me-name"[39m
+            [36m>[39m
+              [0mJane Green[0m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"small muted"[39m
+            [36m>[39m
+              [0mEagles[0m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"link"[39m
+          [36m>[39m
+            [0mNot you?[0m
+          [36m</button>[39m
+        [36m</div>[39m
+        [36m<h2>[39m
+          [0mYour distance to the pin[0m
+        [36m</h2>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"row"[39m
+        [36m>[39m
+          [36m<label[39m
+            [33mclass[39m=[32m"field"[39m
+          [36m>[39m
+            [36m<input[39m
+              [33mclass[39m=[32m"input"[39m
+              [33minputmode[39m=[32m"numeric"[39m
+              [33mplaceholder[39m=[32m"0"[39m
+              [33mvalue[39m=[32m""[39m
+            [36m/>[39m
+            [36m<span>[39m
+              [0mfeet[0m
+            [36m</span>[39m
+          [36m</label>[39m
+          [36m<label[39m
+            [33mclass[39m=[32m"field"[39m
+          [36m>[39m
+            [36m<input[39m
+              [33mclass[39m=[32m"input"[39m
+              [33minputmode[39m=[32m"decimal"[39m
+              [33mplaceholder[39m=[32m"0"[39m
+              [33mvalue[39m=[32m""[39m
+            [36m/>[39m
+            [36m<span>[39m
+              [0minches[0m
+            [36m</span>[39m
+          [36m</label>[39m
+        [36m</div>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"btn"[39m
+        [36m>[39m
+          [0mSubmit[0m
+        [36m</button>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"small muted"[39m
+        [36m>[39m
+          [0mOne entry per golfer.[0m
+        [36m</p>[39m
+      [36m</section>[39m
+    [36m</main>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2m❯[22m src/app/c/[token]/ContestClient.test.tsx:[2m89:16[22m[39m
+    [90m 87|[39m  fireEvent[33m.[39m[34mclick[39m(screen[33m.[39m[34mgetByRole[39m([32m'button'[39m[33m,[39m{name[33m:[39m[36m/Jane Green/[39m}))[33m;[39m
+    [90m 88|[39m  [34mrerender[39m([35mawait[39m [34mroute[39m([32m'second-token'[39m))[33m;[39m[35mawait[39m [34mact[39m([35masync[39m()[33m=>[39m{})[33m;[39m
+    [90m 89|[39m  [34mexpect[39m(screen[33m.[39m[34mgetByRole[39m([32m'dialog'[39m))[33m.[39m[34mtoBeTruthy[39m()[33m;[39m
+    [90m   |[39m                [31m^[39m
+    [90m 90|[39m  [34mexpect[39m(screen[33m.[39m[34mgetByText[39m([32m'Who are you?'[39m))[33m.[39m[34mtoBeTruthy[39m()[33m;[39m
+    [90m 91|[39m })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m10 passed[39m[22m[90m (11)[39m
+[2m   Start at [22m 02:15:46
+[2m   Duration [22m 1.24s[2m (transform 118ms, setup 97ms, import 122ms, tests 350ms, environment 545ms)[22m
+

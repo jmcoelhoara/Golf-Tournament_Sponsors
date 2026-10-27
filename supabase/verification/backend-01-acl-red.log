@@ -1,0 +1,19 @@
+node:internal/modules/run_main:111
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: legacy same-org ungranted owner sees no events
+
+1 !== 0
+
+    at check (file:///workspace/supabase/tests/upgrade.test.mjs:6:56)
+    at file:///workspace/supabase/tests/upgrade.test.mjs:38:1 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v26.12.1

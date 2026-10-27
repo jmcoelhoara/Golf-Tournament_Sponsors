@@ -1,0 +1,4 @@
+npm notice run golf-tournament-sponsors@0.1.0 lint
+npm notice run eslint
+
+command_exit=0

@@ -1,0 +1,114 @@
+{
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "suggestions": [
+    {
+      "id": "TEST-HARDENING-ONLY",
+      "blocking": false,
+      "source": "repo/src/app/admin/access/AccessManager.tsx:25-35,78-107; repo/src/app/admin/access/AccessManager.test.tsx:103-129,192-230; repo/supabase/tests/upgrade.test.mjs:256-273",
+      "suggestion": "Optional follow-up coverage: assert that a second successful refetch cannot clear an existing dirty conflict, exercise rejected/throwing grant reads and failed mutation results while drafts are pending, and explicitly deny a JSONB null placement request on an archived course (distinct from SQL NULL). Existing source handles these paths conservatively; these are coverage opportunities, not observed logic defects."
+    }
+  ],
+  "release_gates": [
+    {
+      "id": "RG-MERGED-LOCAL-SUPABASE-HTTP",
+      "status": "open",
+      "gate": "Use a separately authorized real disposable local Supabase Auth/PostgREST stack with the merged migration and frontend. Verify named RPC dispatch and argument names, JSON error handling, relationship/nested SELECT shapes, persisted writes and exact readbacks. PGlite SQL and mocked Supabase component transport are not HTTP/service integration evidence. Parent-owned full merged DB/UI/lint/type/build/signed-out-HTTP checks must also finish green; this bounded review does not claim to have rerun those complete suites."
+    },
+    {
+      "id": "RG-AUTHENTICATED-BOUNDARIES",
+      "status": "open",
+      "gate": "Exercise platform, granted staff, same-org ungranted owner/admin, revoked creator and no-grant identities through real authenticated requests and direct settings/access/catalog/entries/print/leaderboard/history URLs. Verify revocation without logout and fresh denied mutations. A signed-out redirect or JSDOM permission-state test does not satisfy this gate."
+    },
+    {
+      "id": "RG-STORAGE-SERVICE",
+      "status": "open",
+      "gate": "Verify actual local Storage uploads and registration, other-event/revoked/malformed-path denial, wrong-event/wrong-kind selection denial, scoped listing, denied overwrite/upsert/move/update/delete (including platform clients), and retained objects after failed registration/selection. Validate actual MIME/size service behavior and public delivery separately. Known public event-media URLs can remain downloadable after revoke/archive; no revocable-delivery claim is made. SQL metadata fixtures are not Storage HTTP/object-byte evidence."
+    },
+    {
+      "id": "RG-INDEPENDENT-SESSION-CONCURRENCY",
+      "status": "open",
+      "gate": "Exercise real independent sessions in both orderings for submission versus event/contest archive, review/correction versus archive, and subsequent requests after committed revocation; include direct manager roster DML and Storage upload versus archive. Also exercise competing administrator grant writes. The frontend only reconciles reads it receives, cannot cancel an issued RPC or discover unfetched changes, and supplies neither compare-and-swap nor atomic lost-update prevention. Source locks and sequential PGlite tests do not prove concurrent scheduling."
+    },
+    {
+      "id": "RG-REAL-BROWSER-PRINT-PLAYER",
+      "status": "open",
+      "gate": "Verify real Next RSC refresh and pending access/conflict interaction in a browser, mobile layout, keyboard/focus, popup image loading/errors/dismissal and five-second once-per-visit behavior across polling/token navigation, current shared logos, draft print readiness/pagination and all required elements. Decode/scan QR targets against the unchanged legacy-compatible /c/<token> route; exercise remembered golfers, retry UUIDs, CTP inches and unmeasured drive claims against the real local backend. JSDOM does not prove browser layout, print or QR scannability."
+    },
+    {
+      "id": "RG-ROLLOUT-INVENTORY-AND-AUTHORITY",
+      "status": "open",
+      "gate": "Before separately authorized publication, verify trusted Troy/platform-admin identity inventory, actual deployed policies/privileges including additional Storage policies, approved historical access assignments, catalog conflicts/incompleteness, backup/restore readiness and migration/application ordering. No blanket staff grants, inferred creators, fabricated complete distances or demo-seed reruns. Obtain human approval before any push, hosted migration or deployment. This local verdict closes neither rollout gates nor Kanban tasks."
+    }
+  ],
+  "reviewed_commits": [
+    {
+      "commit": "c34a6ed4a250914a2fe9a544d087986515deacfb",
+      "source_commit": "7824a8103cdd8334512245d0c8e04e134a1e69be",
+      "finding": "M1",
+      "verdict": "resolved",
+      "source_references": [
+        "repo/supabase/migrations/20261025000000_event_catalog_access_media.sql:277-310",
+        "repo/supabase/migrations/20261025000000_event_catalog_access_media.sql:176-185,204-225,227-252",
+        "repo/src/app/admin/EventEditor.tsx:14-20"
+      ],
+      "test_references": [
+        "repo/supabase/tests/upgrade.test.mjs:236-255 (ordinary granted staff creator, platform course archival, metadata success and complete snapshot preservation)",
+        "repo/supabase/tests/upgrade.test.mjs:256-273 (SQL NULL success, archived new/different targets and explicit placements denied, failed-operation row retention)",
+        "repo/supabase/tests/upgrade.test.mjs:274-276 (move to active course, refreshed placement snapshots with scoring/tokens retained)",
+        "repo/supabase/verification/review-m1-red.log:164-179 (historical expected invalid_course failure)",
+        "repo/supabase/verification/review-m1-all-db.log:223-245,385 (historical M1 assertions and 316-upgrade summary)",
+        "verification/backend-m1-parent-review.md:18-26 (separate parent execution: 47 legacy, 316 upgrade, 55 compatibility checks; not this reviewer's rerun)"
+      ],
+      "assessment": "The only production backend correction is the archived-course lookup predicate. It still requires the selected course ID and event organization to match and retains FOR SHARE. The alternative is active course OR the exact existing course with SQL NULL placements, not an arbitrary archived target or explicit new placement. Authorization/nonarchive parent locking remains before lookup; ordered contest locking and snapshot update rules remain unchanged. Same-course metadata edits skip placement updates and preserve course_name. New-event and standalone placement paths still require active catalog courses. The frontend explicitly sends p_contest_placements:null and retains its current archived course option, so the merged UI can use the bounded exception."
+    },
+    {
+      "commit": "a84679e19dd3c4ace68f853e4469d072892bdc6e",
+      "source_commit": "ce6f311e2d4da4ad6a709e33d8c6b93d028fbdca",
+      "finding": "FE-ACL-REFRESH-01",
+      "verdict": "resolved",
+      "source_references": [
+        "repo/src/app/admin/access/AccessManager.tsx:18-37,52-59 (current-event reads, cancellation, read/error blocking)",
+        "repo/src/app/admin/access/AccessManager.tsx:72-86 (snapshot-based authority/draft reconciliation)",
+        "repo/src/app/admin/access/AccessManager.tsx:91-108 (sticky conflict, explicit Use latest access, guarded save and successful-save cleanup)",
+        "repo/src/app/admin/MutationForm.tsx:5-11 (unchanged pending state, error handling and router.refresh)",
+        "repo/src/app/admin/server-views.tsx:18; repo/src/lib/staff.ts:6-14 (unchanged server platform guard)",
+        "repo/supabase/migrations/20261025000000_event_catalog_access_media.sql:187-202 (unchanged platform-only grant RPC and exact parameters)",
+        "repo/src/lib/event-media.ts:9-14 (checked error/ok result handling)"
+      ],
+      "test_references": [
+        "repo/src/app/admin/access/AccessManager.test.tsx:28-75 (exact enable/revoke payloads and clean transitions both ways)",
+        "repo/src/app/admin/access/AccessManager.test.tsx:76-102 (dirty transitions both ways, no stale submit, explicit Use latest access)",
+        "repo/src/app/admin/access/AccessManager.test.tsx:103-129 (pending/failed read blocked; recovery only after success)",
+        "repo/src/app/admin/access/AccessManager.test.tsx:130-165 (another account's real MutationForm Save triggers mocked router refresh, clean/dirty in both directions)",
+        "repo/src/app/admin/access/AccessManager.test.tsx:166-191 (fresh snapshot after completed save even with pre-save authority value; unchanged-authority dirty draft retained)",
+        "repo/src/app/admin/access/AccessManager.test.tsx:192-230 (pending MutationForm remains mounted, conflict survives completion, account error surfaced)",
+        "repo/verification/review-acl-04-green.log:9-14 (historical 16-test green evidence)"
+      ],
+      "assessment": "Clean rows follow every successful new snapshot; dirty rows preserve selections and explicitly block when fetched authority changes, even when the draft now matches it. Conflict is sticky until Use latest access. Old rows stay mounted but disabled while current-event reads are pending or failed, and successful reads clear the error. Stable event/account keys preserve the actual MutationForm pending state. Checked mutation errors do not mark the draft clean; success clears dirty only when no conflict has been discovered. Neither refetch completion nor mutation completion silently resolves a conflict. RPC names/arguments and backend/route guards were not changed by this fix.",
+      "independent_execution": {
+        "command": "/usr/bin/python3 -I /root/.hermes/projects/golf-tournament-sponsors/tooling/sandbox.py --workspace /root/.hermes/projects/golf-tournament-sponsors/repo --timeout 600 -- npm run test:ui -- --maxWorkers=1 src/app/admin/access/AccessManager.test.tsx",
+        "exit_code": 0,
+        "test_files_passed": 1,
+        "tests_passed": 16,
+        "limitations": "Real components and MutationForm in JSDOM; mocked Supabase transport and router refresh, not real Auth/HTTP/Storage/RSC concurrency. Existing nonblocking Vite native-config-loader warning was emitted. No dependencies or tooling were changed."
+      }
+    },
+    {
+      "commit": "a84679e19dd3c4ace68f853e4469d072892bdc6e",
+      "finding": "MERGE-CORRECTNESS",
+      "verdict": "no bounded merge regression found",
+      "integrated_sequence": [
+        "0cce7b0",
+        "590cf8f",
+        "c34a6ed",
+        "d103149",
+        "9710eaa",
+        "a84679e"
+      ],
+      "verification": "Read-only host Git comparisons returned no diff between final backend source 7824a8103cdd8334512245d0c8e04e134a1e69be and merged HEAD for all supabase files, and no diff between final frontend source ce6f311e2d4da4ad6a709e33d8c6b93d028fbdca and merged HEAD for src, package-lock.json, next.config.ts, tsconfig.json and vitest.config.ts. The sole package.json difference from frontend source is the parent's pre-existing test:smoke script; package.json matches parent baseline a0f11f3 exactly. MutationForm, server-views and staff guards have no diff in a84679e. Scoped git diff --check c34a6ed^ HEAD -- src supabase/migrations supabase/tests package.json package-lock.json passed; product git status remained clean and HEAD stayed pinned. Unscoped diff --check reports formatting in retained raw verification logs only, not product source; those historical logs were deliberately not edited."
+    }
+  ],
+  "summary": "PASS for the bounded local code re-review at merged HEAD a84679e19dd3c4ace68f853e4469d072892bdc6e: M1 and FE-ACL-REFRESH-01 are resolved, with no substantiated security blocker, remaining logic defect or merge regression in the reviewed scope. Reviewed the requested plan/contract/previous independent reviews and fix reports as context, then independently inspected the actual corrected source, diffs and regression tests. Standards and spec checks found no blocking violation. Independently reran the narrow AccessManager suite through the required offline sandbox: 16 tests passed, exit 0. Backend full-suite execution is attributed to the separate parent report, not fabricated as this reviewer's execution; the parent owns current full merged regression checks. Product/backend tests and frontend source match their final reviewed source commits, and shared forms/guards/RPC signatures remain intact. This is not a repeat of the original full-source audits and is not release/deployment approval. Real Supabase HTTP/Auth/Storage, independent-session concurrency, browser/print/player acceptance and rollout identity/policy/approval gates remain explicitly open. Only this review JSON was created; no product, test, tooling, dependency, profile, system, gateway or Kanban change was made."
+}

@@ -169,3 +169,38 @@ a { color: var(--green-2); }
 .strip-name { flex: 1; font-weight: 600; font-size: 0.95rem; }
 .strip-add { display: flex; gap: 8px; align-items: center; }
 .strip-add .input { font-size: 0.95rem; padding: 8px 10px; max-width: 320px; }
+
+/* Staff forms should not force the navigation or tables off-screen. */
+.topbar, .topbar-right, .admin-nav { flex-wrap: wrap; gap: 8px; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.contest-tile, .media-picker { min-width: 0; }
+.media-picker { padding: 12px 0; }
+.table-scroll { overflow-x: auto; }
+.tee-swatch { display: inline-block; width: 20px; height: 20px; border: 1px solid var(--muted); border-radius: 50%; }
+.yardage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.access-row { padding: 16px 0; border-top: 1px solid var(--line); }
+summary { cursor: pointer; padding: 8px 0; font-weight: 600; }
+
+/* One sponsor canvas per visit, above the player interface. */
+.banner-backdrop { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 16px; background: #08160de0; }
+.banner-dialog { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; max-width: 440px; max-height: 100dvh; padding: 12px; border-radius: var(--radius); background: var(--card); overflow: auto; }
+.banner-dialog img { display: block; width: 100%; max-height: 78dvh; min-height: 0; object-fit: contain; }
+.banner-dialog button { flex-shrink: 0; }
+
+/* Shared event branding and printable QR sign. */
+.event-logo { display: block; max-width: min(100%, 260px); max-height: 140px; object-fit: contain; margin: 0 auto 16px; }
+.media-preview { display: block; max-width: 100%; max-height: 220px; object-fit: contain; margin: 12px auto; }
+.print-sheet { background: white; border: 2px solid var(--green); border-top-width: 10px; border-radius: var(--radius); padding: 32px; text-align: center; }
+.print-sheet h1 { font-size: 2rem; }
+.print-sheet h2 { margin-top: 18px; font-size: 1.6rem; }
+.print-hole { font-size: 2rem; font-weight: 800; }
+.print-qr { display: block; width: 300px; max-width: 100%; height: auto; margin: 24px auto; }
+@media print {
+  @page { margin: 15mm; }
+  body { background: white; color: black; }
+  .no-print, .topbar { display: none !important; }
+  .print-shell { max-width: none; margin: 0; padding: 0; }
+  .print-sheet { break-inside: avoid; box-shadow: none; border-radius: 0; }
+  .print-qr { width: 75mm; }
+  .print-sheet a { color: black; text-decoration: none; }
+}

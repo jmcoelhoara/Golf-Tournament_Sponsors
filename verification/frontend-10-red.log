@@ -1,0 +1,47 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [32m✓[39m src/app/admin/navigation.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 243[2mms[22m[39m
+ [32m✓[39m src/app/admin/MediaPicker.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 200[2mms[22m[39m
+ [32m✓[39m src/app/c/[token]/ContestClient.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 239[2mms[22m[39m
+ [32m✓[39m src/app/admin/courses/CatalogEditor.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 181[2mms[22m[39m
+ [32m✓[39m src/app/admin/EventEditor.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 169[2mms[22m[39m
+ [32m✓[39m src/app/admin/server-views.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 197[2mms[22m[39m
+ [32m✓[39m src/lib/event-media.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [31m❯[39m src/app/admin/access/AccessManager.test.tsx [2m([22m[2m0 test[22m[2m)[22m
+ [32m✓[39m src/app/admin/contests/[id]/print/PrintSheet.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 162[2mms[22m[39m
+ [32m✓[39m src/lib/staff.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Suites 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/access/AccessManager.test.tsx[2m [ src/app/admin/access/AccessManager.test.tsx ][22m
+[31m[1mError[22m: Failed to resolve import "./AccessManager" from "src/app/admin/access/AccessManager.test.tsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/workspace/src/app/admin/access/AccessManager.test.tsx[39m:3:0
+[33m  11 |  const __vi_import_1__ = await import("@testing-library/react");
+  12 |  const __vi_import_2__ = await import("react/jsx-dev-runtime");
+  13 |  const __vi_import_3__ = await import("./AccessManager");
+     |                                       ^
+  14 |  
+  15 |  [39m
+[90m [2m❯[22m TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:[2m8803:39[22m[39m
+[90m [2m❯[22m TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:[2m8800:14[22m[39m
+[90m [2m❯[22m resolveId node_modules/vite/dist/node/chunks/node.js:[2m26594:18[22m[39m
+[90m [2m❯[22m node_modules/vite/dist/node/chunks/node.js:[2m26693:23[22m[39m
+[90m [2m❯[22m TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:[2m26666:4[22m[39m
+[90m [2m❯[22m EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:[2m8582:14[22m[39m
+[90m [2m❯[22m loadAndTransform node_modules/vite/dist/node/chunks/node.js:[2m20155:26[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m9 passed[39m[22m[90m (10)[39m
+[2m      Tests [22m [1m[32m37 passed[39m[22m[90m (37)[39m
+[2m   Start at [22m 19:42:22
+[2m   Duration [22m 9.23s[2m (transform 242ms, setup 807ms, import 397ms, tests 1.41s, environment 5.27s)[22m
+

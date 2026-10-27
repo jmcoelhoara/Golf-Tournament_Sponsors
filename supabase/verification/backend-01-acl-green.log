@@ -1,0 +1,9 @@
+ok 1 legacy same-org ungranted owner sees no events
+ok 2 no inferred legacy grants
+ok 3 platform sees legacy event
+ok 4 context lists creation organization without revealing events
+ok 5 nonplatform staff account enumeration denied
+ok 6 platform staff list contains existing members
+ok 7 raw legacy event update denied
+ok 8 raw event deletion denied even platform
+Upgrade suite: 8 passed

@@ -1,0 +1,60 @@
+[
+  {
+    "check": "database",
+    "returncode": 0,
+    "seconds": 7.85,
+    "log": "/root/.hermes/projects/golf-tournament-sponsors/verification/parent-final-merged-20261026/database.log",
+    "log_sha256": "143ed58f43fe13474e79d2194d50d88809e582c2471a075a52508d414545720c",
+    "counts": {
+      "legacy": 47,
+      "upgrade": 316,
+      "compatibility": 55
+    },
+    "tests_passed": 418
+  },
+  {
+    "check": "ui",
+    "returncode": 0,
+    "seconds": 15.15,
+    "log": "/root/.hermes/projects/golf-tournament-sponsors/verification/parent-final-merged-20261026/ui.log",
+    "log_sha256": "79e054aef66cef6b5bbcc3fa137371bac90ac850dd1c033bb7b95a0b7f7962f6",
+    "tests_passed": 78
+  },
+  {
+    "check": "lint",
+    "returncode": 0,
+    "seconds": 7.41,
+    "log": "/root/.hermes/projects/golf-tournament-sponsors/verification/parent-final-merged-20261026/lint.log",
+    "log_sha256": "32a05c851b0771823e740ea7e4223348ef6cf35232b5a40c72facb77a9fa6d4a"
+  },
+  {
+    "check": "typecheck",
+    "returncode": 0,
+    "seconds": 5.6,
+    "log": "/root/.hermes/projects/golf-tournament-sponsors/verification/parent-final-merged-20261026/typecheck.log",
+    "log_sha256": "6d04769ed016dd1d42e6bfd228f9c50f0b1b934b21bf0ad80724d6a08cf851ea"
+  },
+  {
+    "check": "build",
+    "returncode": 0,
+    "seconds": 12.16,
+    "log": "/root/.hermes/projects/golf-tournament-sponsors/verification/parent-final-merged-20261026/build.log",
+    "log_sha256": "e7219c411d706675f421c7fa315881c87778efdb699c53c13204cef4fe93d5a2"
+  },
+  {
+    "check": "http",
+    "returncode": 0,
+    "seconds": 4.57,
+    "log": "/root/.hermes/projects/golf-tournament-sponsors/verification/parent-final-merged-20261026/http.log",
+    "log_sha256": "4ecb6ff283e35fe93af1c4c3c5d54fbba15d79d7228187b37d5f483ddc62b1b3",
+    "tests_passed": 16
+  },
+  {
+    "check": "baseline-http",
+    "returncode": 0,
+    "seconds": 4.57,
+    "log": "/root/.hermes/projects/golf-tournament-sponsors/verification/parent-final-merged-20261026/baseline-http.log",
+    "log_sha256": "46712e0a8b645499d35d9729471dd9c2724318eb983a01996bbdfa153859132a",
+    "tests_passed": 6
+  }
+]

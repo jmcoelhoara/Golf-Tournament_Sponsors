@@ -1,0 +1,13 @@
+Error: librt.so.1: cannot open shared object file: No such file or directory
+    at Object..node (node:internal/modules/cjs/loader:2135:18)
+    at Module.load (node:internal/modules/cjs/loader:1690:32)
+    at Module._load (node:internal/modules/cjs/loader:1480:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at ModuleWrap.evaluationCallback (node:internal/modules/esm/translators:309:7)
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:650:26
+    at async file:///workspace/[eval1]:1:7 {
+  code: 'ERR_DLOPEN_FAILED'
+}
+(node:3) ExperimentalWarning: Importing addons is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

@@ -1,0 +1,67 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:db
+npm notice run node supabase/tests/schema.test.mjs
+migration + seed applied
+
+Golfer (anonymous) access
+  ok   contest details visible by QR token
+  ok   bad token reveals nothing
+  ok   roster filtered to Men division (72)
+  ok   roster has no contact details
+  ok   anon cannot read golfers table
+  ok   anon cannot read entries table
+  ok   anon cannot insert entries directly
+  ok   anon cannot call staff functions
+
+Closest to the Pin (lowest wins)
+  ok   first entry accepted
+  ok   closer shot takes lead
+  ok   worse shot does not take lead
+  ok   retry with same request id counted once
+  ok   second entry by same golfer blocked
+  ok   out-of-range value rejected
+  ok   missing value rejected
+  ok   wrong division rejected
+  ok   unknown golfer rejected
+  ok   public leaderboard row readable by anon
+
+Long Drive (latest accepted claim wins)
+  ok   newest claim leads
+
+Staff actions
+  ok   staff sees own org entries
+  ok   void leader -> next best leads
+  ok   staff cannot correct values (admins only)
+  ok   owner correction updates leader
+  ok   staff can check in golfer
+  ok   staff cannot edit golfers directly
+  ok   staff cannot add contests
+  ok   audit log records entry changes
+  ok   staff cannot read audit log
+
+Approval mode
+  ok   entry pending, no leader yet
+  ok   approval makes leader
+
+Separation between customers
+  ok   org B owner sees no org A golfers
+  ok   org B owner sees no org A entries
+  ok   org B owner cannot add golfer to org A event
+  ok   org B owner cannot void org A entry
+  ok   org A owner sees 144 golfers
+  ok   platform admin sees all orgs
+  ok   owner cannot create organizations
+
+Event sponsor strip
+  ok   strip returned in sort order
+  ok   staff cannot change the strip
+  ok   anon cannot read event_sponsors table
+  ok   org B owner cannot add to org A strip
+  ok   org B owner sees no org A strip rows
+  ok   deleting a sponsor removes it from the strip
+
+Closing
+  ok   closed contest refuses entries
+  ok   closed contest leaderboard still public
+  ok   draft event hides leaderboard from public
+
+46 passed, 0 failed

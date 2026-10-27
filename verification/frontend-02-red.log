@@ -1,0 +1,72 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/lib/event-media.test.ts [2m([22m[2m6 tests[22m[2m | [22m[31m6 failed[39m[2m)[22m[32m 16[2mms[22m[39m
+[31m   [31m×[31m accepts raster only and rejects oversized or empty uploads[39m[32m 5[2mms[22m[39m
+[31m   [31m×[31m uploads immutable random event path, registers before selecting and never deletes[39m[32m 2[2mms[22m[39m
+[31m   [31m×[31m surfaces storage failure and retains uploaded objects[39m[32m 1[2mms[22m[39m
+[31m   [31m×[31m surfaces registration failure and retains uploaded objects[39m[32m 1[2mms[22m[39m
+[31m   [31m×[31m surfaces selection failure and retains uploaded objects[39m[32m 1[2mms[22m[39m
+[31m   [31m×[31m rejects RPC false/null and direct DML zero-row responses[39m[32m 4[2mms[22m[39m
+ [32m✓[39m src/app/c/[token]/ContestClient.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 273[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 6 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/lib/event-media.test.ts[2m > [22maccepts raster only and rejects oversized or empty uploads
+[31m[1mTypeError[22m: validateRaster is not a function[39m
+[36m [2m❯[22m src/lib/event-media.test.ts:[2m4:77[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/event-media.test.ts[2m > [22muploads immutable random event path, registers before selecting and never deletes
+[31m[1mTypeError[22m: uploadEventImage is not a function[39m
+[36m [2m❯[22m src/lib/event-media.test.ts:[2m8:8[22m[39m
+    [90m  6|[39m  const upload=vi.fn().mockResolvedValue({error:null}), rpc=vi.fn().moc…
+    [90m  7|[39m  [35mconst[39m storage[33m=[39m{[35mfrom[39m[33m:[39mvi[33m.[39m[34mfn[39m(()[33m=>[39m({upload}))}[33m;[39m
+    [90m  8|[39m  await uploadEventImage({storage,rpc} as never,{organizationId:org,eve…
+    [90m   |[39m        [31m^[39m
+    [90m  9|[39m  expect(upload.mock.calls[0][0]).toMatch(new RegExp(`^${org}/${event}/…
+    [90m 10|[39m  expect(rpc.mock.calls.map(c=>c[0])).toEqual(['register_event_image','…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/event-media.test.ts[2m > [22msurfaces storage failure and retains uploaded objects
+[41m[1m FAIL [22m[49m src/lib/event-media.test.ts[2m > [22msurfaces registration failure and retains uploaded objects
+[41m[1m FAIL [22m[49m src/lib/event-media.test.ts[2m > [22msurfaces selection failure and retains uploaded objects
+[31m[1mTypeError[22m: uploadEventImage is not a function[39m
+[36m [2m❯[22m src/lib/event-media.test.ts:[2m16:15[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/event-media.test.ts[2m > [22mrejects RPC false/null and direct DML zero-row responses
+[31m[1mAssertionError[22m: expected [Function] to throw error matching /placements/ but got '(0 , __vite_ssr_import_1__.checkedMut…'[39m
+
+[32m- Expected:[39m
+/placements/
+
+[31m+ Received:[39m
+"(0 , __vite_ssr_import_1__.checkedMutation) is not a function"
+
+[36m [2m❯[22m src/lib/event-media.test.ts:[2m20:88[22m[39m
+    [90m 18|[39m })[33m;[39m
+    [90m 19|[39m [34mit[39m([32m'rejects RPC false/null and direct DML zero-row responses'[39m[33m,[39m()[33m=>[39m{
+    [90m 20|[39m  expect(()=>checkedMutation({data:{ok:false,error:'placements_required…
+    [90m   |[39m                                                                                        [31m^[39m
+    [90m 21|[39m  expect(()=>checkedMutation({data:null,error:null})).toThrow(/No chang…
+    [90m 22|[39m  expect(()=>checkedMutation({data:[],error:null},true)).toThrow(/No ch…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m1 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[31m6 failed[39m[22m[2m | [22m[1m[32m4 passed[39m[22m[90m (10)[39m
+[2m   Start at [22m 19:31:50
+[2m   Duration [22m 2.09s[2m (transform 124ms, setup 211ms, import 117ms, tests 288ms, environment 1.16s)[22m
+
