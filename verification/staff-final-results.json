@@ -1,0 +1,107 @@
+{
+  "started_at": "2026-10-27T05:16:43.936Z",
+  "network": "offline sandbox",
+  "services": "No real Supabase Auth/SMTP/Storage service; fake loopback configuration and explicitly fake Auth HTTP transport for session-http only",
+  "checks": [
+    {
+      "name": "database",
+      "command": "npm run test:db",
+      "exit_code": 0,
+      "seconds": 7.669,
+      "log": "verification/staff-final-database.log",
+      "suite_counts": [
+        47,
+        316,
+        55
+      ],
+      "tests_passed": 418
+    },
+    {
+      "name": "staff-database",
+      "command": "node supabase/tests/staff-invitations.test.mjs",
+      "exit_code": 0,
+      "seconds": 2.883,
+      "log": "verification/staff-final-staff-database.log",
+      "tests_passed": 56
+    },
+    {
+      "name": "ui",
+      "command": "npm run test:ui -- --maxWorkers=1",
+      "exit_code": 0,
+      "seconds": 20.833,
+      "log": "verification/staff-final-ui.log",
+      "tests_passed": 154,
+      "files_passed": 17
+    },
+    {
+      "name": "lint",
+      "command": "npm run lint",
+      "exit_code": 0,
+      "seconds": 4.909,
+      "log": "verification/staff-final-lint.log"
+    },
+    {
+      "name": "typecheck",
+      "command": "npm run typecheck",
+      "exit_code": 0,
+      "seconds": 1.89,
+      "log": "verification/staff-final-typecheck.log"
+    },
+    {
+      "name": "build",
+      "command": "npm run build",
+      "exit_code": 0,
+      "seconds": 4.865,
+      "log": "verification/staff-final-build.log"
+    },
+    {
+      "name": "legacy-http",
+      "command": "node --test .sandbox/staff-verification/legacy-http.mjs",
+      "exit_code": 0,
+      "seconds": 3.886,
+      "log": "verification/staff-final-legacy-http.log",
+      "tests_passed": 16,
+      "tests_failed": 0,
+      "tests_skipped": 0
+    },
+    {
+      "name": "staff-http",
+      "command": "node --test verification/staff-http-smoke.mjs",
+      "exit_code": 0,
+      "seconds": 3.931,
+      "log": "verification/staff-final-staff-http.log",
+      "tests_passed": 9,
+      "tests_failed": 0,
+      "tests_skipped": 0
+    },
+    {
+      "name": "session-http",
+      "command": "node --test verification/staff-session-refresh.test.mjs",
+      "exit_code": 0,
+      "seconds": 1.655,
+      "log": "verification/staff-final-session-http.log",
+      "tests_passed": 4,
+      "tests_failed": 0,
+      "tests_skipped": 0
+    },
+    {
+      "name": "baseline-http",
+      "command": "npm run test:smoke",
+      "exit_code": 0,
+      "seconds": 3.77,
+      "log": "verification/staff-final-baseline-http.log",
+      "tests_passed": 6,
+      "tests_failed": 0,
+      "tests_skipped": 0
+    },
+    {
+      "name": "browser-secret-scan",
+      "command": "Runner scans every .next/static file for fake build-secret canary, privileged variable name and factory",
+      "exit_code": 0,
+      "files_scanned": 19,
+      "leaking_paths": []
+    }
+  ],
+  "status": "passed",
+  "finished_at": "2026-10-27T05:17:40.235Z"
+}

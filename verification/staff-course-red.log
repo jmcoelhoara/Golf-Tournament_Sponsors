@@ -1,0 +1,285 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/admin/server-views.test.tsx
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/admin/server-views.test.tsx [2m([22m[2m16 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 462[2mms[22m[39m
+   [32m✓[39m requires platform authority before reading the retired organization-wide sponsor screen[32m 4[2mms[22m[39m
+   [32m✓[39m retains legacy sponsor display without destructive organization-wide image controls[32m 114[2mms[22m[39m
+   [32m✓[39m loads granted event settings through user-scoped SELECT and keeps no-grants users logged in[32m 21[2mms[22m[39m
+   [32m✓[39m makes course-scoped event pages discoverable without granting catalog editing[32m 22[2mms[22m[39m
+   [32m✓[39m loads an event detail only after its RLS event read and exposes fixed contest creation plus shared logo[32m 29[2mms[22m[39m
+   [32m✓[39m refuses archived event history on a direct ordinary-staff settings URL[32m 1[2mms[22m[39m
+   [32m✓[39m keeps platform operational contests separate from an explicit retained-history view[32m 52[2mms[22m[39m
+   [32m✓[39m builds leaderboard navigation from the same granted-event SELECT[32m 6[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct courses route[32m 1[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct access route[32m 0[2mms[22m[39m
+   [32m✓[39m requires server platform context for direct history route[32m 0[2mms[22m[39m
+   [32m✓[39m renders course-specific granted events but no ordinary-staff catalog editor[32m 12[2mms[22m[39m
+   [32m✓[39m shows an authenticated event leaderboard including closed and draft contests[32m 5[2mms[22m[39m
+[31m   [31m×[31m offers course-scoped Add staff only to platform ADM with exact course context[39m[32m 21[2mms[22m[39m
+   [32m✓[39m reads the updated shared event logo for every newly opened draft print sheet[32m 134[2mms[22m[39m
+   [32m✓[39m prints draft contests with the parent current logo and original QR token through the user client[32m 38[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/server-views.test.tsx[2m > [22moffers course-scoped Add staff only to platform ADM with exact course context
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: Add staff. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"shell wide"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"topbar no-print"[39m
+      [36m>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Staff navigation"[39m
+          [33mclass[39m=[32m"admin-nav"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mhref[39m=[32m"/admin"[39m
+          [36m>[39m
+            [0mEvent settings[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mhref[39m=[32m"/admin/leaderboards"[39m
+          [36m>[39m
+            [0mLeaderboard[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33maria-current[39m=[32m"page"[39m
+            [33mclass[39m=[32m"active"[39m
+            [33mhref[39m=[32m"/admin/courses"[39m
+          [36m>[39m
+            [0mCourses[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mhref[39m=[32m"/admin/access"[39m
+          [36m>[39m
+            [0mStaff access[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mhref[39m=[32m"/admin/history"[39m
+          [36m>[39m
+            [0mArchive history[0m
+          [36m</a>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"topbar-right"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"small muted"[39m
+          [36m>[39m
+            [0madm@example.test[0m
+          [36m</span>[39m
+          [36m<form[39m
+            [33maction[39m=[32m"javascript:throw new Error('A React form was unexpectedly submitted. If you called form.submit() manually, consider using form.requestSubmit() instead. If you\\'re trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().')"[39m
+          [36m>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"link"[39m
+            [36m>[39m
+              [0mSign out[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<h1>[39m
+        [0mNorth Course[0m
+      [36m</h1>[39m
+      [36m<h2>[39m
+        [0mEnabled events at this course[0m
+      [36m</h2>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"event-list"[39m
+      [36m>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"card"[39m
+        [36m>[39m
+          [36m<h2>[39m
+            [36m<a[39m
+              [33mhref[39m=[32m"/admin/events/event1"[39m
+            [36m>[39m
+              [0mGranted Charity[0m
+            [36m</a>[39m
+          [36m</h2>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"small muted"[39m
+          [36m>[39m
+            [0m2026-11-05 · draft[0m
+          [36m</p>[39m
+        [36m</section>[39m
+      [36m</div>[39m
+      [36m<section[39m
+        [33mclass[39m=[32m"card"[39m
+      [36m>[39m
+        [36m<h2>[39m
+          [0mCreate event at [0m
+          [0mNorth Course[0m
+        [36m</h2>[39m
+        [36m<form>[39m
+          [36m<fieldset>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"stack"[39m
+            [36m>[39m
+              [0mOrganization[0m
+              [36m<select[39m
+                [33mclass[39m=[32m"input"[39m
+                [33mrequired[39m=[32m""[39m
+              [36m>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"org"[39m
+                [36m>[39m
+                  [0mNorth Club[0m
+                [36m</option>[39m
+              [36m</select>[39m
+            [36m</label>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"stack"[39m
+            [36m>[39m
+              [0mEvent title[0m
+              [36m<input[39m
+                [33mclass[39m=[32m"input"[39m
+                [33mmaxlength[39m=[32m"200"[39m
+                [33mname[39m=[32m"name"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</label>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"stack"[39m
+            [36m>[39m
+              [0mEvent date[0m
+              [36m<input[39m
+                [33mclass[39m=[32m"input"[39m
+                [33mname[39m=[32m"date"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mtype[39m=[32m"date"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</label>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"stack"[39m
+            [36m>[39m
+              [0mCourse[0m
+              [36m<select[39m
+                [33mclass[39m=[32m"input"[39m
+                [33mrequired[39m=[32m""[39m
+              [36m>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m""[39m
+                [36m>[39m
+                  [0mSelect a course[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"course1"[39m
+                [36m>[39m
+                  [0mNorth Course[0m
+                [36m</option>[39m
+              [36m</select>[39m
+            [36m</label>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"btn small"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mCreate event[0m
+            [36m</button>[39m
+          [36m</fieldset>[39m
+        [36m</form>[39m
+      [36m</section>[39m
+      [36m<section[39m
+        [33mclass[39m=[32m"card"[39m
+      [36m>[39m
+        [36m<h2>[39m
+          [0mCourse settings[0m
+        [36m</h2>[39m
+        [36m<form>[39m
+          [36m<fieldset>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"stack"[39m
+            [36m>[39m
+              [0mCourse name[0m
+              [36m<input[39m
+                [33mclass[39m=[32m"input"[39m
+                [33mmaxlength[39m=[32m"200"[39m
+                [33mname[39m=[32m"name"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mvalue[39m=[32m"North Course"[39m
+              [36m/>[39m
+            [36m</label>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"btn small"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mSave course name[0m
+            [36m</button>[39m
+          [36m</fieldset>[39m
+        [36m</form>[39m
+      [36m</section>[39m
+      [36m<section[39m
+        [33mclass[39m=[32m"card"[39m
+      [36m>[39m
+        [36m<h2>[39m
+          [0mCreate tee[0m
+        [36m</h2>[39m
+        [36m<form>[39m
+          [36m<fieldset>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"stack"[39m
+            [36m>[39m
+              [0mTee label[0m
+              [36m<input[39m
+                [33mclass[39m=[32m"input"[39m
+                [33mmaxlength[39m=[32m"50"[39m
+                [33mname[39m=[32m"label"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</label>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"stack"[39m
+            [36m>[39m
+              [0mTee color (hex, optional)[0m
+              [36m<input[39m
+                [33mclass[39m=[32m"input"[39m
+                [33mname[39m=[32m"color"[39m
+                [33mplaceholder[39m=[32m"#ad6f32"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</label>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"btn small"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mCreate tee[0m
+            [36m</button>[39m
+          [36m</fieldset>[39m
+        [36m</form>[39m
+      [36m</section>[39m
+    [36m</main>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2m❯[22m src/app/admin/server-views.test.tsx:[2m58:16[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m15 passed[39m[22m[90m (16)[39m
+[2m   Start at [22m 04:34:04
+[2m   Duration [22m 1.49s[2m (transform 169ms, setup 114ms, import 252ms, tests 462ms, environment 533ms)[22m
+

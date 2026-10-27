@@ -1,0 +1,66 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/admin/invitation-actions.test.ts
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [31m❯[39m src/app/admin/invitation-actions.test.ts [2m([22m[2m34 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 30[2mms[22m[39m
+   [32m✓[39m implements the server action[32m 2[2mms[22m[39m
+   [32m✓[39m invites after authenticated preflight then grants using caller RPC[32m 4[2mms[22m[39m
+   [32m✓[39m denies signed out before privileged client construction[32m 1[2mms[22m[39m
+   [32m✓[39m denies ordinary before privileged client construction[32m 0[2mms[22m[39m
+   [32m✓[39m denies context error before privileged client construction[32m 1[2mms[22m[39m
+   [32m✓[39m denies revoked before privileged client construction[32m 0[2mms[22m[39m
+   [32m✓[39m fresh guard catches revocation between preflight and secret use[32m 1[2mms[22m[39m
+   [32m✓[39m fails closed with useful missing key error[32m 1[2mms[22m[39m
+   [32m✓[39m rejects submitted organization_id[32m 1[2mms[22m[39m
+   [32m✓[39m rejects submitted role[32m 1[2mms[22m[39m
+   [32m✓[39m rejects submitted user_id[32m 0[2mms[22m[39m
+   [32m✓[39m rejects submitted redirectTo[32m 0[2mms[22m[39m
+   [32m✓[39m validates invalid_course before Auth[32m 0[2mms[22m[39m
+   [32m✓[39m validates invalid_events before Auth[32m 0[2mms[22m[39m
+   [32m✓[39m validates not_allowed before Auth[32m 0[2mms[22m[39m
+   [32m✓[39m reuses existing email without inviting or resetting password/metadata[32m 1[2mms[22m[39m
+   [32m✓[39m handles duplicate email race through exact-email completion[32m 0[2mms[22m[39m
+   [32m✓[39m reports partial Auth success and DB failure, safe idempotent retry[32m 1[2mms[22m[39m
+   [32m✓[39m sanitizes SMTP/config/rate errors: over_email_send_rate_limit[32m 0[2mms[22m[39m
+   [32m✓[39m sanitizes SMTP/config/rate errors: email_address_not_authorized[32m 0[2mms[22m[39m
+   [32m✓[39m sanitizes SMTP/config/rate errors: unexpected_failure[32m 0[2mms[22m[39m
+   [32m✓[39m sanitizes thrown transport error and conservatively reports uncertain progress[32m 0[2mms[22m[39m
+   [32m✓[39m rejects invalid configured site origin https://evil.test/path[32m 0[2mms[22m[39m
+   [32m✓[39m rejects invalid configured site origin //evil.test[32m 0[2mms[22m[39m
+   [32m✓[39m rejects invalid configured site origin https://user:pass@golf.example.test[32m 0[2mms[22m[39m
+   [32m✓[39m rejects invalid configured site origin https://golf.example.test/path[32m 0[2mms[22m[39m
+   [32m✓[39m rejects invalid configured site origin javascript:alert(1)[32m 0[2mms[22m[39m
+   [32m✓[39m accepts zero selections with no implicit grant[32m 2[2mms[22m[39m
+   [32m✓[39m gives a specific sanitized rate-limit recovery message[32m 1[2mms[22m[39m
+   [32m✓[39m gives a specific sanitized SMTP sender-configuration message[32m 0[2mms[22m[39m
+   [32m✓[39m resends only on explicit existing-pending request and never sends metadata[32m 0[2mms[22m[39m
+   [32m✓[39m sanitizes privileged client construction failure without exposing key[32m 0[2mms[22m[39m
+   [32m✓[39m refuses a merely truthy platform-admin field[32m 0[2mms[22m[39m
+[31m   [31m×[31m distinguishes known accepted email request from uncertain Auth transport on DB failure[39m[32m 4[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/admin/invitation-actions.test.ts[2m > [22mdistinguishes known accepted email request from uncertain Auth transport on DB failure
+[31m[1mAssertionError[22m: expected 'Auth/email may have progressed, but s…' to match /Auth accepted.*delivery unconfirmed/i[39m
+
+[32m- Expected:[39m
+/Auth accepted.*delivery unconfirmed/i
+
+[31m+ Received:[39m
+"Auth/email may have progressed, but staff setup is not confirmed. Reload the course, review selected active tournaments and retry with the same email. Existing grants are retained. Do not delete the account or membership. Check SMTP/rate settings before explicitly requesting another invitation."
+
+[36m [2m❯[22m src/app/admin/invitation-actions.test.ts:[2m30:456[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m33 passed[39m[22m[90m (34)[39m
+[2m   Start at [22m 04:49:18
+[2m   Duration [22m 885ms[2m (transform 66ms, setup 90ms, import 63ms, tests 30ms, environment 562ms)[22m
+

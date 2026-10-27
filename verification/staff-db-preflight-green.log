@@ -1,0 +1,17 @@
+ok 1 course invitation preflight RPC installed
+ok 2 platform validates exact course and selected events
+ok 3 server resolves organization
+ok 4 new email is not an existing account
+ok 5 existing lookup is exact and case insensitive
+ok 6 ordinary staff cannot preflight
+ok 7 same-org owner cannot preflight
+ok 8 anonymous has no execute
+ok 9 wrong course events rejected
+ok 10 archived events rejected
+ok 11 null events rejected
+ok 12 null array elements rejected
+ok 13 unknown course rejected
+ok 14 invalid email rejected
+ok 15 zero events valid
+ok 16 duplicate selection valid
+16 staff invitation checks passed

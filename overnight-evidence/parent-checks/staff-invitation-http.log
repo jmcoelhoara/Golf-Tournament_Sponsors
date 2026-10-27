@@ -1,0 +1,17 @@
+✔ GET invitation landing is private and does not set an Auth session (646.685187ms)
+✔ HEAD invitation landing is private and does not set an Auth session (10.694506ms)
+✔ repeated landing GETs still offer manual confirmation without backend (56.935473ms)
+✔ invalid landing variant without token shows help (21.352233ms)
+✔ invalid landing variant with rejected parameters shows help (21.887291ms)
+✔ invalid landing variant with rejected parameters shows help (22.691971ms)
+✔ invalid landing variant with rejected parameters shows help (30.137292ms)
+✔ signed-out password page does not expose password form (42.736376ms)
+✔ signed-out course mutation entry point remains protected (4.227263ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4034.039235

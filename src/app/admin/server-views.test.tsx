@@ -51,6 +51,16 @@ it('builds leaderboard navigation from the same granted-event SELECT',async()=>{
 it.each([['courses',CourseListContent],['access',AccessContent],['history',HistoryContent]])('requires server platform context for direct %s route',async(_name,view)=>{requireStaff.mockRejectedValueOnce(new Error('platform_denied'));await expect(view()).rejects.toThrow('platform_denied');expect(requireStaff).toHaveBeenCalledWith(true)});
 it('renders course-specific granted events but no ordinary-staff catalog editor',async()=>{client.from.mockImplementation((table:string)=>{const result={data:table==='courses'?[{id:'course1',organization_id:'org',name:'North Course',archived_at:null,course_tees:[]}]:[event],error:null};const q={select:()=>q,order:()=>q,is:()=>q,neq:()=>q,eq:()=>q,returns:()=>Promise.resolve(result)};return q});render(await CourseContent({params:Promise.resolve({id:'course1'})}));expect(screen.getByRole('heading',{name:'North Course'})).toBeTruthy();expect(screen.getByRole('link',{name:'Granted Charity'})).toBeTruthy();expect(screen.queryByRole('button',{name:'Create tee'})).toBeNull()});
 it('shows an authenticated event leaderboard including closed and draft contests',async()=>{render(await EventLeaderboardContent({params:Promise.resolve({id:'event1'})}));expect(requireEvent).toHaveBeenCalledWith(client,'event1');expect(screen.getByRole('heading',{name:'Granted Charity leaderboard'})).toBeTruthy()});
+it('offers course-scoped Add staff only to platform ADM with exact course context',async()=>{
+ requireStaff.mockResolvedValue({client,user:{email:'adm@example.test'},context:{is_platform_admin:true,creation_organizations:[{id:'org',name:'North Club'}]}});
+ client.from.mockImplementation((table:string)=>{const result={data:table==='courses'?[{id:'course1',organization_id:'org',name:'North Course',archived_at:null,course_tees:[]}]:[event],error:null};const q={select:()=>q,order:()=>q,is:()=>q,neq:()=>q,eq:()=>q,returns:()=>Promise.resolve(result)};return q});
+ render(await CourseContent({params:Promise.resolve({id:'course1'})}));
+ expect(screen.getByText('Add staff')).toBeTruthy();
+ expect(screen.getByLabelText('Staff email')).toBeTruthy();
+ expect(screen.getByText(/Club: North Club/)).toBeTruthy();
+ expect(screen.getByLabelText('Granted Charity')).toBeTruthy();
+ expect(screen.getByText(/zero selections/i)).toBeTruthy();
+});
 it('reads the updated shared event logo for every newly opened draft print sheet',async()=>{
  const contest={id:'c1',event_id:'event1',name:'Long Drive',hole_number:7,tees:'Blue',hole_yardage:155,public_token:'legacy-token',archived_at:null};
  let currentLogo='first-logo';

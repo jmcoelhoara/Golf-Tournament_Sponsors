@@ -1,0 +1,15 @@
+npm notice run golf-tournament-sponsors@0.1.0 test:ui
+npm notice run vitest run --maxWorkers=1 src/app/admin/invitation-actions.test.ts
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.12 [39m[90m/workspace[39m
+
+ [32m✓[39m src/app/admin/invitation-actions.test.ts [2m([22m[2m33 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m33 passed[39m[22m[90m (33)[39m
+[2m   Start at [22m 04:47:03
+[2m   Duration [22m 895ms[2m (transform 68ms, setup 94ms, import 65ms, tests 24ms, environment 571ms)[22m
+

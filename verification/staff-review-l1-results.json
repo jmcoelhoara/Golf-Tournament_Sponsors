@@ -1,0 +1,50 @@
+{
+  "finding": "L1",
+  "reviewed_commit": "dab811b354870d7c8d7653c2dd91e0ff7d2de456",
+  "scope": "Only the substantiated blocking password-setup refresh-cookie finding; S1 and S2 suggestions intentionally not changed.",
+  "production_change": "Add /auth/set-password to src/proxy.ts matcher, without adding /auth/invite or an /auth wildcard.",
+  "sandbox_command_prefix": "/usr/bin/python3 -I /root/.hermes/projects/golf-tournament-sponsors/tooling/sandbox.py --workspace /root/.hermes/projects/golf-tournament-sponsors/work-staff-invitations --timeout 600 --",
+  "build_command": "env NEXT_TELEMETRY_DISABLED=1 NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=offline-fake-key npm run build",
+  "test_command": "node --test verification/staff-session-refresh.test.mjs",
+  "red": {
+    "source": "Unmodified src/proxy.ts at reviewed_commit; new regression already present",
+    "build_exit_code": 0,
+    "build_log": "verification/staff-review-l1-red-build.log",
+    "test_exit_code": 1,
+    "tests_passed": 2,
+    "tests_failed": 2,
+    "tests_skipped": 0,
+    "log": "verification/staff-review-l1-red.log",
+    "witnessed_failure": "Expired and nearly expired password GETs each refreshed once and rendered with the replacement token, but failed the assertion that a replacement session cookie reaches the HTTP client. Login and inert invitation controls passed."
+  },
+  "green": {
+    "source": "Only production change from RED is the exact password-route proxy matcher entry",
+    "build_exit_code": 0,
+    "build_log": "verification/staff-review-l1-green-build.log",
+    "test_exit_code": 0,
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "tests_skipped": 0,
+    "log": "verification/staff-review-l1-green.log",
+    "witnessed_behavior": [
+      "Expired-session /login control returns replacement session cookies.",
+      "Invitation GET, HEAD and prefetch with expired cookies do not contact the fake Auth listener or set session cookies.",
+      "Expired and nearly expired /auth/set-password GETs refresh exactly once and render with the replacement session.",
+      "Both replacement access and refresh tokens are decoded from actual response Set-Cookie headers.",
+      "A later HTTP POST submits the actual rendered password form and bound action fields with only the persisted response cookies.",
+      "The real server action checks the user and sends PUT /auth/v1/user with the replacement access token and chosen fixture password, without another refresh; response redirects 303 to /admin."
+    ]
+  },
+  "full_verification": {
+    "command": "node verification/verify-staff-invitations.mjs",
+    "exit_code": 0,
+    "started_at": "2026-10-27T05:16:43.936Z",
+    "finished_at": "2026-10-27T05:17:40.235Z",
+    "report": "verification/staff-final-results.json",
+    "session_regression_log": "verification/staff-final-session-http.log"
+  },
+  "evidence_type": "Real optimized Next production HTTP and installed Supabase SDK/SSR cookie handling against an explicitly fake isolated-loopback Auth transport; HTTP cookie-jar form submission, NOT a browser or real Supabase integration.",
+  "independent_re_review": "Still required; no independent child/reviewer was launched in this synchronous correction run.",
+  "release_gates": "RG1 independent re-review remains open; RG2-RG6 and all prior real-service/browser/concurrency/configuration/publication gates remain unchanged and unproved.",
+  "boundaries": "Offline sandbox only for all project execution; no hosted calls, credentials, push, deployment, other-worktree/tooling/system changes or background children. All test identities, sessions and passwords are synthetic."
+}
